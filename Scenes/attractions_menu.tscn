@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://yx773pucesf7"]
+
+[ext_resource type="Script" uid="uid://qb0kq4l5bnpp" path="res://Scripts/attractions_menu.gd" id="1_adqtg"]
+[ext_resource type="PackedScene" uid="uid://cpyn41cshnmx7" path="res://Scenes/attraction_node.tscn" id="1_j3bc1"]
+[ext_resource type="Script" uid="uid://dbk65ivdwrtqk" path="res://Scenes/attraction_node.gd" id="3_a86ji"]
+
+[node name="Control" type="MarginContainer" unique_id=1357519373]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_adqtg")
+attraction_node = ExtResource("1_j3bc1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1920421737]
+layout_mode = 2
+color = Color(0.7679978, 0.62168515, 0.44653302, 1)
+
+[node name="MarginContainer" type="GridContainer" parent="." unique_id=1727079865]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+script = ExtResource("3_a86ji")

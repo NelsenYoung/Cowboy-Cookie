@@ -13,12 +13,14 @@ config_version=5
 config/name="Cowboy Cookie"
 run/main_scene="uid://b7ew3khn2gn3g"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/size/window_width_override=360
+window/size/window_height_override=640
+window/stretch/mode="viewport"
 
 [editor]
 

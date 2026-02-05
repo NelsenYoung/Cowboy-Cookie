@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttractionData" format=3 uid="uid://cdae5avtvo86n"]
+
+[ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Resources/AttractionData.gd" id="1_oia3f"]
+[ext_resource type="Texture2D" uid="uid://lu5mndkvgmq6" path="res://Assests/tile_0084.png" id="1_syxgt"]
+
+[resource]
+script = ExtResource("1_oia3f")
+id = "9"
+item_name = "8"
+icon = ExtResource("1_syxgt")
+metadata/_custom_type_script = "uid://hgobj064obp5"

@@ -10,11 +10,8 @@ script = ExtResource("1_wrm1d")
 [node name="Background" parent="." unique_id=754170012 instance=ExtResource("1_ebmjs")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=555515714]
-anchor_mode = 0
+position = Vector2(360, 639)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=805291291]
-
-[node name="Control" parent="CanvasLayer" unique_id=1357519373 instance=ExtResource("3_3dryh")]
-size_flags_horizontal = 3
-size_flags_vertical = 3
-metadata/_edit_use_anchors_ = true
+[node name="Control" parent="." unique_id=1357519373 instance=ExtResource("3_3dryh")]
+offset_right = 720.0
+offset_bottom = 1280.0
