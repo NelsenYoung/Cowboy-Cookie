@@ -31,6 +31,7 @@ script = SubResource("GDScript_qxrlw")
 [node name="Background" type="ColorRect" parent="." unique_id=458104259]
 offset_right = 719.0
 offset_bottom = 1272.0
+color = Color(0.24002954, 0.48308927, 1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=555515714]
 anchor_mode = 0

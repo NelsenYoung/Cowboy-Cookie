@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AttractionData" format=3 uid="uid://xb351unwxoy0"]
 
-[ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Resources/AttractionData.gd" id="1_ax7v7"]
+[ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Scripts/AttractionData.gd" id="1_ax7v7"]
 [ext_resource type="Texture2D" uid="uid://53b7jt0l7by2" path="res://Assests/tile_0077.png" id="1_udbah"]
 
 [resource]

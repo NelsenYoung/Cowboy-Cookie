@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AttractionData" format=3 uid="uid://denqv1lhysu4c"]
 
 [ext_resource type="Texture2D" uid="uid://beah6jxfmo7hv" path="res://Assests/tile_0074.png" id="1_8c18a"]
-[ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Resources/AttractionData.gd" id="1_8xcnu"]
+[ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Scripts/AttractionData.gd" id="1_8xcnu"]
 
 [resource]
 script = ExtResource("1_8xcnu")
