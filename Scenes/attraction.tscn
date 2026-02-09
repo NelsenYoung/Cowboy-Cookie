@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dxyymqfqupprc"]
+
+[sub_resource type="GDScript" id="GDScript_ggwdv"]
+
+[node name="Attraction" type="Node2D" unique_id=896809067]
+script = SubResource("GDScript_ggwdv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1453195550]
+
+[node name="Characters" type="Node" parent="." unique_id=357099176]

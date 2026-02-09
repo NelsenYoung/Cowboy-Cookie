@@ -1,20 +1,47 @@
 [gd_scene format=3 uid="uid://b7ew3khn2gn3g"]
 
-[ext_resource type="PackedScene" uid="uid://1m4lyoo5fd3q" path="res://Scenes/background.tscn" id="1_ebmjs"]
-[ext_resource type="Script" uid="uid://u5tiocv1d4t0" path="res://Scripts/game.gd" id="1_wrm1d"]
-[ext_resource type="PackedScene" uid="uid://yx773pucesf7" path="res://Scenes/attractions_menu.tscn" id="3_3dryh"]
+[ext_resource type="Script" uid="uid://b2gp58xvtak5g" path="res://Scripts/game_controller.gd" id="1_ebmjs"]
+
+[sub_resource type="GDScript" id="GDScript_qxrlw"]
+script/source = "extends Node2D
+
+#@onready var background = $Background
+#@onready var attraction_menu: Control = $CanvasLayer/Control
+#signal change_slot_texture(sprite: Texture2D)
+#
+## Called when the node enters the scene tree for the first time.
+#func _ready() -> void:
+	#background.slot_clicked.connect(show_menu)
+	#change_slot_texture.connect(background._change_tex)
+	#attraction_menu.attraction_chosen.connect(place_attraction)
+	#attraction_menu.hide()
+#
+#func show_menu():
+	#attraction_menu.visible = true
+#
+#func place_attraction(texture: Texture2D):
+	#print(\"Root: \", texture)
+	#change_slot_texture.emit(texture)
+	#attraction_menu.visible = false
+"
 
 [node name="Game" type="Node2D" unique_id=207332668]
-script = ExtResource("1_wrm1d")
+script = SubResource("GDScript_qxrlw")
 
-[node name="Background" parent="." unique_id=754170012 instance=ExtResource("1_ebmjs")]
+[node name="Background" type="ColorRect" parent="." unique_id=458104259]
+offset_right = 719.0
+offset_bottom = 1272.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=555515714]
 anchor_mode = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=805291291]
+[node name="GameController" type="Node2D" parent="." unique_id=2126240113]
+script = ExtResource("1_ebmjs")
 
-[node name="Control" parent="CanvasLayer" unique_id=1357519373 instance=ExtResource("3_3dryh")]
-size_flags_horizontal = 3
-size_flags_vertical = 3
-metadata/_edit_use_anchors_ = true
+[node name="UIController" type="Node" parent="." unique_id=1165379278]
+
+[node name="EntitiesContainer" type="Node2D" parent="." unique_id=537070834]
+
+[node name="Attractions" type="Node2D" parent="EntitiesContainer" unique_id=1079911432]
+
+[node name="Characters" type="Node2D" parent="EntitiesContainer" unique_id=1237138373]

@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="AttractionData" format=3 uid="uid://dc5w1a6x5ky63"]
 
 [ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Resources/AttractionData.gd" id="1_0joaw"]
-[ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assests/tile_0072.png" id="1_oua6n"]
 
 [resource]
 script = ExtResource("1_0joaw")
 id = "1"
-item_name = "dart_board"
-icon = ExtResource("1_oua6n")
+attraction_name = "dart board"
+price = 5
+character_slots = [{
+"occupied": false
+}]
 metadata/_custom_type_script = "uid://hgobj064obp5"
