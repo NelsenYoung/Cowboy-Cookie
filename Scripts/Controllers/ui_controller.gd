@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var attraction_menu_close_button = $AttractionMenu/CloseButton
 @onready var drinks_menu = $DrinkMenu
 @onready var drink_grid = $DrinkMenu/MarginContainer/ScrollContainer/AttractionGrid
+@onready var drink_menu_close_button = $DrinkMenu/CloseButton
 
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
 signal drink_card_selected(drink: DrinkData)
@@ -21,6 +22,7 @@ func _ready():
 	drink_slot.pressed.connect(_on_drink_slot_pressed)
 	
 	attraction_menu_close_button.pressed.connect(close_attraction_menu)
+	drink_menu_close_button.pressed.connect(close_drink_menu)
 	for i in range(slot_buttons.size()):
 		# We use the bind function here to pass extra data on a signal that does not normally have it
 		# The button.pressed signal does not emit an index normally but in this case we need it, so we use bind

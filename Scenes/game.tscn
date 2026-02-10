@@ -118,6 +118,31 @@ offset_bottom = 40.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("2_qxrlw")
 
+[node name="GiftsButton" type="Control" parent="UIController" unique_id=888711726]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = -80.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="TextureButton" type="TextureButton" parent="UIController/GiftsButton" unique_id=327045986]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_3dryh")
+stretch_mode = 0
+
 [node name="DrinkMenu" type="Panel" parent="UIController" unique_id=1915711493]
 visible = false
 anchors_preset = 15
@@ -235,6 +260,63 @@ columns = 2
 [node name="CloseButton" type="TextureButton" parent="UIController/AttractionMenu" unique_id=1489917161]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 104.0
+texture_normal = ExtResource("4_3dryh")
+stretch_mode = 0
+
+[node name="GiftsMenu" type="Panel" parent="UIController" unique_id=855820792]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UIController/GiftsMenu" unique_id=1683005443]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.656323, 0.42837825, 0.28491765, 1)
+
+[node name="Title" type="Label" parent="UIController/GiftsMenu" unique_id=636457207]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_top = 80.0
+offset_right = 36.0
+offset_bottom = 125.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Gifts"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/GiftsMenu" unique_id=1133872896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/GiftsMenu/MarginContainer" unique_id=1336521328]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/GiftsMenu/MarginContainer/ScrollContainer" unique_id=686049209]
+layout_mode = 2
+
+[node name="CloseButton" type="TextureButton" parent="UIController/GiftsMenu" unique_id=331760691]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 104.0
