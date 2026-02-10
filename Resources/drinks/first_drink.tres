@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DrinkData" format=3 uid="uid://do7tx32xjeqhn"]
 
-[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/CharacterData.gd" id="1_baixa"]
-[ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/DrinkData.gd" id="2_5s617"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_baixa"]
+[ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_5s617"]
 [ext_resource type="Resource" uid="uid://0mxc2mk3m1n" path="res://Resources/characters/first_char.tres" id="2_r10d7"]
 [ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assests/tile_0072.png" id="3_5s617"]
 

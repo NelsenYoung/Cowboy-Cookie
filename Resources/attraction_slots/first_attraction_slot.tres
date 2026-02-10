@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://dyfwcumehbinx"]
 
-[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/CharacterData.gd" id="1_305xk"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_305xk"]
 [ext_resource type="Resource" uid="uid://0mxc2mk3m1n" path="res://Resources/characters/first_char.tres" id="2_p14yq"]
-[ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/AttractionSlotData.gd" id="2_qx6gr"]
+[ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_qx6gr"]
 [ext_resource type="Texture2D" uid="uid://c76n7lxaiy8ky" path="res://Assests/tile_0104.png" id="4_7bylb"]
 
 [resource]

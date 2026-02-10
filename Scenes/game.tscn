@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://b7ew3khn2gn3g"]
 
-[ext_resource type="Script" uid="uid://b2gp58xvtak5g" path="res://Scripts/game_controller.gd" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://b2gp58xvtak5g" path="res://Scripts/Controllers/game_controller.gd" id="1_ebmjs"]
+[ext_resource type="Texture2D" uid="uid://c76n7lxaiy8ky" path="res://Assests/tile_0104.png" id="2_qxrlw"]
+[ext_resource type="Script" uid="uid://4dfs0j2c71ab" path="res://Scripts/Controllers/ui_controller.gd" id="2_wrm1d"]
+[ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assests/tile_0072.png" id="4_3dryh"]
 
 [sub_resource type="GDScript" id="GDScript_qxrlw"]
 script/source = "extends Node2D
@@ -39,7 +42,135 @@ anchor_mode = 0
 [node name="GameController" type="Node2D" parent="." unique_id=2126240113]
 script = ExtResource("1_ebmjs")
 
-[node name="UIController" type="Node" parent="." unique_id=1165379278]
+[node name="UIController" type="CanvasLayer" parent="." unique_id=1952688494]
+script = ExtResource("2_wrm1d")
+
+[node name="HUD" type="Control" parent="UIController" unique_id=626210644]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyDisplay" type="HBoxContainer" parent="UIController/HUD" unique_id=2097343096]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyIcon" type="TextureRect" parent="UIController/HUD/MoneyDisplay" unique_id=1218405606]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="UIController/HUD/MoneyDisplay" unique_id=603573638]
+layout_mode = 2
+
+[node name="CameraMenuButton" type="Button" parent="UIController/HUD" unique_id=2066416301]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="AttractionSlotButtons" type="Control" parent="UIController" unique_id=1784525404]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SlotButton1" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=1745191880]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_qxrlw")
+
+[node name="SlotButton2" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=1690941387]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_qxrlw")
+
+[node name="SlotButton3" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=106839215]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_qxrlw")
+
+[node name="SlotButton4" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=1956748766]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_qxrlw")
+
+[node name="AttractionMenu" type="Panel" parent="UIController" unique_id=2039143183]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UIController/AttractionMenu" unique_id=841009267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6761263, 0.50288224, 0.38649476, 1)
+
+[node name="Title" type="Label" parent="UIController/AttractionMenu" unique_id=261685736]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = 50.0
+offset_right = 86.0
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Attractions"
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/AttractionMenu" unique_id=1455397647]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/AttractionMenu/MarginContainer" unique_id=2121921434]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="AttractionGrid" type="GridContainer" parent="UIController/AttractionMenu/MarginContainer/ScrollContainer" unique_id=778882404]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="CloseButton" type="TextureButton" parent="UIController/AttractionMenu" unique_id=1489917161]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 104.0
+texture_normal = ExtResource("4_3dryh")
+stretch_mode = 0
+
+[node name="CameraMenu" type="Panel" parent="UIController" unique_id=1887539568]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="EntitiesContainer" type="Node2D" parent="." unique_id=537070834]
 

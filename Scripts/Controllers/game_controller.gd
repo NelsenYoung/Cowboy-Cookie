@@ -11,6 +11,7 @@ var attractions: Array[AttractionDisplay] = []
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
+@onready var attraction_slots_container = $"../UIController/AttractionSlotButtons"
 
 var time_accumulator: float = 0.0
 var tick_interval: float = 2.0  # Seconds between ticks
@@ -26,10 +27,13 @@ const SLOT_POSITIONS = [
 ]
 
 func _ready():
-	drink = load("res://Resources/drinks/first_drink.tres")
-	var attraction = load("res://Resources/attractions/dart_board.tres")
+	#drink = load("res://Resources/drinks/first_drink.tres")
+	#var attraction = load("res://Resources/attractions/dart_board.tres")
+	#for i in range(num_attraction_slots):
+		#spawn_attraction(attraction, i)
+	var slot_buttons = attraction_slots_container.get_children()
 	for i in range(num_attraction_slots):
-		spawn_attraction(attraction, i)
+		slot_buttons[i].position = SLOT_POSITIONS[i]
 
 func spawn_attraction(attraction_data: AttractionData, slot_idx: int):
 	var attraction_instance = AttractionDisplayScene.instantiate()
