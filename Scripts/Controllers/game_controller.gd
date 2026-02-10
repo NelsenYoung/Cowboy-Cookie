@@ -1,9 +1,5 @@
 extends Node
 
-# What does this do again?
-# It spawns the characters, handles the money, and places
-# the attractions in the scene
-
 var money: int = 0
 var drink: DrinkData = null
 var num_attraction_slots = 4
@@ -11,13 +7,17 @@ var attractions: Array[AttractionDisplay] = []
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
+@onready var drinks_container = $"../EntitiesContainer/Drinks"
 @onready var attraction_slots_container = $"../UIController/AttractionSlotButtons"
+@onready var ui_controller = $"../UIController"
 
 var time_accumulator: float = 0.0
 var tick_interval: float = 2.0  # Seconds between ticks
 
 const AttractionDisplayScene = preload("res://Scenes/AttractionDisplay.tscn")
 const CharacterDisplayScene = preload("res://Scenes/CharacterDisplay.tscn")
+const DrinkDisplayScene = preload("res://Scenes/DrinkDisplay.tscn")
+
 # Define where attractions appear
 const SLOT_POSITIONS = [
 	Vector2(400, 200),
@@ -26,22 +26,34 @@ const SLOT_POSITIONS = [
 	Vector2(400, 1100)
 ]
 
+const DRINK_SLOT_POSITION = Vector2(200, 640)
+
 func _ready():
-	#drink = load("res://Resources/drinks/first_drink.tres")
-	#var attraction = load("res://Resources/attractions/dart_board.tres")
-	#for i in range(num_attraction_slots):
-		#spawn_attraction(attraction, i)
+	var drink_slot_button = $"../UIController/DrinkSlotButton/SlotButton1"
+	drink_slot_button.position = DRINK_SLOT_POSITION
+	drinks_container.position = DRINK_SLOT_POSITION
+	
 	var slot_buttons = attraction_slots_container.get_children()
 	for i in range(num_attraction_slots):
 		slot_buttons[i].position = SLOT_POSITIONS[i]
+		attractions.append(null)
+		
+	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
+	ui_controller.drink_card_selected.connect(_on_drink_selected)
 
-func spawn_attraction(attraction_data: AttractionData, slot_idx: int):
+func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
 	var attraction_instance = AttractionDisplayScene.instantiate()
-	attraction_instance.setup(attraction_data, SLOT_POSITIONS[slot_idx])
+	attraction_instance.setup(attraction, SLOT_POSITIONS[slot_idx])
 	attractions_container.add_child(attraction_instance)
-	attractions.append(attraction_instance)
-	
-	
+	attractions[slot_idx] = attraction_instance
+
+func _on_drink_selected(drink_data: DrinkData):
+	print("Drink Selected")
+	var drink_instance = DrinkDisplayScene.instantiate()
+	drink_instance.setup(drink_data)
+	drinks_container.add_child(drink_instance)
+	drink = drink_data
+
 func _process(delta):
 	time_accumulator += delta
 	

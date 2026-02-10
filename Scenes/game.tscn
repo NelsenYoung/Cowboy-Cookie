@@ -105,6 +105,81 @@ offset_bottom = 8.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("2_qxrlw")
 
+[node name="DrinkSlotButton" type="Control" parent="UIController" unique_id=1233033032]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SlotButton1" type="TextureButton" parent="UIController/DrinkSlotButton" unique_id=783853419]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_qxrlw")
+
+[node name="DrinkMenu" type="Panel" parent="UIController" unique_id=1915711493]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UIController/DrinkMenu" unique_id=1252224722]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6761263, 0.50288224, 0.38649476, 1)
+
+[node name="Title" type="Label" parent="UIController/DrinkMenu" unique_id=1906121200]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = 50.0
+offset_right = 86.0
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Attractions"
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/DrinkMenu" unique_id=775027348]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 80
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/DrinkMenu/MarginContainer" unique_id=1054194279]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="AttractionGrid" type="GridContainer" parent="UIController/DrinkMenu/MarginContainer/ScrollContainer" unique_id=1694715332]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="CloseButton" type="TextureButton" parent="UIController/DrinkMenu" unique_id=468504045]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 104.0
+texture_normal = ExtResource("4_3dryh")
+stretch_mode = 0
+
 [node name="AttractionMenu" type="Panel" parent="UIController" unique_id=2039143183]
 visible = false
 anchors_preset = 15
@@ -177,3 +252,5 @@ offset_bottom = 40.0
 [node name="Attractions" type="Node2D" parent="EntitiesContainer" unique_id=1079911432]
 
 [node name="Characters" type="Node2D" parent="EntitiesContainer" unique_id=1237138373]
+
+[node name="Drinks" type="Node2D" parent="EntitiesContainer" unique_id=1892903962]

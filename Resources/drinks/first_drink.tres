@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("2_5s617")
+drink_name = "First Drink"
 num_uses = 5
 texture = ExtResource("3_5s617")
 possible_chars = Array[ExtResource("1_baixa")]([ExtResource("2_r10d7")])

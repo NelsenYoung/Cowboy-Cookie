@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bnqia1tcps72k" path="res://Scripts/attraction_displays.gd" id="1_mpgva"]
 
 [node name="AttractionDisplays" type="Node2D" unique_id=903877339]
-scale = Vector2(16, 16)
+scale = Vector2(4, 4)
 script = ExtResource("1_mpgva")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1351845646]

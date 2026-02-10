@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cdp7anxh2tgmv"]
+
+[ext_resource type="Script" uid="uid://b0eecfn3orfjd" path="res://Scripts/drink_display.gd" id="1_uu3hq"]
+
+[node name="DrinkDisplay" type="Node2D" unique_id=2051557704]
+scale = Vector2(4, 4)
+script = ExtResource("1_uu3hq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1154735273]
