@@ -1,25 +1,40 @@
 extends CanvasLayer
 
-@onready var HUD = $HUD
+@onready var game_controller = $"../GameController"
+#@onready var HUD = $HUD
+
 @onready var slot_buttons_container = $AttractionSlotButtons
 @onready var slot_buttons = slot_buttons_container.get_children()
+
 @onready var attractions_menu = $AttractionMenu
 @onready var attraction_grid = $AttractionMenu/MarginContainer/ScrollContainer/AttractionGrid
 @onready var attraction_menu_close_button = $AttractionMenu/CloseButton
+
 @onready var drinks_menu = $DrinkMenu
 @onready var drink_grid = $DrinkMenu/MarginContainer/ScrollContainer/AttractionGrid
 @onready var drink_menu_close_button = $DrinkMenu/CloseButton
 
+@onready var gifts_menu_button = $TextureButton
+@onready var gifts_menu = $GiftsMenu
+@onready var gifts_vbox = $GiftsMenu/MarginContainer/ScrollContainer/VBoxContainer
+
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
 signal drink_card_selected(drink: DrinkData)
+signal gift_claimed(idx: int, amount: int)
 
 var attraction_card = preload("res://Scenes/attraction_card.tscn")
 var drink_card = preload("res://Scenes/drink_card.tscn")
+var gift_card = preload("res://Scenes/gift_card.tscn")
 var slot_idx = null
 
 func _ready():
 	var drink_slot = $DrinkSlotButton/SlotButton1
 	drink_slot.pressed.connect(_on_drink_slot_pressed)
+	print(gifts_menu_button)
+	gifts_menu_button.pressed.connect(_on_gifts_menu_button_pressed)
+	
+	var close_gifts_menu_button = $GiftsMenu/CloseButton
+	close_gifts_menu_button.pressed.connect(_on_close_gifts_menu_button_pressed)
 	
 	attraction_menu_close_button.pressed.connect(close_attraction_menu)
 	drink_menu_close_button.pressed.connect(close_drink_menu)
@@ -27,6 +42,28 @@ func _ready():
 		# We use the bind function here to pass extra data on a signal that does not normally have it
 		# The button.pressed signal does not emit an index normally but in this case we need it, so we use bind
 		slot_buttons[i].pressed.connect(_on_slot_button_pressed.bind(i))
+
+func _on_gifts_menu_button_pressed() -> void:
+	gifts_menu.visible = true
+	
+	var gifts = game_controller.unclaimed_gifts
+	for i in range(len(gifts)):
+		var char = gifts[i][0]
+		var amount = gifts[i][1]
+		var card = gift_card.instantiate()
+		card.setup(char, amount)
+		gifts_vbox.add_child(card)
+		var child_button = card.get_child(2)
+		child_button.pressed.connect(_on_gift_claimed.bind(card, i, amount))
+
+func _on_gift_claimed(card: GiftCard, idx: int, amount: int):
+	gift_claimed.emit(idx, amount)
+	card.queue_free()
+
+func _on_close_gifts_menu_button_pressed():
+	gifts_menu.visible = false
+	for child in gifts_vbox.get_children():
+		child.queue_free()
 
 func _on_drink_slot_pressed() -> void:
 	var drinks = load_drinks_from_dir()
@@ -53,7 +90,6 @@ func load_drinks_from_dir() -> Array[DrinkData]:
 func populate_drink_menu(drink_data: Array[DrinkData]) -> void:
 	for drink in drink_data:
 		var card = drink_card.instantiate()
-		print(drink)
 		card.setup(drink)
 		drink_grid.add_child(card)
 		card.get_child(4).pressed.connect(_on_drink_card_selected.bind(drink))

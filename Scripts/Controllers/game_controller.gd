@@ -4,6 +4,7 @@ var money: int = 0
 var drink: DrinkData = null
 var num_attraction_slots = 4
 var attractions: Array[AttractionDisplay] = []
+var unclaimed_gifts: Array = []
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
@@ -41,19 +42,6 @@ func _ready():
 	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
 	ui_controller.drink_card_selected.connect(_on_drink_selected)
 
-func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
-	var attraction_instance = AttractionDisplayScene.instantiate()
-	attraction_instance.setup(attraction, SLOT_POSITIONS[slot_idx])
-	attractions_container.add_child(attraction_instance)
-	attractions[slot_idx] = attraction_instance
-
-func _on_drink_selected(drink_data: DrinkData):
-	print("Drink Selected")
-	var drink_instance = DrinkDisplayScene.instantiate()
-	drink_instance.setup(drink_data)
-	drinks_container.add_child(drink_instance)
-	drink = drink_data
-
 func _process(delta):
 	time_accumulator += delta
 	
@@ -85,8 +73,13 @@ func spawn_chars_loop():
 					else:
 						var remove_threshold = randf()
 						if remove_threshold < slot.data.character.leave_rate:
-							print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
-							slot.remove_char()
+							remove_char(slot, slot.data.character)
+							
+func remove_char(slot: AttractionSlotNode, char: CharacterData):
+	print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
+	var amount: int = 10 * char.leave_rate
+	unclaimed_gifts.append([char, amount])
+	slot.remove_char()
 
 func find_intersection(array: Array, set: Dictionary) -> Array:
 	var res = []
@@ -104,3 +97,16 @@ func array_to_dict(in_array: Array) -> Dictionary:
 	for item in in_array:
 		res[item] = true
 	return res
+
+func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
+	var attraction_instance = AttractionDisplayScene.instantiate()
+	attraction_instance.setup(attraction, SLOT_POSITIONS[slot_idx])
+	attractions_container.add_child(attraction_instance)
+	attractions[slot_idx] = attraction_instance
+
+func _on_drink_selected(drink_data: DrinkData):
+	print("Drink Selected")
+	var drink_instance = DrinkDisplayScene.instantiate()
+	drink_instance.setup(drink_data)
+	drinks_container.add_child(drink_instance)
+	drink = drink_data
