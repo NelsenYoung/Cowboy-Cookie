@@ -4,13 +4,16 @@ var money: int = 0
 var drink: DrinkData = null
 var num_attraction_slots = 4
 var attractions: Array[AttractionDisplay] = []
-var unclaimed_gifts: Array = []
+var unclaimed_gifts: Dictionary = {}
+var unique_gift_id: int = 0
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
 @onready var drinks_container = $"../EntitiesContainer/Drinks"
 @onready var attraction_slots_container = $"../UIController/AttractionSlotButtons"
 @onready var ui_controller = $"../UIController"
+
+@onready var money_label = $"../UIController/MoneyDisplay/MoneyLabel"
 
 var time_accumulator: float = 0.0
 var tick_interval: float = 2.0  # Seconds between ticks
@@ -41,6 +44,7 @@ func _ready():
 		
 	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
 	ui_controller.drink_card_selected.connect(_on_drink_selected)
+	ui_controller.gift_claimed.connect(_on_gift_claimed)
 
 func _process(delta):
 	time_accumulator += delta
@@ -68,7 +72,7 @@ func spawn_chars_loop():
 						var char = choose_rand_from_array(possible_chars)
 						var spawn_threshold = randf()
 						if spawn_threshold < char.hit_rate:
-							print(char.char_name + " was spawned at " + slot.get_parent().get_name())
+							# print(char.char_name + " was spawned at " + slot.get_parent().get_name())
 							slot.spawn_char(char)
 					else:
 						var remove_threshold = randf()
@@ -76,9 +80,10 @@ func spawn_chars_loop():
 							remove_char(slot, slot.data.character)
 							
 func remove_char(slot: AttractionSlotNode, char: CharacterData):
-	print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
+	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
 	var amount: int = 10 * char.leave_rate
-	unclaimed_gifts.append([char, amount])
+	unclaimed_gifts[unique_gift_id] = [char, amount]
+	unique_gift_id += 1
 	slot.remove_char()
 
 func find_intersection(array: Array, set: Dictionary) -> Array:
@@ -105,8 +110,12 @@ func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
 	attractions[slot_idx] = attraction_instance
 
 func _on_drink_selected(drink_data: DrinkData):
-	print("Drink Selected")
 	var drink_instance = DrinkDisplayScene.instantiate()
 	drink_instance.setup(drink_data)
 	drinks_container.add_child(drink_instance)
 	drink = drink_data
+
+func _on_gift_claimed(id: int, amount: int):
+	money += amount
+	unclaimed_gifts.erase(id)
+	ui_controller.update_money_label(money)

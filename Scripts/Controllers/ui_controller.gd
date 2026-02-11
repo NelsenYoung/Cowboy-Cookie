@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 @onready var game_controller = $"../GameController"
-#@onready var HUD = $HUD
 
 @onready var slot_buttons_container = $AttractionSlotButtons
 @onready var slot_buttons = slot_buttons_container.get_children()
@@ -18,6 +17,8 @@ extends CanvasLayer
 @onready var gifts_menu = $GiftsMenu
 @onready var gifts_vbox = $GiftsMenu/MarginContainer/ScrollContainer/VBoxContainer
 
+@onready var money_label = $MoneyDisplay/MoneyLabel
+
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
 signal drink_card_selected(drink: DrinkData)
 signal gift_claimed(idx: int, amount: int)
@@ -30,7 +31,6 @@ var slot_idx = null
 func _ready():
 	var drink_slot = $DrinkSlotButton/SlotButton1
 	drink_slot.pressed.connect(_on_drink_slot_pressed)
-	print(gifts_menu_button)
 	gifts_menu_button.pressed.connect(_on_gifts_menu_button_pressed)
 	
 	var close_gifts_menu_button = $GiftsMenu/CloseButton
@@ -47,23 +47,26 @@ func _on_gifts_menu_button_pressed() -> void:
 	gifts_menu.visible = true
 	
 	var gifts = game_controller.unclaimed_gifts
-	for i in range(len(gifts)):
-		var char = gifts[i][0]
-		var amount = gifts[i][1]
+	for key in gifts:
+		var char = gifts[key][0]
+		var amount = gifts[key][1]
 		var card = gift_card.instantiate()
 		card.setup(char, amount)
 		gifts_vbox.add_child(card)
 		var child_button = card.get_child(2)
-		child_button.pressed.connect(_on_gift_claimed.bind(card, i, amount))
+		child_button.pressed.connect(_on_gift_claimed.bind(card, key, amount))
 
-func _on_gift_claimed(card: GiftCard, idx: int, amount: int):
-	gift_claimed.emit(idx, amount)
+func _on_gift_claimed(card: GiftCard, key: int, amount: int):
+	gift_claimed.emit(key, amount)
 	card.queue_free()
 
 func _on_close_gifts_menu_button_pressed():
 	gifts_menu.visible = false
 	for child in gifts_vbox.get_children():
 		child.queue_free()
+
+func update_money_label(updated_value: int):
+	money_label.text = "$%d" % updated_value
 
 func _on_drink_slot_pressed() -> void:
 	var drinks = load_drinks_from_dir()
@@ -110,7 +113,7 @@ func _on_slot_button_pressed(slot_index: int):
 	var attractions = load_attractions_from_dir()
 	populate_attraction_menu(attractions)
 	attractions_menu.visible = true
-	print("Slot ", slot_idx, " Pressed!")
+	# print("Slot ", slot_idx, " Pressed!")
 	
 func load_attractions_from_dir() -> Array[AttractionData]:
 	var attractions: Array[AttractionData] = []
