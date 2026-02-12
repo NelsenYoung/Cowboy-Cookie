@@ -91,7 +91,7 @@ func spawn_char(slot: AttractionSlotNode, char: CharacterData):
 
 func remove_char(slot: AttractionSlotNode, char: CharacterData):
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
-	var amount: int = 10 * char.money_rate
+	var amount: int = floor(10 * char.money_rate * randf())
 	unclaimed_gifts[unique_gift_id] = [char, amount]
 	unique_gift_id += 1
 	characters.erase(char)
