@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://b7ew3khn2gn3g"]
 
+[ext_resource type="Texture2D" uid="uid://unkm2qxg3an0" path="res://Assets/Background.png" id="1_1l0tm"]
 [ext_resource type="Script" uid="uid://b2gp58xvtak5g" path="res://Scripts/Controllers/game_controller.gd" id="1_ebmjs"]
-[ext_resource type="Texture2D" uid="uid://c76n7lxaiy8ky" path="res://Assests/tile_0104.png" id="2_qxrlw"]
 [ext_resource type="Script" uid="uid://4dfs0j2c71ab" path="res://Scripts/Controllers/ui_controller.gd" id="2_wrm1d"]
-[ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assests/tile_0072.png" id="4_3dryh"]
-[ext_resource type="Texture2D" uid="uid://53b7jt0l7by2" path="res://Assests/tile_0077.png" id="5_wowpa"]
-[ext_resource type="Texture2D" uid="uid://d3pu2iud8wiet" path="res://Assests/tile_0075.png" id="6_i6g32"]
+[ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assets/tile_0072.png" id="4_3dryh"]
+[ext_resource type="Texture2D" uid="uid://53b7jt0l7by2" path="res://Assets/tile_0077.png" id="5_wowpa"]
+[ext_resource type="Texture2D" uid="uid://d3pu2iud8wiet" path="res://Assets/tile_0075.png" id="6_i6g32"]
 
 [sub_resource type="GDScript" id="GDScript_qxrlw"]
 script/source = "extends Node2D
@@ -33,10 +33,10 @@ script/source = "extends Node2D
 [node name="Game" type="Node2D" unique_id=207332668]
 script = SubResource("GDScript_qxrlw")
 
-[node name="Background" type="ColorRect" parent="." unique_id=458104259]
+[node name="Background" type="TextureRect" parent="." unique_id=554216893]
 offset_right = 720.0
 offset_bottom = 1280.0
-color = Color(0.24002954, 0.48308927, 1, 1)
+texture = ExtResource("1_1l0tm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=555515714]
 anchor_mode = 0
@@ -55,46 +55,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SlotButton1" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=1745191880]
+[node name="SlotButton1" type="Button" parent="UIController/AttractionSlotButtons" unique_id=1348700747]
+modulate = Color(0, 0, 0, 0.49019608)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 413.0
+offset_top = 425.0
+offset_right = 477.0
+offset_bottom = 489.0
 scale = Vector2(4, 4)
-texture_normal = ExtResource("2_qxrlw")
 
-[node name="SlotButton2" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=1690941387]
+[node name="SlotButton2" type="Button" parent="UIController/AttractionSlotButtons" unique_id=1265393301]
+modulate = Color(0, 0, 0, 0.49019608)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 60.0
+offset_top = 638.0
+offset_right = 124.0
+offset_bottom = 702.0
 scale = Vector2(4, 4)
-texture_normal = ExtResource("2_qxrlw")
 
-[node name="SlotButton3" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=106839215]
+[node name="SlotButton3" type="Button" parent="UIController/AttractionSlotButtons" unique_id=1092040490]
+modulate = Color(0, 0, 0, 0.49019608)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 418.0
+offset_top = 859.0
+offset_right = 482.0
+offset_bottom = 923.0
 scale = Vector2(4, 4)
-texture_normal = ExtResource("2_qxrlw")
-
-[node name="SlotButton4" type="TextureButton" parent="UIController/AttractionSlotButtons" unique_id=1956748766]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-scale = Vector2(4, 4)
-texture_normal = ExtResource("2_qxrlw")
 
 [node name="DrinkSlotButton" type="Control" parent="UIController" unique_id=1233033032]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 2.0
+offset_top = 127.0
+offset_right = 722.0
+offset_bottom = 177.0
 
-[node name="SlotButton1" type="TextureButton" parent="UIController/DrinkSlotButton" unique_id=783853419]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(4, 4)
-texture_normal = ExtResource("2_qxrlw")
+[node name="SlotButton1" type="Button" parent="UIController/DrinkSlotButton" unique_id=88820465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DrinkMenu" type="Panel" parent="UIController" unique_id=1915711493]
 visible = false

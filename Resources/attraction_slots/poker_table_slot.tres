@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://c22odfhxq5utb"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_mnuj8"]
+[ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_4gvab"]
+[ext_resource type="Resource" uid="uid://ckospap31qsrf" path="res://Resources/characters/Jawbreaker_Joe.tres" id="2_6vfc5"]
+
+[resource]
+script = ExtResource("2_4gvab")
+possible_chars = Array[ExtResource("1_mnuj8")]([ExtResource("2_6vfc5")])
+metadata/_custom_type_script = "uid://bke5xyxtew67v"

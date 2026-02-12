@@ -2,8 +2,9 @@ extends Node
 
 var money: int = 0
 var drink: DrinkData = null
-var num_attraction_slots = 4
+var num_attraction_slots = 3
 var attractions: Array[AttractionDisplay] = []
+var characters: Dictionary[CharacterData, bool] = {}
 var unclaimed_gifts: Dictionary = {}
 var unique_gift_id: int = 0
 
@@ -34,12 +35,12 @@ const DRINK_SLOT_POSITION = Vector2(200, 640)
 
 func _ready():
 	var drink_slot_button = $"../UIController/DrinkSlotButton/SlotButton1"
-	drink_slot_button.position = DRINK_SLOT_POSITION
-	drinks_container.position = DRINK_SLOT_POSITION
+	#drink_slot_button.position = DRINK_SLOT_POSITION
+	#drinks_container.position = DRINK_SLOT_POSITION
 	
 	var slot_buttons = attraction_slots_container.get_children()
 	for i in range(num_attraction_slots):
-		slot_buttons[i].position = SLOT_POSITIONS[i]
+		# slot_buttons[i].position = SLOT_POSITIONS[i]
 		attractions.append(null)
 		
 	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
@@ -66,24 +67,34 @@ func spawn_chars_loop():
 						# Create an array of the possible characters to spawn in this slot
 						var slot_possible_chars_d = array_to_dict(slot.data.possible_chars)
 						possible_chars = drink.possible_chars
-						possible_chars = find_intersection(possible_chars, slot_possible_chars_d)
+						possible_chars = find_intersection(possible_chars, slot_possible_chars_d)						
+						for char in characters:
+							possible_chars.erase(char)
+						
+						if len(possible_chars) == 0:
+							continue
 						
 						# Pick a random possible char and try to spawn them
 						var char = choose_rand_from_array(possible_chars)
 						var spawn_threshold = randf()
 						if spawn_threshold < char.hit_rate:
-							# print(char.char_name + " was spawned at " + slot.get_parent().get_name())
-							slot.spawn_char(char)
+							spawn_char(slot, char)
 					else:
 						var remove_threshold = randf()
 						if remove_threshold < slot.data.character.leave_rate:
 							remove_char(slot, slot.data.character)
-							
+
+func spawn_char(slot: AttractionSlotNode, char: CharacterData):
+	print(char.char_name + " was spawned at " + slot.get_parent().get_name())
+	characters[char] = true
+	slot.spawn_char(char)
+
 func remove_char(slot: AttractionSlotNode, char: CharacterData):
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
-	var amount: int = 10 * char.leave_rate
+	var amount: int = 10 * char.money_rate
 	unclaimed_gifts[unique_gift_id] = [char, amount]
 	unique_gift_id += 1
+	characters.erase(char)
 	slot.remove_char()
 
 func find_intersection(array: Array, set: Dictionary) -> Array:
@@ -105,8 +116,10 @@ func array_to_dict(in_array: Array) -> Dictionary:
 
 func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
 	var attraction_instance = AttractionDisplayScene.instantiate()
-	attraction_instance.setup(attraction, SLOT_POSITIONS[slot_idx])
+	attraction_instance.setup(attraction, attraction_slots_container.get_child(slot_idx).position)
 	attractions_container.add_child(attraction_instance)
+	if attractions[slot_idx] != null:
+		attractions[slot_idx].queue_free()
 	attractions[slot_idx] = attraction_instance
 
 func _on_drink_selected(drink_data: DrinkData):

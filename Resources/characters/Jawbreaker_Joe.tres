@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://ckospap31qsrf"]
+
+[ext_resource type="Texture2D" uid="uid://bdjbdq5je7ue6" path="res://Assets/Jawbreaker Joe.png" id="1_0p8w5"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_dyyig"]
+
+[resource]
+script = ExtResource("1_dyyig")
+char_name = "Jawbreak Joe"
+poses = Array[Texture2D]([ExtResource("1_0p8w5")])
+hit_rate = 0.3
+leave_rate = 0.1
+money_rate = 3.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"

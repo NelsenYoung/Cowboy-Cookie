@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://ctnksknnviya1"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_1lmxp"]
+[ext_resource type="Resource" uid="uid://dnf86l87qm1m8" path="res://Resources/characters/Donut_Don.tres" id="2_66y6l"]
+[ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_osg8v"]
+[ext_resource type="Resource" uid="uid://0mxc2mk3m1n" path="res://Resources/characters/Evil_SnickerDoodle.tres" id="3_5gjak"]
+
+[resource]
+script = ExtResource("2_osg8v")
+possible_chars = Array[ExtResource("1_1lmxp")]([ExtResource("2_66y6l"), ExtResource("3_5gjak")])
+metadata/_custom_type_script = "uid://bke5xyxtew67v"
