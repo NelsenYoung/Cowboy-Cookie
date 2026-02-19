@@ -1,7 +1,7 @@
 extends Node
 
 var money: int = 0
-var drink: DrinkData = null
+var drink: DrinkDisplay = null
 var num_attraction_slots = 3
 var attractions: Array[AttractionDisplay] = []
 var characters: Dictionary[CharacterData, bool] = {}
@@ -79,8 +79,8 @@ func _ready():
 		#time_accumulator -= tick_interval
 		#game_tick()
 
-func game_tick():
-	spawn_chars_loop()
+#func game_tick():
+	#spawn_chars_loop()
 
 func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
 	print(Time.get_datetime_string_from_unix_time(current_time))
@@ -111,7 +111,7 @@ func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 	
 	# Create an array of the possible characters to spawn in this slot
 	var slot_possible_chars_d = array_to_dict(slot.data.possible_chars)
-	possible_chars = drink.possible_chars
+	possible_chars = drink.data.possible_chars
 	possible_chars = find_intersection(possible_chars, slot_possible_chars_d)
 	
 	# Ensure that we don't spawn a character already in the scene
@@ -129,33 +129,33 @@ func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 		return char
 	return null
 
-func spawn_chars_loop():
-	var possible_chars = {}
-	if drink != null and drink.num_uses > 0:
-		for attraction in attractions:
-			if attraction != null:
-				for slot in attraction.slot_nodes:
-					if slot.character == null:
-						# Create an array of the possible characters to spawn in this slot
-						var slot_possible_chars_d = array_to_dict(slot.data.possible_chars)
-						possible_chars = drink.possible_chars
-						possible_chars = find_intersection(possible_chars, slot_possible_chars_d)						
-						for char in characters:
-							possible_chars.erase(char)
-						
-						if len(possible_chars) == 0:
-							continue
-						
-						# Pick a random possible char and try to spawn them
-						var char = choose_rand_from_array(possible_chars)
-						var spawn_threshold = randf()
-						if spawn_threshold < char.hit_rate:
-							pass
-							#spawn_char(slot, char)
-					else:
-						var remove_threshold = randf()
-						if remove_threshold < slot.data.character.leave_rate:
-							remove_char(slot, slot.data.character, false)
+#func spawn_chars_loop():
+	#var possible_chars = {}
+	#if drink != null and drink.num_uses > 0:
+		#for attraction in attractions:
+			#if attraction != null:
+				#for slot in attraction.slot_nodes:
+					#if slot.character == null:
+						## Create an array of the possible characters to spawn in this slot
+						#var slot_possible_chars_d = array_to_dict(slot.data.possible_chars)
+						#possible_chars = drink.possible_chars
+						#possible_chars = find_intersection(possible_chars, slot_possible_chars_d)						
+						#for char in characters:
+							#possible_chars.erase(char)
+						#
+						#if len(possible_chars) == 0:
+							#continue
+						#
+						## Pick a random possible char and try to spawn them
+						#var char = choose_rand_from_array(possible_chars)
+						#var spawn_threshold = randf()
+						#if spawn_threshold < char.hit_rate:
+							#pass
+							##spawn_char(slot, char)
+					#else:
+						#var remove_threshold = randf()
+						#if remove_threshold < slot.data.character.leave_rate:
+							#remove_char(slot, slot.data.character, false)
 
 func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
 	print(char.char_name + " was spawned at " + slot.get_parent().get_name())
@@ -199,9 +199,57 @@ func _on_drink_selected(drink_data: DrinkData):
 	var drink_instance = DrinkDisplayScene.instantiate()
 	drink_instance.setup(drink_data)
 	drinks_container.add_child(drink_instance)
-	drink = drink_data
+	drink = drink_instance
 
 func _on_gift_claimed(id: int, amount: int):
 	money += amount
 	unclaimed_gifts.erase(id)
 	ui_controller.update_money_label(money)
+
+func save_game():
+	var save_data = {
+		"last_login_time": Time.get_unix_time_from_system(),
+		"money": money,
+		"drink": drink.data.resource_path if drink else null,
+		"attractions": serialize_attractions(),
+		"characters": serialize_characters(),
+		"unclaimed_gifts": unclaimed_gifts
+	}
+
+	var file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	file.store_var(save_data)
+	file.close()
+	
+func load_game():
+	if not FileAccess.file_exists("user://savegame.save"):
+		return null
+	
+	var file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var save_data = file.get_var()
+	file.close()
+	
+	return save_data
+
+func serialize_attractions():
+	var data = []
+	for attraction in attractions:
+		if attraction:
+			data.append(attraction.data.resource_path)
+		else:
+			data.append(null)
+	return data
+
+func serialize_characters():
+	var data = []
+	for attraction in attractions:
+		if attraction:
+			for slot in attraction.slot_nodes:
+				if slot.character:
+					data.append({
+						"char": slot.character.data.resource_path,
+						"arrival": slot.character.arrival_time,
+						"departure": slot.character.departure_time,
+						"slot_index": slot.get_index(),
+						"attraction_index": attraction.get_index()
+					})
+	return data
