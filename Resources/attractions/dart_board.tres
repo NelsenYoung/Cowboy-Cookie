@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Scripts/Classes/AttractionData.gd" id="1_0joaw"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_dbemk"]
-[ext_resource type="Resource" uid="uid://dyfwcumehbinx" path="res://Resources/attraction_slots/piano_slot.tres" id="3_0pvg5"]
 [ext_resource type="Texture2D" uid="uid://c2bx572dvv2gs" path="res://Assets/tile_0076.png" id="4_0pvg5"]
 
 [resource]
@@ -10,6 +9,5 @@ script = ExtResource("1_0joaw")
 id = "1"
 attraction_name = "dart board"
 price = 5
-slots = Array[ExtResource("2_dbemk")]([ExtResource("3_0pvg5")])
 texture = ExtResource("4_0pvg5")
 metadata/_custom_type_script = "uid://hgobj064obp5"

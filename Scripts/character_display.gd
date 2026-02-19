@@ -6,13 +6,15 @@ class_name CharacterDisplay
 var texture: Texture2D
 var data: CharacterData
 
-var arrival_time = Time.get_unix_time_from_system()
+var arrival_time
 var stay_duration = randi_range(1800, 2700)  # 30-45 mins in seconds+
-var departure_time = arrival_time + stay_duration
+var departure_time
 
-func setup(character_data: CharacterData):
+func setup(character_data: CharacterData, spawn_time: float):
 	data = character_data
 	texture = character_data.poses[0]
+	arrival_time = spawn_time
+	departure_time = arrival_time + stay_duration
 
 func _ready():
 	sprite.texture = texture

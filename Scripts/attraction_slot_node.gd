@@ -11,9 +11,9 @@ func setup(slot_data: AttractionSlotData):
 	data = slot_data
 	data.character = null
 
-func spawn_char(char: CharacterData):
+func spawn_char(char: CharacterData, time: float):
 	var char_instance = CharacterScene.instantiate()
-	char_instance.setup(char)
+	char_instance.setup(char, time)
 	root.add_child(char_instance)
 	character = char_instance
 	data.character = char
@@ -21,5 +21,5 @@ func spawn_char(char: CharacterData):
 func remove_char():
 	if character != null:
 		character.queue_free()
-		character = null
-		data.character = null
+	character = null
+	data.character = null

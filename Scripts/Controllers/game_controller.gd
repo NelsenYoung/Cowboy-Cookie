@@ -23,6 +23,14 @@ const AttractionDisplayScene = preload("res://Scenes/AttractionDisplay.tscn")
 const CharacterDisplayScene = preload("res://Scenes/CharacterDisplay.tscn")
 const DrinkDisplayScene = preload("res://Scenes/DrinkDisplay.tscn")
 
+var TEST_ATTRACTIONS = [load("res://Resources/attractions/piano.tres"), load("res://Resources/attractions/poker_table.tres"), load("res://Resources/attractions/table.tres")]
+var TEST_DRINK = load("res://Resources/drinks/first_drink.tres")
+
+const DEBUG_MODE = true
+const DEBUG_ONE_HOUR_PASSED = 3600
+const DEBUG_SIX_HOURS_PASSED = 10800
+const DEBUG_TEN_HOURS_PASSED = 36000
+
 # Define where attractions appear
 const SLOT_POSITIONS = [
 	Vector2(400, 200),
@@ -35,27 +43,91 @@ const DRINK_SLOT_POSITION = Vector2(200, 640)
 
 func _ready():
 	var drink_slot_button = $"../UIController/DrinkSlotButton/SlotButton1"
-	#drink_slot_button.position = DRINK_SLOT_POSITION
-	#drinks_container.position = DRINK_SLOT_POSITION
+	_on_drink_selected(TEST_DRINK)
 	
 	var slot_buttons = attraction_slots_container.get_children()
 	for i in range(num_attraction_slots):
-		# slot_buttons[i].position = SLOT_POSITIONS[i]
 		attractions.append(null)
+		
+	for i in range(num_attraction_slots):
+		_on_attraction_selected(i, TEST_ATTRACTIONS[i])
 		
 	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
 	ui_controller.drink_card_selected.connect(_on_drink_selected)
 	ui_controller.gift_claimed.connect(_on_gift_claimed)
-
-func _process(delta):
-	time_accumulator += delta
 	
-	if time_accumulator >= tick_interval:
-		time_accumulator -= tick_interval
-		game_tick()
+	await get_tree().create_timer(0.5).timeout  # Wait 2 seconds
+	#print("This prints after 2 seconds")
+	
+	if DEBUG_MODE:
+		var current_time = Time.get_unix_time_from_system()
+		var fake_last_login = current_time - DEBUG_ONE_HOUR_PASSED
+		
+		if drink == null:
+			# Clear all characters from the screen
+			pass
+		
+		for attraction in attractions:
+			if attraction != null:
+				for slot in attraction.slot_nodes:
+					simulate_slot(slot, current_time, fake_last_login)
+
+#func _process(delta):
+	#time_accumulator += delta
+	#
+	#if time_accumulator >= tick_interval:
+		#time_accumulator -= tick_interval
+		#game_tick()
 
 func game_tick():
 	spawn_chars_loop()
+
+func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
+	print(Time.get_datetime_string_from_unix_time(current_time))
+	print(Time.get_datetime_string_from_unix_time(last_login_time))
+	var tick = 60
+	var sim_time = last_login_time
+	while sim_time < current_time:
+		#print("Sim Time:", Time.get_datetime_string_from_unix_time(sim_time))
+		if slot.character != null:
+			if slot.character.departure_time <= sim_time:
+				slot.remove_char()
+			sim_time += tick
+		else:
+			# Get possible char
+			var char = try_to_spwan(slot, sim_time)
+			if char != null:
+				if slot.character.departure_time > current_time:
+					print(slot.character.data.char_name + " Spawned and won't leave until " + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+				else:
+					print(slot.character.data.char_name + " Came and left at" + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+					sim_time = slot.character.departure_time
+					remove_char(slot, char, true)
+			else:
+				sim_time += tick
+
+func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
+	var possible_chars = {}
+	
+	# Create an array of the possible characters to spawn in this slot
+	var slot_possible_chars_d = array_to_dict(slot.data.possible_chars)
+	possible_chars = drink.possible_chars
+	possible_chars = find_intersection(possible_chars, slot_possible_chars_d)
+	
+	# Ensure that we don't spawn a character already in the scene
+	for char in characters:
+		possible_chars.erase(char)
+	
+	if len(possible_chars) == 0:
+		return null
+	
+	# Pick a random possible char and try to spawn them
+	var char = choose_rand_from_array(possible_chars)
+	var spawn_threshold = randf()
+	if spawn_threshold < char.hit_rate:
+		spawn_char(slot, char, time)
+		return char
+	return null
 
 func spawn_chars_loop():
 	var possible_chars = {}
@@ -78,18 +150,19 @@ func spawn_chars_loop():
 						var char = choose_rand_from_array(possible_chars)
 						var spawn_threshold = randf()
 						if spawn_threshold < char.hit_rate:
-							spawn_char(slot, char)
+							pass
+							#spawn_char(slot, char)
 					else:
 						var remove_threshold = randf()
 						if remove_threshold < slot.data.character.leave_rate:
-							remove_char(slot, slot.data.character)
+							remove_char(slot, slot.data.character, false)
 
-func spawn_char(slot: AttractionSlotNode, char: CharacterData):
+func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
 	print(char.char_name + " was spawned at " + slot.get_parent().get_name())
 	characters[char] = true
-	slot.spawn_char(char)
+	slot.spawn_char(char, time)
 
-func remove_char(slot: AttractionSlotNode, char: CharacterData):
+func remove_char(slot: AttractionSlotNode, char: CharacterData, sim: bool):
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
 	var amount: int = floor(10 * char.money_rate * randf())
 	unclaimed_gifts[unique_gift_id] = [char, amount]
