@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ba5mxbbeoutxt"]
 
-[ext_resource type="Script" uid="uid://r5clhjvctobd" path="res://Scripts/drink_card.gd" id="1_g33h4"]
+[ext_resource type="Script" uid="uid://r5clhjvctobd" path="res://Scripts/SceneScripts/drink_card.gd" id="1_g33h4"]
 [ext_resource type="Texture2D" uid="uid://53b7jt0l7by2" path="res://Assets/tile_0077.png" id="2_3g3qc"]
 
 [node name="DrinkCard" type="Control" unique_id=1096644621]

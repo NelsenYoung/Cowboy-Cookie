@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjh2emlayb0vj"]
 
-[ext_resource type="Script" uid="uid://cj37h1ckj3bnk" path="res://Scripts/attraction_card.gd" id="1_ily3r"]
+[ext_resource type="Script" uid="uid://cj37h1ckj3bnk" path="res://Scripts/SceneScripts/attraction_card.gd" id="1_ily3r"]
 [ext_resource type="Texture2D" uid="uid://6vu7bukxwcki" path="res://Assets/Piano.png" id="2_ily3r"]
 
 [node name="AttractionCard" type="Control" unique_id=1096644621]
