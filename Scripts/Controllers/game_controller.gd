@@ -9,6 +9,8 @@ var unclaimed_gifts: Dictionary = {}
 var unique_gift_id: int = 0
 var last_login_time:float = 0
 
+var purchased_attractions: Dictionary = {}
+
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
 @onready var drinks_container = $"../EntitiesContainer/Drinks"
@@ -27,7 +29,7 @@ const DrinkDisplayScene = preload("res://Scenes/DrinkDisplay.tscn")
 var TEST_ATTRACTIONS = [load("res://Resources/attractions/piano.tres"), load("res://Resources/attractions/poker_table.tres"), load("res://Resources/attractions/table.tres")]
 var TEST_DRINK = load("res://Resources/drinks/first_drink.tres")
 
-const DEBUG_MODE = true
+const DEBUG_MODE = false
 const DEBUG_ONE_HOUR_PASSED = 3600
 const DEBUG_SIX_HOURS_PASSED = 10800
 const DEBUG_TEN_HOURS_PASSED = 36000
@@ -54,6 +56,7 @@ func _ready():
 		#_on_attraction_selected(i, TEST_ATTRACTIONS[i])
 		
 	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
+	ui_controller.attraction_purchase_requested.connect(_on_attraction_purchased)
 	ui_controller.drink_card_selected.connect(_on_drink_selected)
 	ui_controller.gift_claimed.connect(_on_gift_claimed)
 	
@@ -160,11 +163,18 @@ func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
 		attractions[slot_idx].queue_free()
 	attractions[slot_idx] = attraction_instance
 
+func _on_attraction_purchased(slot_idx: int, attraction: AttractionData) -> void:
+	money -= attraction.price
+	purchased_attractions[attraction] = true
+	_on_attraction_selected(slot_idx, attraction)
+	return
+
 func _on_drink_selected(drink_data: DrinkData, time_placed: float = Time.get_unix_time_from_system()):
 	var drink_instance = DrinkDisplayScene.instantiate()
 	drink_instance.setup(drink_data, time_placed)
 	drinks_container.add_child(drink_instance)
 	drink = drink_instance
+	money -= drink_data.price
 
 func _on_gift_claimed(id: int, amount: int):
 	money += amount

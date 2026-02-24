@@ -28,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.7082323, 0.521698, 0.42184725, 1)
+color = Color(0.70980394, 0.52156866, 0.42352942, 1)
 
 [node name="IconContainer" type="Control" parent="." unique_id=198306873]
 custom_minimum_size = Vector2(150, 150)
@@ -105,6 +105,15 @@ offset_right = 55.0
 offset_bottom = 35.0
 theme_override_font_sizes/font_size = 24
 text = "$300"
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1533132715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
 [node name="Button" type="Button" parent="." unique_id=1705658065]
 self_modulate = Color(1, 1, 1, 0)

@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var attractions_menu = $AttractionMenu
 @onready var attraction_grid = $AttractionMenu/MarginContainer/ScrollContainer/AttractionGrid
 @onready var attraction_menu_close_button = $AttractionMenu/CloseButton
+@onready var purchased_attractions = game_controller.purchased_attractions
 
 @onready var drinks_menu = $DrinkMenu
 @onready var drink_grid = $DrinkMenu/MarginContainer/ScrollContainer/AttractionGrid
@@ -20,12 +21,14 @@ extends CanvasLayer
 @onready var money_label = $MoneyDisplay/MoneyLabel
 
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
+signal attraction_purchase_requested(slot_indx: int, attraction: AttractionData)
 signal drink_card_selected(drink: DrinkData)
 signal gift_claimed(idx: int, amount: int)
 
 var attraction_card = preload("res://Scenes/attraction_card.tscn")
 var drink_card = preload("res://Scenes/drink_card.tscn")
 var gift_card = preload("res://Scenes/gift_card.tscn")
+var purchase_check_menu = preload("res://Scenes/purchase_check_menu.tscn")
 var slot_idx = null
 
 func _ready():
@@ -95,10 +98,22 @@ func populate_drink_menu(drink_data: Array[DrinkData]) -> void:
 		var card = drink_card.instantiate()
 		card.setup(drink)
 		drink_grid.add_child(card)
-		card.get_child(4).pressed.connect(_on_drink_card_selected.bind(drink))
+		card.get_child(4).pressed.connect(_on_drink_purchase_request.bind(drink))
 	return
 
-func _on_drink_card_selected(drink: DrinkData):
+func _on_drink_purchase_request(drink: DrinkData):
+	var check_menu = purchase_check_menu.instantiate()
+	drinks_menu.add_child(check_menu)
+	check_menu.setup(drink.price)
+	
+	if game_controller.money >= drink.price:
+		check_menu.get_child(1).get_child(2).get_child(0).pressed.connect(_on_drink_card_selected.bind(drink, check_menu))
+	else:
+		check_menu.get_child(1).get_child(2).get_child(0).text = "Not Enough"
+	check_menu.get_child(1).get_child(2).get_child(1).pressed.connect(_on_purchase_declined.bind(check_menu))
+
+func _on_drink_card_selected(drink: DrinkData, check_menu):
+	check_menu.queue_free()
 	drink_card_selected.emit(drink)
 	close_drink_menu()
 
@@ -137,16 +152,38 @@ func populate_attraction_menu(attraction_data: Array[AttractionData]) -> void:
 		attractions_menu.visible = false
 		return
 	
-	for attraction in attraction_data:
+	for attraction in attraction_data:	
 		var card = attraction_card.instantiate()
 		card.setup(attraction)
 		attraction_grid.add_child(card)
-		card.get_child(4).pressed.connect(_on_attraction_card_selected.bind(slot_idx, attraction))
+		if attraction not in purchased_attractions:
+			card.get_child(4).color = Color(0, 0, 0, 0.5)
+			card.get_child(5).pressed.connect(_on_locked_attraction_selected.bind(slot_idx, attraction))
+		else:
+			card.get_child(5).pressed.connect(_on_attraction_card_selected.bind(slot_idx, attraction))
 	return
 
 func _on_attraction_card_selected(slot_index: int, attraction: AttractionData):
 	attraction_card_selected.emit(slot_index, attraction)
 	close_attraction_menu()
+
+func _on_locked_attraction_selected(slot_idx: int, attraction: AttractionData):
+	var check_menu = purchase_check_menu.instantiate()
+	attractions_menu.add_child(check_menu)
+	check_menu.setup(attraction.price)
+	if game_controller.money >= attraction.price:
+		check_menu.get_child(1).get_child(2).get_child(0).pressed.connect(_on_purchase_requested.bind(slot_idx, attraction, check_menu))
+	else:
+		check_menu.get_child(1).get_child(2).get_child(0).text = "Not Enough"
+	check_menu.get_child(1).get_child(2).get_child(1).pressed.connect(_on_purchase_declined.bind(check_menu))
+
+func _on_purchase_requested(slot_idx: int, attraction: AttractionData, check_menu):
+	check_menu.queue_free()
+	attraction_purchase_requested.emit(slot_idx, attraction)
+	close_attraction_menu()
+
+func _on_purchase_declined(check_menu):
+	check_menu.queue_free()
 
 func close_attraction_menu():
 	attractions_menu.visible = false
