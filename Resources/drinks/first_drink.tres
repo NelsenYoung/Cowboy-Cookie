@@ -2,15 +2,32 @@
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_baixa"]
 [ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_5s617"]
-[ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assets/tile_0072.png" id="3_5s617"]
-[ext_resource type="Resource" path="res://Resources/characters/Donut_Don.tres" id="3_fjnax"]
-[ext_resource type="Resource" path="res://Resources/characters/Evil_SnickerDoodle.tres" id="4_fjnax"]
-[ext_resource type="Resource" path="res://Resources/characters/Jawbreaker_Joe.tres" id="4_r2qmp"]
+[ext_resource type="Resource" uid="uid://dbvqsnpcmht2u" path="res://Resources/characters/Donut_Don.tres" id="3_fjnax"]
+[ext_resource type="Texture2D" uid="uid://bsbrb8pr61j8k" path="res://Assets/Characters/Arm Wrestling Machine(Jawbreaker Joe).png" id="3_r2qmp"]
+[ext_resource type="Texture2D" uid="uid://crjo8rmm8lipw" path="res://Assets/Characters/Poker Table(Evil Snickerdoodle).png" id="4_8k11k"]
+[ext_resource type="Texture2D" uid="uid://dt7rx7k3pcv23" path="res://Assets/Drinks/Bar(Full).png" id="6_72elj"]
+
+[sub_resource type="Resource" id="Resource_k4u2x"]
+script = ExtResource("1_baixa")
+char_name = "Jawbreak Joe"
+poses = Array[Texture2D]([ExtResource("3_r2qmp")])
+hit_rate = 0.5
+leave_rate = 0.1
+money_rate = 3.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"
+
+[sub_resource type="Resource" id="Resource_nxp1f"]
+script = ExtResource("1_baixa")
+char_name = "Evil SnickerDoodle"
+poses = Array[Texture2D]([ExtResource("4_8k11k")])
+hit_rate = 0.8
+leave_rate = 0.1
+money_rate = 2.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"
 
 [resource]
 script = ExtResource("2_5s617")
-drink_name = "First Drink"
-num_uses = 5
-texture = ExtResource("3_5s617")
-possible_chars = Array[ExtResource("1_baixa")]([ExtResource("3_fjnax"), ExtResource("4_r2qmp"), ExtResource("4_fjnax")])
+drink_name = "Milk"
+texture = ExtResource("6_72elj")
+possible_chars = Array[ExtResource("1_baixa")]([ExtResource("3_fjnax"), SubResource("Resource_k4u2x"), SubResource("Resource_nxp1f")])
 metadata/_custom_type_script = "uid://bf7ioe8sus5gb"

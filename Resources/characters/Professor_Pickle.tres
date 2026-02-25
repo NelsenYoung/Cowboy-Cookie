@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bifk8ier487q5"]
+
+[ext_resource type="Texture2D" uid="uid://1df36171tru5" path="res://Assets/Characters/Piano(Professor Pickle).png" id="1_ixgu6"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_w5rei"]
+
+[resource]
+script = ExtResource("1_w5rei")
+char_name = "Professor Pickle"
+poses = Array[Texture2D]([ExtResource("1_ixgu6")])
+hit_rate = 0.05
+leave_rate = 0.1
+money_rate = 30.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"

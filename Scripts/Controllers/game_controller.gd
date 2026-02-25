@@ -1,6 +1,6 @@
 extends Node
 
-var money: int = 0
+var money: int = 500
 var drink: DrinkDisplay = null
 var num_attraction_slots = 3
 var attractions: Array[AttractionDisplay] = []
@@ -8,7 +8,6 @@ var characters: Dictionary[CharacterData, bool] = {}
 var unclaimed_gifts: Dictionary = {}
 var unique_gift_id: int = 0
 var last_login_time:float = 0
-
 var purchased_attractions: Dictionary = {}
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
@@ -16,11 +15,7 @@ var purchased_attractions: Dictionary = {}
 @onready var drinks_container = $"../EntitiesContainer/Drinks"
 @onready var attraction_slots_container = $"../UIController/AttractionSlotButtons"
 @onready var ui_controller = $"../UIController"
-
 @onready var money_label = $"../UIController/MoneyDisplay/MoneyLabel"
-
-var time_accumulator: float = 0.0
-var tick_interval: float = 2.0  # Seconds between ticks
 
 const AttractionDisplayScene = preload("res://Scenes/AttractionDisplay.tscn")
 const CharacterDisplayScene = preload("res://Scenes/CharacterDisplay.tscn")
@@ -33,6 +28,9 @@ const DEBUG_MODE = false
 const DEBUG_ONE_HOUR_PASSED = 3600
 const DEBUG_SIX_HOURS_PASSED = 10800
 const DEBUG_TEN_HOURS_PASSED = 36000
+
+const RESTART = false
+const FIRST_LOGIN = false
 
 # Define where attractions appear
 const SLOT_POSITIONS = [
@@ -61,13 +59,21 @@ func _ready():
 	ui_controller.gift_claimed.connect(_on_gift_claimed)
 	
 	await get_tree().create_timer(0.5).timeout  # Wait 0.5 seconds
+	var current_time = Time.get_unix_time_from_system()
 	
 	if DEBUG_MODE:
-		var save_data = load_game()
+		if not RESTART:
+			var save_data = load_game()
+			read_save_data(save_data)
+		last_login_time = current_time - DEBUG_ONE_HOUR_PASSED
+	
+	var save_data = load_game()
+	if save_data != null:
 		read_save_data(save_data)
 
-	var current_time = Time.get_unix_time_from_system()
-	#var fake_last_login = current_time - DEBUG_ONE_HOUR_PASSED
+	if FIRST_LOGIN:
+		# run the tutorial and init
+		pass
 	
 	if drink == null:
 		# Clear all characters from the screen

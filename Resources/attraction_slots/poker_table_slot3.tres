@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://bo7v7v436bsbp"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_rb7j4"]
+[ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_c0s63"]
+
+[resource]
+script = ExtResource("2_c0s63")
+metadata/_custom_type_script = "uid://bke5xyxtew67v"

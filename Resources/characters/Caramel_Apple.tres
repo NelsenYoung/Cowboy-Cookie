@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://o81eotgsr014"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_8hi3n"]
+[ext_resource type="Texture2D" uid="uid://082e5vrn88gm" path="res://Assets/Characters/Poker Table(Caramel Apple).png" id="1_kaifw"]
+[ext_resource type="Texture2D" uid="uid://srjq0txiov1o" path="res://Assets/Characters/Table(Caramel Apple).png" id="2_4liyp"]
+
+[resource]
+script = ExtResource("1_8hi3n")
+char_name = "Caramel Apple"
+poses = Array[Texture2D]([ExtResource("1_kaifw"), ExtResource("2_4liyp")])
+hit_rate = 0.3
+leave_rate = 0.1
+money_rate = 1.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"

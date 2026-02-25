@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://c73xmegchgg8r"]
+
+[ext_resource type="Texture2D" uid="uid://cppvf4qr4u0pd" path="res://Assets/Characters/Poker Table(Adam S. Apple).png" id="1_5tnpp"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_e8uij"]
+[ext_resource type="Texture2D" uid="uid://crsfchm8pcr0d" path="res://Assets/Characters/Table(Adam S. Apple).png" id="2_65mnf"]
+
+[resource]
+script = ExtResource("1_e8uij")
+char_name = "Adam S Apple"
+poses = Array[Texture2D]([ExtResource("1_5tnpp"), ExtResource("2_65mnf")])
+hit_rate = 0.5
+leave_rate = 0.1
+money_rate = 2.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"

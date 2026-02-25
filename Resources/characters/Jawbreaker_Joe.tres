@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://c8f45l00vox2c"]
 
-[ext_resource type="Texture2D" uid="uid://bdjbdq5je7ue6" path="res://Assets/Jawbreaker Joe.png" id="1_0p8w5"]
+[ext_resource type="Texture2D" uid="uid://bsbrb8pr61j8k" path="res://Assets/Characters/Arm Wrestling Machine(Jawbreaker Joe).png" id="1_0p8w5"]
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_dyyig"]
 
 [resource]
