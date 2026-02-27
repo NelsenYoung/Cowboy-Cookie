@@ -11,4 +11,7 @@ func setup(drink_data: DrinkData, time: float):
 	time_placed = time
 	
 func _ready():
-	sprite.texture = data.texture
+	sprite.texture = data.textures[0]
+
+func change_state(state: int):
+	sprite.texture = data.textures[state]

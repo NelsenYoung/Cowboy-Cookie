@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ba5mxbbeoutxt"]
 
 [ext_resource type="Script" uid="uid://r5clhjvctobd" path="res://Scripts/SceneScripts/drink_card.gd" id="1_g33h4"]
-[ext_resource type="Texture2D" uid="uid://53b7jt0l7by2" path="res://Assets/tile_0077.png" id="2_3g3qc"]
+[ext_resource type="Texture2D" uid="uid://ca8lit8mlilde" path="res://Assets/UI/Camera Icon.png" id="2_g33h4"]
 
 [node name="DrinkCard" type="Control" unique_id=1096644621]
 custom_minimum_size = Vector2(260, 260)
@@ -58,7 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_3g3qc")
+texture = ExtResource("2_g33h4")
 
 [node name="Name" type="Label" parent="." unique_id=795025569]
 layout_mode = 1

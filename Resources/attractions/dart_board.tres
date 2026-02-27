@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("1_0joaw")
 id = "1"
-attraction_name = "dart board"
+attraction_name = "Dart Board"
 price = 5
 slots = Array[ExtResource("2_dbemk")]([ExtResource("3_0pvg5")])
 texture = ExtResource("3_dbemk")

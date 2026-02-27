@@ -1,7 +1,34 @@
 [gd_scene format=3 uid="uid://bj5bapy1y3x1o"]
 
 [ext_resource type="Script" uid="uid://d08crfw22yhdn" path="res://Scripts/purchase_check_menu.gd" id="1_q5m6a"]
-[ext_resource type="Texture2D" uid="uid://cwbsgnyyr6h4p" path="res://Assets/tile_0072.png" id="1_sxmd2"]
+[ext_resource type="FontFile" uid="uid://l3xf26id3o6y" path="res://Assets/Font/CowboyJunior-GO6Dq.ttf" id="2_xxitt"]
+[ext_resource type="Texture2D" uid="uid://cs58gup3o18he" path="res://Assets/UI/Coin Icon(Silver).png" id="3_5bf55"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kw7u4"]
+bg_color = Color(0.7019608, 0.49019608, 0.3647059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f1hr"]
+bg_color = Color(0.49019608, 0.36862746, 0.26666668, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_right = 5.0
 
 [node name="Control" type="Control" unique_id=1420215380]
 layout_mode = 3
@@ -21,77 +48,100 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.49803922)
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=108072204]
-custom_minimum_size = Vector2(516, 256)
+[node name="Panel" type="Panel" parent="." unique_id=263754777]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -258.0
+offset_top = -127.0
+offset_right = 258.0
+offset_bottom = 129.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.7772301, 0.5812888, 0.35134557, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_kw7u4")
 
-[node name="Question" type="Label" parent="ColorRect2" unique_id=1903250775]
+[node name="Question" type="Label" parent="Panel" unique_id=1903250775]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -163.5
+offset_right = 163.5
+offset_bottom = 69.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_xxitt")
 theme_override_font_sizes/font_size = 50
 text = "Are you sure?"
 
-[node name="MoneyBox" type="HBoxContainer" parent="ColorRect2" unique_id=2146944055]
+[node name="MoneyBox" type="HBoxContainer" parent="Panel" unique_id=2146944055]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -65.0
+offset_top = -34.5
+offset_right = 65.0
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect2/MoneyBox" unique_id=744445543]
+[node name="TextureRect" type="TextureRect" parent="Panel/MoneyBox" unique_id=744445543]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("1_sxmd2")
+texture = ExtResource("3_5bf55")
 expand_mode = 2
 
-[node name="Money" type="Label" parent="ColorRect2/MoneyBox" unique_id=2098561528]
+[node name="Money" type="Label" parent="Panel/MoneyBox" unique_id=2098561528]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_xxitt")
 theme_override_font_sizes/font_size = 50
 text = "64"
 
-[node name="Buttons" type="HBoxContainer" parent="ColorRect2" unique_id=1646201312]
+[node name="Buttons" type="HBoxContainer" parent="Panel" unique_id=1646201312]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -77.0
+offset_left = -128.0
+offset_top = -86.0
+offset_right = 128.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Yes" type="Button" parent="ColorRect2/Buttons" unique_id=1201806007]
+[node name="Yes" type="Button" parent="Panel/Buttons" unique_id=1201806007]
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0.49019608, 0.36862746, 0.26666668, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_xxitt")
 theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_1f1hr")
 text = "Yes"
 
-[node name="No" type="Button" parent="ColorRect2/Buttons" unique_id=1328315731]
+[node name="No" type="Button" parent="Panel/Buttons" unique_id=385797950]
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0.49019608, 0.36862746, 0.26666668, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_xxitt")
 theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_1f1hr")
 text = "No"

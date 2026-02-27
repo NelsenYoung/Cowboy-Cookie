@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_dyyig")
-char_name = "Jawbreak Joe"
+char_name = "Jawbreaker Joe"
 poses = Array[Texture2D]([ExtResource("1_0p8w5")])
 hit_rate = 0.5
 leave_rate = 0.1

@@ -18,6 +18,9 @@ extends CanvasLayer
 @onready var gifts_menu = $GiftsMenu
 @onready var gifts_vbox = $GiftsMenu/MarginContainer/ScrollContainer/VBoxContainer
 
+@onready var camera_menu_button = $CameraMenuButton
+@onready var camera_menu = $CameraMenu
+
 @onready var money_label = $MoneyDisplay/MoneyLabel
 
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
@@ -45,6 +48,11 @@ func _ready():
 		# We use the bind function here to pass extra data on a signal that does not normally have it
 		# The button.pressed signal does not emit an index normally but in this case we need it, so we use bind
 		slot_buttons[i].pressed.connect(_on_slot_button_pressed.bind(i))
+		
+	camera_menu_button.pressed.connect(_on_camera_menu_button_pressed)
+
+func _on_camera_menu_button_pressed():
+	camera_menu.visible = true
 
 func _on_gifts_menu_button_pressed() -> void:
 	gifts_menu.visible = true
@@ -54,6 +62,7 @@ func _on_gifts_menu_button_pressed() -> void:
 		var char = gifts[key][0]
 		var amount = gifts[key][1]
 		var card = gift_card.instantiate()
+		print(char, amount)
 		card.setup(char, amount)
 		gifts_vbox.add_child(card)
 		var child_button = card.get_child(2)
@@ -157,7 +166,10 @@ func populate_attraction_menu(attraction_data: Array[AttractionData]) -> void:
 		card.setup(attraction)
 		attraction_grid.add_child(card)
 		if attraction not in purchased_attractions:
-			card.get_child(4).color = Color(0, 0, 0, 0.5)
+			var panel = card.get_child(4)
+			var style = panel.get_theme_stylebox("panel").duplicate()
+			style.bg_color.a = 0.5  # 50% transparent
+			panel.add_theme_stylebox_override("panel", style)
 			card.get_child(5).pressed.connect(_on_locked_attraction_selected.bind(slot_idx, attraction))
 		else:
 			card.get_child(5).pressed.connect(_on_attraction_card_selected.bind(slot_idx, attraction))

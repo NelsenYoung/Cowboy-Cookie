@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cei8ndrdkym5m" path="res://Assets/Background(No bottles).png" id="1_i6g32"]
 [ext_resource type="Script" uid="uid://4dfs0j2c71ab" path="res://Scripts/Controllers/ui_controller.gd" id="2_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://b8g35pltric0" path="res://Assets/UI/Close Button.png" id="4_1l0tm"]
+[ext_resource type="FontFile" uid="uid://l3xf26id3o6y" path="res://Assets/Font/CowboyJunior-GO6Dq.ttf" id="5_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://bfsgeyhmnrhhi" path="res://Assets/UI/Money Icon.png" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://ca8lit8mlilde" path="res://Assets/UI/Camera Icon.png" id="6_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://cs58gup3o18he" path="res://Assets/UI/Coin Icon(Silver).png" id="7_ldgsr"]
@@ -61,9 +62,9 @@ modulate = Color(0, 0, 0, 0.49019608)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 413.0
-offset_top = 425.0
+offset_top = 540.0
 offset_right = 477.0
-offset_bottom = 489.0
+offset_bottom = 556.0
 scale = Vector2(4, 4)
 
 [node name="SlotButton2" type="Button" parent="UIController/AttractionSlotButtons" unique_id=1265393301]
@@ -71,9 +72,9 @@ modulate = Color(0, 0, 0, 0.49019608)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 60.0
-offset_top = 638.0
+offset_top = 743.0
 offset_right = 124.0
-offset_bottom = 702.0
+offset_bottom = 759.0
 scale = Vector2(4, 4)
 
 [node name="SlotButton3" type="Button" parent="UIController/AttractionSlotButtons" unique_id=1092040490]
@@ -81,9 +82,9 @@ modulate = Color(0, 0, 0, 0.49019608)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 418.0
-offset_top = 859.0
+offset_top = 953.0
 offset_right = 482.0
-offset_bottom = 923.0
+offset_bottom = 969.0
 scale = Vector2(4, 4)
 
 [node name="DrinkSlotButton" type="Control" parent="UIController" unique_id=1233033032]
@@ -191,6 +192,7 @@ offset_top = 50.0
 offset_right = 86.0
 offset_bottom = 95.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_h4fw4")
 theme_override_font_sizes/font_size = 32
 text = "Attractions"
 
@@ -286,8 +288,20 @@ stretch_mode = 0
 
 [node name="CameraMenu" type="Panel" parent="UIController" unique_id=1887539568]
 visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UIController/CameraMenu" unique_id=360443926]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.21568628)
 
 [node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
 custom_minimum_size = Vector2(128, 64)

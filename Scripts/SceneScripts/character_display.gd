@@ -10,11 +10,11 @@ var arrival_time
 var stay_duration = randi_range(1800, 2700)  # 30-45 mins in seconds+
 var departure_time
 
-func setup(character_data: CharacterData, spawn_time: float):
+func setup(character_data: CharacterData, spawn_time: float, drink_expiration_time: float):
 	data = character_data
 	texture = character_data.poses[0]
 	arrival_time = spawn_time
-	departure_time = arrival_time + stay_duration
+	departure_time = min(arrival_time + stay_duration, drink_expiration_time)
 
 func _ready():
 	sprite.texture = texture

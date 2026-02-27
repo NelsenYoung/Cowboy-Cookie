@@ -76,35 +76,48 @@ func _ready():
 		pass
 	
 	if drink == null:
-		# Clear all characters from the screen
-		pass
-	
+		print("removing all chars because there is no drink")
+		remove_all_chars()
+	else:
+		# Calculate time passed since drink was placed
+		var drink_ttl = (drink.time_placed + drink.data.time) - current_time
+		print("Drink Time to Live: ", drink_ttl)
+		if drink_ttl > (drink.data.time / 2):
+			drink.change_state(0)
+		elif drink_ttl < (drink.data.time / 2) and drink_ttl > 0:
+			drink.change_state(1)
+		else:
+			drink.change_state(2)
+			print("removing all chars because the drink is empty")
+			remove_all_chars()
+
 	for attraction in attractions:
 		if attraction != null:
 			for slot in attraction.slot_nodes:
 				simulate_slot(slot, current_time, last_login_time)
 
 func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
-	print(Time.get_datetime_string_from_unix_time(current_time))
-	print(Time.get_datetime_string_from_unix_time(last_login_time))
-	var tick = 60
+	var tick = 5
 	var sim_time = last_login_time
-	while sim_time < current_time:
+	while sim_time < min(current_time, drink.time_placed + drink.data.time):
 		#print("Sim Time:", Time.get_datetime_string_from_unix_time(sim_time))
 		if slot.character != null:
 			if slot.character.departure_time <= sim_time:
 				slot.remove_char()
 			sim_time += tick
 		else:
+			if (drink.time_placed + drink.data.time) - sim_time > 0:
 			# Get possible char
-			var char = try_to_spwan(slot, sim_time)
-			if char != null:
-				if slot.character.departure_time > current_time:
-					print(slot.character.data.char_name + " Spawned and won't leave until " + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+				var char = try_to_spwan(slot, sim_time)
+				if char != null:
+					if slot.character.departure_time > current_time:
+						print(slot.character.data.char_name + " Spawned and won't leave until " + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+					else:
+						print(slot.character.data.char_name + " Came and left at" + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+						sim_time = slot.character.departure_time
+						remove_char(slot, char, true)
 				else:
-					print(slot.character.data.char_name + " Came and left at" + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
-					sim_time = slot.character.departure_time
-					remove_char(slot, char, true)
+					sim_time += tick
 			else:
 				sim_time += tick
 
@@ -132,22 +145,32 @@ func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 	return null
 
 func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
-	print(char.char_name + " was spawned at " + slot.get_parent().get_name())
 	characters[char] = true
-	slot.spawn_char(char, time)
+	slot.spawn_char(char, time, drink.time_placed + drink.data.time)
 
 func remove_char(slot: AttractionSlotNode, char: CharacterData, sim: bool):
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
-	var amount: int = floor(10 * char.money_rate * randf())
-	unclaimed_gifts[unique_gift_id] = [char, amount]
-	unique_gift_id += 1
+	leave_gift(char)
 	characters.erase(char)
 	slot.remove_char()
 
+func remove_all_chars() -> void:
+	for attraction in attractions:
+		if attraction != null:
+			for slot in attraction.slot_nodes:
+				if slot.character != null:
+					remove_char(slot, slot.data.character, false)
+
+func leave_gift(char: CharacterData) -> int:
+	var amount: int = floor(10 * char.money_rate * randf())
+	unclaimed_gifts[unique_gift_id] = [char, amount]
+	unique_gift_id += 1
+	return amount
+	
 func find_intersection(array: Array, set: Dictionary) -> Array:
 	var res = []
 	for item in array:
-		if item in set:
+		if item.char_name in set:
 			res.append(item)
 	return res
 
@@ -158,7 +181,7 @@ func choose_rand_from_array(possible_chars: Array):
 func array_to_dict(in_array: Array) -> Dictionary:
 	var res = {}
 	for item in in_array:
-		res[item] = true
+		res[item.char_name] = true
 	return res
 
 func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
@@ -173,6 +196,7 @@ func _on_attraction_purchased(slot_idx: int, attraction: AttractionData) -> void
 	money -= attraction.price
 	purchased_attractions[attraction] = true
 	_on_attraction_selected(slot_idx, attraction)
+	ui_controller.update_money_label(money)
 	return
 
 func _on_drink_selected(drink_data: DrinkData, time_placed: float = Time.get_unix_time_from_system()):
@@ -181,11 +205,14 @@ func _on_drink_selected(drink_data: DrinkData, time_placed: float = Time.get_uni
 	drinks_container.add_child(drink_instance)
 	drink = drink_instance
 	money -= drink_data.price
+	ui_controller.update_money_label(money)
 
 func _on_gift_claimed(id: int, amount: int):
 	money += amount
 	unclaimed_gifts.erase(id)
 	ui_controller.update_money_label(money)
+
+# ------------------- SAVE GAME LOGIC ------------------- #
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_PAUSED:
@@ -203,7 +230,8 @@ func save_game():
 		"drink_time_placed": drink.time_placed if drink else null,
 		"attractions": serialize_attractions(),
 		"characters": serialize_characters(),
-		"unclaimed_gifts": unclaimed_gifts
+		"unclaimed_gifts": serialize_gifts(),
+		"purchased_attractions": serialize_purchased_attractions()
 	}
 
 	var file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -241,7 +269,16 @@ func read_save_data(save_data: Dictionary):
 			spawn_char(cur_slot, load(character_data["char"]), character_data["arrival"])
 	
 	# Store Unclaimed gifts if there are any
-	unclaimed_gifts = save_data["unclaimed_gifts"]
+	print(save_data["unclaimed_gifts"])
+	for gift in save_data["unclaimed_gifts"]:
+		leave_gift(load(gift["char"]))
+	
+	print(save_data["purchased_attractions"])
+	if "purchased_attractions" in save_data:
+		for purchased_attraction in save_data["purchased_attractions"]:
+			print(purchased_attraction)
+			purchased_attractions[load(purchased_attraction["attraction"])] = true
+	print(purchased_attractions)
 	return
 
 func serialize_attractions():
@@ -266,4 +303,24 @@ func serialize_characters():
 						"slot_index": slot.get_index(),
 						"attraction_index": attraction.get_index()
 					})
+	return data
+
+func serialize_gifts():
+	var data = []
+	for gift in unclaimed_gifts:
+		data.append(({
+			"char": unclaimed_gifts[gift][0].resource_path,
+			"amount": unclaimed_gifts[gift][1]
+		}))
+	print(data)
+	return data
+
+func serialize_purchased_attractions():
+	var data = []
+	print(purchased_attractions)
+	for purchased_attraction in purchased_attractions:
+		data.append({
+			"attraction": purchased_attraction.resource_path
+		})
+	print(data)
 	return data

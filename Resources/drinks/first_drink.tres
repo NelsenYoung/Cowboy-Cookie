@@ -2,32 +2,29 @@
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_baixa"]
 [ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_5s617"]
+[ext_resource type="Resource" uid="uid://br1jax2avcbuo" path="res://Resources/characters/Unique/Evil_SnickerDoodle.tres" id="3_70f0s"]
 [ext_resource type="Resource" uid="uid://dbvqsnpcmht2u" path="res://Resources/characters/Unique/Donut_Don.tres" id="3_fjnax"]
-[ext_resource type="Texture2D" uid="uid://bsbrb8pr61j8k" path="res://Assets/Characters/Arm Wrestling Machine(Jawbreaker Joe).png" id="3_r2qmp"]
-[ext_resource type="Texture2D" uid="uid://crjo8rmm8lipw" path="res://Assets/Characters/Poker Table(Evil Snickerdoodle).png" id="4_8k11k"]
+[ext_resource type="Resource" uid="uid://c8f45l00vox2c" path="res://Resources/characters/Unique/Jawbreaker_Joe.tres" id="4_70f0s"]
+[ext_resource type="Resource" uid="uid://bhqugyfa5a8u4" path="res://Resources/characters/Oreos/Omar_Reo.tres" id="5_ua2om"]
 [ext_resource type="Texture2D" uid="uid://dt7rx7k3pcv23" path="res://Assets/Drinks/Bar(Full).png" id="6_72elj"]
-
-[sub_resource type="Resource" id="Resource_k4u2x"]
-script = ExtResource("1_baixa")
-char_name = "Jawbreak Joe"
-poses = Array[Texture2D]([ExtResource("3_r2qmp")])
-hit_rate = 0.5
-leave_rate = 0.1
-money_rate = 3.0
-metadata/_custom_type_script = "uid://c4ydn64imo227"
-
-[sub_resource type="Resource" id="Resource_nxp1f"]
-script = ExtResource("1_baixa")
-char_name = "Evil SnickerDoodle"
-poses = Array[Texture2D]([ExtResource("4_8k11k")])
-hit_rate = 0.8
-leave_rate = 0.1
-money_rate = 2.0
-metadata/_custom_type_script = "uid://c4ydn64imo227"
+[ext_resource type="Resource" uid="uid://c0n67ckprqnx1" path="res://Resources/characters/Oreos/Oscar_Reo.tres" id="6_rt4ju"]
+[ext_resource type="Texture2D" uid="uid://b3do78p48d146" path="res://Assets/Drinks/Bar(Mid).png" id="7_8k11k"]
+[ext_resource type="Resource" uid="uid://dqq3d32rf5d36" path="res://Resources/characters/Oreos/Ottis_Reo.tres" id="7_iysyj"]
+[ext_resource type="Texture2D" uid="uid://cw13b14u45lnf" path="res://Assets/Drinks/Bar(Empty w_ bottles).png" id="8_72elj"]
+[ext_resource type="Resource" uid="uid://y7t2juim4yk3" path="res://Resources/characters/Oreos/Otto_Reno.tres" id="8_yeccm"]
+[ext_resource type="Resource" uid="uid://doofsik3ge7h0" path="res://Resources/characters/Oreos/Oliver_Reo.tres" id="9_tvqhv"]
+[ext_resource type="Resource" uid="uid://dfphcisgilbjh" path="res://Resources/characters/Apples/Ghost_Apple.tres" id="10_4gejk"]
+[ext_resource type="Resource" uid="uid://c73xmegchgg8r" path="res://Resources/characters/Apples/Adam_S_Apple.tres" id="11_d6q04"]
+[ext_resource type="Resource" uid="uid://bi61u2u66kg8y" path="res://Resources/characters/Apples/Golden_Apple.tres" id="12_tqgqc"]
+[ext_resource type="Resource" uid="uid://b3lya2kl3o0sy" path="res://Resources/characters/Apples/Granny_Smith.tres" id="13_amk1k"]
+[ext_resource type="Resource" uid="uid://o81eotgsr014" path="res://Resources/characters/Apples/Caramel_Apple.tres" id="14_m5hkf"]
+[ext_resource type="Resource" uid="uid://cw7yt8bgca7pf" path="res://Resources/characters/Unique/Cowboy_Cookie.tres" id="15_uae47"]
+[ext_resource type="Resource" uid="uid://bifk8ier487q5" path="res://Resources/characters/Unique/Professor_Pickle.tres" id="16_ysn3a"]
 
 [resource]
 script = ExtResource("2_5s617")
 drink_name = "Milk"
-texture = ExtResource("6_72elj")
-possible_chars = Array[ExtResource("1_baixa")]([ExtResource("3_fjnax"), SubResource("Resource_k4u2x"), SubResource("Resource_nxp1f")])
+textures = Array[Texture2D]([ExtResource("6_72elj"), ExtResource("7_8k11k"), ExtResource("8_72elj")])
+possible_chars = Array[ExtResource("1_baixa")]([ExtResource("3_fjnax"), ExtResource("3_70f0s"), ExtResource("4_70f0s"), ExtResource("5_ua2om"), ExtResource("6_rt4ju"), ExtResource("7_iysyj"), ExtResource("8_yeccm"), ExtResource("9_tvqhv"), ExtResource("10_4gejk"), ExtResource("11_d6q04"), ExtResource("12_tqgqc"), ExtResource("13_amk1k"), ExtResource("14_m5hkf"), ExtResource("15_uae47"), ExtResource("16_ysn3a")])
+time = 60
 metadata/_custom_type_script = "uid://bf7ioe8sus5gb"

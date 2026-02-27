@@ -1,7 +1,7 @@
 extends Control
 class_name AttractionPurchaseCheckMenu
 
-@onready var money_label = $ColorRect2/MoneyBox/Money
+@onready var money_label = $Panel/MoneyBox/Money
 
 func setup(money: int):
 	print(money_label)

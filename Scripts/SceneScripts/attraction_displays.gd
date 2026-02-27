@@ -14,7 +14,7 @@ const AttractionSlotNode = preload("res://Scenes/AttractionSlotNode.tscn")
 func setup(attraction_data: AttractionData, slot_position: Vector2):
 	texture = attraction_data.texture
 	position.x = slot_position[0] + 128
-	position.y = slot_position[1] + 128
+	position.y = slot_position[1] - 128
 	data = attraction_data
 
 func create_slots():

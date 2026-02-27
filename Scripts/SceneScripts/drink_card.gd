@@ -11,6 +11,6 @@ func setup(drink_data: DrinkData):
 	data = drink_data
 
 func _ready():
-	icon.texture = data.texture
+	icon.texture = data.textures[0]
 	name_label.text = data.drink_name
 	cost_label.text = "$%d" % data.price
