@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://y7t2juim4yk3"]
+
+[ext_resource type="Texture2D" uid="uid://ds1o2aiykytsk" path="res://Assets/Characters/Poker Table(Otto Reno).png" id="1_nqp3q"]
+[ext_resource type="Texture2D" uid="uid://coiiksolgo7ou" path="res://Assets/Characters/Table(Otto Reo).png" id="2_jllks"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="3_e15dm"]
+
+[resource]
+script = ExtResource("3_e15dm")
+char_name = "Otto Reno"
+poses = Array[Texture2D]([ExtResource("1_nqp3q"), ExtResource("2_jllks")])
+hit_rate = 0.3
+leave_rate = 0.1
+money_rate = 2.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"

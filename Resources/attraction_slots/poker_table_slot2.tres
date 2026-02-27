@@ -1,8 +1,14 @@
 [gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://brtalydy27vf3"]
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_jfth4"]
+[ext_resource type="Resource" uid="uid://doofsik3ge7h0" path="res://Resources/characters/Oreos/Oliver_Reo.tres" id="2_38c22"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_q4yx2"]
+[ext_resource type="Resource" uid="uid://y7t2juim4yk3" path="res://Resources/characters/Oreos/Otto_Reno.tres" id="3_xt65g"]
+[ext_resource type="Resource" uid="uid://dqq3d32rf5d36" path="res://Resources/characters/Oreos/Ottis_Reo.tres" id="4_6vkar"]
+[ext_resource type="Resource" uid="uid://c0n67ckprqnx1" path="res://Resources/characters/Oreos/Oscar_Reo.tres" id="5_bq2wn"]
+[ext_resource type="Resource" uid="uid://bhqugyfa5a8u4" path="res://Resources/characters/Oreos/Omar_Reo.tres" id="6_jl21a"]
 
 [resource]
 script = ExtResource("2_q4yx2")
+possible_chars = Array[ExtResource("1_jfth4")]([ExtResource("2_38c22"), ExtResource("3_xt65g"), ExtResource("4_6vkar"), ExtResource("5_bq2wn"), ExtResource("6_jl21a")])
 metadata/_custom_type_script = "uid://bke5xyxtew67v"

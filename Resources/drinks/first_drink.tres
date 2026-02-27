@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_baixa"]
 [ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_5s617"]
-[ext_resource type="Resource" uid="uid://dbvqsnpcmht2u" path="res://Resources/characters/Donut_Don.tres" id="3_fjnax"]
+[ext_resource type="Resource" uid="uid://dbvqsnpcmht2u" path="res://Resources/characters/Unique/Donut_Don.tres" id="3_fjnax"]
 [ext_resource type="Texture2D" uid="uid://bsbrb8pr61j8k" path="res://Assets/Characters/Arm Wrestling Machine(Jawbreaker Joe).png" id="3_r2qmp"]
 [ext_resource type="Texture2D" uid="uid://crjo8rmm8lipw" path="res://Assets/Characters/Poker Table(Evil Snickerdoodle).png" id="4_8k11k"]
 [ext_resource type="Texture2D" uid="uid://dt7rx7k3pcv23" path="res://Assets/Drinks/Bar(Full).png" id="6_72elj"]

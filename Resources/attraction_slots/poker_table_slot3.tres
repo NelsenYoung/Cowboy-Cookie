@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_rb7j4"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_c0s63"]
+[ext_resource type="Resource" uid="uid://o81eotgsr014" path="res://Resources/characters/Apples/Caramel_Apple.tres" id="2_lp6xy"]
+[ext_resource type="Resource" uid="uid://b3lya2kl3o0sy" path="res://Resources/characters/Apples/Granny_Smith.tres" id="3_w5ewu"]
+[ext_resource type="Resource" uid="uid://bi61u2u66kg8y" path="res://Resources/characters/Apples/Golden_Apple.tres" id="4_i4jxu"]
+[ext_resource type="Resource" uid="uid://c73xmegchgg8r" path="res://Resources/characters/Apples/Adam_S_Apple.tres" id="5_ntim8"]
+[ext_resource type="Resource" uid="uid://dfphcisgilbjh" path="res://Resources/characters/Apples/Ghost_Apple.tres" id="6_34gxg"]
 
 [resource]
 script = ExtResource("2_c0s63")
+possible_chars = Array[ExtResource("1_rb7j4")]([ExtResource("2_lp6xy"), ExtResource("3_w5ewu"), ExtResource("4_i4jxu"), ExtResource("5_ntim8"), ExtResource("6_34gxg")])
 metadata/_custom_type_script = "uid://bke5xyxtew67v"

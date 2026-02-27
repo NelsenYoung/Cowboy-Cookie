@@ -1,10 +1,19 @@
 [gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://cxtgy8r646nju"]
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_x3ca4"]
-[ext_resource type="Resource" uid="uid://br1jax2avcbuo" path="res://Resources/characters/Evil_SnickerDoodle.tres" id="2_8ol0s"]
+[ext_resource type="Texture2D" uid="uid://crjo8rmm8lipw" path="res://Assets/Characters/Poker Table(Evil Snickerdoodle).png" id="2_x3ca4"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="3_ye3bs"]
+
+[sub_resource type="Resource" id="Resource_bbhcx"]
+script = ExtResource("1_x3ca4")
+char_name = "Evil SnickerDoodle"
+poses = Array[Texture2D]([ExtResource("2_x3ca4")])
+hit_rate = 0.1
+leave_rate = 0.1
+money_rate = 2.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"
 
 [resource]
 script = ExtResource("3_ye3bs")
-possible_chars = Array[ExtResource("1_x3ca4")]([ExtResource("2_8ol0s")])
+possible_chars = Array[ExtResource("1_x3ca4")]([SubResource("Resource_bbhcx")])
 metadata/_custom_type_script = "uid://bke5xyxtew67v"

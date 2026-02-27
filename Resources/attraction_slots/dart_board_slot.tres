@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://chj1w0vmkp16f"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_16ubq"]
+[ext_resource type="Texture2D" uid="uid://c38a47yao8o6a" path="res://Assets/Characters/Dart Board(Cowboy Cookie).png" id="2_na3tk"]
+[ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_uye33"]
+
+[sub_resource type="Resource" id="Resource_3lxqs"]
+script = ExtResource("1_16ubq")
+char_name = "Cowboy Cookie"
+poses = Array[Texture2D]([ExtResource("2_na3tk")])
+hit_rate = 0.05
+leave_rate = 0.1
+money_rate = 10.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"
+
+[resource]
+script = ExtResource("2_uye33")
+possible_chars = Array[ExtResource("1_16ubq")]([SubResource("Resource_3lxqs")])
+metadata/_custom_type_script = "uid://bke5xyxtew67v"

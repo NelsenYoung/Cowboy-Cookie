@@ -2,14 +2,31 @@
 
 [ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Scripts/Classes/AttractionData.gd" id="1_kthlb"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_abdlf"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="3_8c52o"]
 [ext_resource type="Resource" uid="uid://cxtgy8r646nju" path="res://Resources/attraction_slots/poker_table_slot1.tres" id="3_wbv5g"]
+[ext_resource type="Texture2D" uid="uid://crjo8rmm8lipw" path="res://Assets/Characters/Poker Table(Evil Snickerdoodle).png" id="4_61o6f"]
 [ext_resource type="Texture2D" uid="uid://bkb3bx8a0sbhi" path="res://Assets/Attractions/Poker Table.png" id="4_cqshm"]
+[ext_resource type="Resource" uid="uid://brtalydy27vf3" path="res://Resources/attraction_slots/poker_table_slot2.tres" id="6_cn3oy"]
+
+[sub_resource type="Resource" id="Resource_bbhcx"]
+script = ExtResource("3_8c52o")
+char_name = "Evil SnickerDoodle"
+poses = Array[Texture2D]([ExtResource("4_61o6f")])
+hit_rate = 0.1
+leave_rate = 0.1
+money_rate = 2.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"
+
+[sub_resource type="Resource" id="Resource_qib5b"]
+script = ExtResource("2_abdlf")
+possible_chars = Array[ExtResource("3_8c52o")]([SubResource("Resource_bbhcx")])
+metadata/_custom_type_script = "uid://bke5xyxtew67v"
 
 [resource]
 script = ExtResource("1_kthlb")
 id = "0"
 attraction_name = "Poker Table"
 price = 500
-slots = Array[ExtResource("2_abdlf")]([ExtResource("3_wbv5g")])
+slots = Array[ExtResource("2_abdlf")]([SubResource("Resource_qib5b"), ExtResource("3_wbv5g"), ExtResource("6_cn3oy")])
 texture = ExtResource("4_cqshm")
 metadata/_custom_type_script = "uid://hgobj064obp5"

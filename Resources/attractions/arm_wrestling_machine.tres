@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Scripts/Classes/AttractionData.gd" id="1_s7ycw"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_8q6jy"]
 [ext_resource type="Texture2D" uid="uid://bsbrb8pr61j8k" path="res://Assets/Characters/Arm Wrestling Machine(Jawbreaker Joe).png" id="3_8q6jy"]
+[ext_resource type="Resource" uid="uid://cj206padamtjx" path="res://Resources/attraction_slots/arm_wresling_machine_slot.tres" id="3_e6dhn"]
 
 [resource]
 script = ExtResource("1_s7ycw")
 id = "5"
 attraction_name = "Arm Wrestling Machine"
 price = 1000
+slots = Array[ExtResource("2_8q6jy")]([ExtResource("3_e6dhn")])
 texture = ExtResource("3_8q6jy")
 metadata/_custom_type_script = "uid://hgobj064obp5"

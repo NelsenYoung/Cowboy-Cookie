@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bhqugyfa5a8u4"]
+
+[ext_resource type="Texture2D" uid="uid://bn6cg2wrss6gi" path="res://Assets/Characters/Poker Table(Omar Reo).png" id="1_rwla1"]
+[ext_resource type="Texture2D" uid="uid://bxpncggrrk0nu" path="res://Assets/Characters/Table(Omar Reo).png" id="2_rpihb"]
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="3_ysiwl"]
+
+[resource]
+script = ExtResource("3_ysiwl")
+char_name = "Omar Reo"
+poses = Array[Texture2D]([ExtResource("1_rwla1"), ExtResource("2_rpihb")])
+hit_rate = 0.3
+leave_rate = 0.1
+money_rate = 3.0
+metadata/_custom_type_script = "uid://c4ydn64imo227"
