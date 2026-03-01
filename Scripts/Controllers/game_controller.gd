@@ -9,6 +9,7 @@ var unclaimed_gifts: Dictionary = {}
 var unique_gift_id: int = 0
 var last_login_time:float = 0
 var purchased_attractions: Dictionary = {}
+var all_visited_chars: Dictionary = {}
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
@@ -16,10 +17,12 @@ var purchased_attractions: Dictionary = {}
 @onready var attraction_slots_container = $"../UIController/AttractionSlotButtons"
 @onready var ui_controller = $"../UIController"
 @onready var money_label = $"../UIController/MoneyDisplay/MoneyLabel"
+@onready var wall_pictures_container = $"../UIController/WallPictures/MarginContainer/GridContainer"
 
 const AttractionDisplayScene = preload("res://Scenes/AttractionDisplay.tscn")
 const CharacterDisplayScene = preload("res://Scenes/CharacterDisplay.tscn")
 const DrinkDisplayScene = preload("res://Scenes/DrinkDisplay.tscn")
+const PictureFrameScene = preload("res://Scenes/wall_picture.tscn")
 
 var TEST_ATTRACTIONS = [load("res://Resources/attractions/piano.tres"), load("res://Resources/attractions/poker_table.tres"), load("res://Resources/attractions/table.tres")]
 var TEST_DRINK = load("res://Resources/drinks/first_drink.tres")
@@ -95,6 +98,7 @@ func _ready():
 		if attraction != null:
 			for slot in attraction.slot_nodes:
 				simulate_slot(slot, current_time, last_login_time)
+	create_picture_wall_frames()
 
 func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
 	var tick = 5
@@ -146,6 +150,7 @@ func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 
 func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
 	characters[char] = true
+	all_visited_chars[char] = true
 	slot.spawn_char(char, time, drink.time_placed + drink.data.time)
 
 func remove_char(slot: AttractionSlotNode, char: CharacterData, sim: bool):
@@ -160,6 +165,12 @@ func remove_all_chars() -> void:
 			for slot in attraction.slot_nodes:
 				if slot.character != null:
 					remove_char(slot, slot.data.character, false)
+
+func create_picture_wall_frames():
+	for character in all_visited_chars:
+		var picture = PictureFrameScene.instantiate()
+		wall_pictures_container.add_child(picture)
+		picture.setup(character)
 
 func leave_gift(char: CharacterData) -> int:
 	var amount: int = floor(10 * char.money_rate * randf())
@@ -183,6 +194,8 @@ func array_to_dict(in_array: Array) -> Dictionary:
 	for item in in_array:
 		res[item.char_name] = true
 	return res
+
+# ------------------- UI Interactions ------------------- #
 
 func _on_attraction_selected(slot_idx: int, attraction: AttractionData):
 	var attraction_instance = AttractionDisplayScene.instantiate()
@@ -231,7 +244,8 @@ func save_game():
 		"attractions": serialize_attractions(),
 		"characters": serialize_characters(),
 		"unclaimed_gifts": serialize_gifts(),
-		"purchased_attractions": serialize_purchased_attractions()
+		"purchased_attractions": serialize_purchased_attractions(),
+		"all_visited_chars": serialize_all_visited_chars()
 	}
 
 	var file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -269,16 +283,16 @@ func read_save_data(save_data: Dictionary):
 			spawn_char(cur_slot, load(character_data["char"]), character_data["arrival"])
 	
 	# Store Unclaimed gifts if there are any
-	print(save_data["unclaimed_gifts"])
 	for gift in save_data["unclaimed_gifts"]:
 		leave_gift(load(gift["char"]))
 	
-	print(save_data["purchased_attractions"])
 	if "purchased_attractions" in save_data:
 		for purchased_attraction in save_data["purchased_attractions"]:
-			print(purchased_attraction)
 			purchased_attractions[load(purchased_attraction["attraction"])] = true
-	print(purchased_attractions)
+	
+	if "all_visited_chars" in save_data:
+		for character in save_data["all_visited_chars"]:
+			all_visited_chars[load(character["char"])] = true
 	return
 
 func serialize_attractions():
@@ -312,15 +326,20 @@ func serialize_gifts():
 			"char": unclaimed_gifts[gift][0].resource_path,
 			"amount": unclaimed_gifts[gift][1]
 		}))
-	print(data)
 	return data
 
 func serialize_purchased_attractions():
 	var data = []
-	print(purchased_attractions)
 	for purchased_attraction in purchased_attractions:
 		data.append({
 			"attraction": purchased_attraction.resource_path
 		})
-	print(data)
+	return data
+
+func serialize_all_visited_chars():
+	var data = []
+	for character in all_visited_chars:
+		data.append({
+			"char": character.resource_path
+		})
 	return data

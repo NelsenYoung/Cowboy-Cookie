@@ -20,6 +20,7 @@ extends CanvasLayer
 
 @onready var camera_menu_button = $CameraMenuButton
 @onready var camera_menu = $CameraMenu
+@onready var back_wall_button = $WallPictures/Button
 
 @onready var money_label = $MoneyDisplay/MoneyLabel
 
@@ -50,9 +51,13 @@ func _ready():
 		slot_buttons[i].pressed.connect(_on_slot_button_pressed.bind(i))
 		
 	camera_menu_button.pressed.connect(_on_camera_menu_button_pressed)
+	back_wall_button.pressed.connect(_on_back_wall_button_pressed)
 
 func _on_camera_menu_button_pressed():
 	camera_menu.visible = true
+
+func _on_back_wall_button_pressed():
+	print("back wall button pressed")
 
 func _on_gifts_menu_button_pressed() -> void:
 	gifts_menu.visible = true

@@ -84,6 +84,7 @@ offset_bottom = 165.0
 grow_horizontal = 2
 
 [node name="Panel" type="Panel" parent="IconContainer" unique_id=235323477]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

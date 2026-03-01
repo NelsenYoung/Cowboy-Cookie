@@ -32,6 +32,9 @@ script/source = "extends Node2D
 	#attraction_menu.visible = false
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v158k"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="Game" type="Node2D" unique_id=207332668]
 script = SubResource("GDScript_qxrlw")
 
@@ -102,6 +105,44 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="WallPictures" type="Control" parent="UIController" unique_id=1052356240]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -360.0
+offset_right = 360.0
+offset_bottom = 120.0
+grow_horizontal = 2
+
+[node name="Button" type="Button" parent="UIController/WallPictures" unique_id=1913386292]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_v158k")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/WallPictures" unique_id=1925533067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 17
+
+[node name="GridContainer" type="GridContainer" parent="UIController/WallPictures/MarginContainer" unique_id=807388925]
+custom_minimum_size = Vector2(43, 44)
+layout_mode = 2
+theme_override_constants/h_separation = 65
+theme_override_constants/v_separation = 52
+columns = 11
 
 [node name="DrinkMenu" type="Panel" parent="UIController" unique_id=1915711493]
 visible = false
