@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://cepkaxjyajvgc"]
+
+[ext_resource type="Script" uid="uid://dpd5jopkxqh25" path="res://Scripts/SceneScripts/wall_picture.gd" id="1_srqwu"]
+
+[node name="Control" type="Control" unique_id=326401622]
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1822261517]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 620.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2059508049]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="HScrollBar" type="HScrollBar" parent="MarginContainer" unique_id=968877660]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HScrollBar" unique_id=1698650378]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1508.0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="VFlowContainer" parent="MarginContainer/HScrollBar/MarginContainer" unique_id=931827266]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+script = ExtResource("1_srqwu")
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1766465594]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1909358991]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1877463816]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=758358510]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=191639039]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=147032563]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1395353506]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=990780463]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1723373603]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1584722198]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=771336134]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=8179899]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect13" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=944231172]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect14" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1854682173]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect15" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=727600335]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect16" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=636319059]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)
+
+[node name="ColorRect17" type="ColorRect" parent="MarginContainer/HScrollBar/MarginContainer/HBoxContainer" unique_id=1155336105]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 2
+color = Color(0.52956223, 0.62282205, 0.98612577, 1)

@@ -35,6 +35,18 @@ script/source = "extends Node2D
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v158k"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4fw4"]
+bg_color = Color(0.3558096, 0.24379754, 0.16757601, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Game" type="Node2D" unique_id=207332668]
 script = SubResource("GDScript_qxrlw")
 
@@ -116,15 +128,6 @@ offset_right = 360.0
 offset_bottom = 120.0
 grow_horizontal = 2
 
-[node name="Button" type="Button" parent="UIController/WallPictures" unique_id=1913386292]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_v158k")
-
 [node name="MarginContainer" type="MarginContainer" parent="UIController/WallPictures" unique_id=1925533067]
 layout_mode = 1
 anchors_preset = 15
@@ -143,6 +146,142 @@ layout_mode = 2
 theme_override_constants/h_separation = 65
 theme_override_constants/v_separation = 52
 columns = 11
+
+[node name="Button" type="Button" parent="UIController/WallPictures" unique_id=1913386292]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_v158k")
+
+[node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
+custom_minimum_size = Vector2(128, 64)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = -120.0
+offset_right = 184.0
+offset_bottom = -56.0
+grow_vertical = 0
+
+[node name="MoneyIcon" type="TextureRect" parent="UIController/MoneyDisplay" unique_id=1218405606]
+layout_mode = 2
+texture = ExtResource("5_v158k")
+expand_mode = 3
+
+[node name="MoneyLabel" type="Label" parent="UIController/MoneyDisplay" unique_id=603573638]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="CameraMenuButton" type="TextureButton" parent="UIController" unique_id=1240222806]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -120.0
+offset_right = 32.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("6_h4fw4")
+stretch_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="UIController" unique_id=1638974363]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = -56.0
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("7_ldgsr")
+stretch_mode = 0
+
+[node name="PicturesMenu" type="Panel" parent="UIController" unique_id=1144630620]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UIController/PicturesMenu" unique_id=1362594327]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.7729475, 0.57769287, 0.3833229, 1)
+
+[node name="Control" type="Control" parent="UIController/PicturesMenu" unique_id=2029600602]
+custom_minimum_size = Vector2(704, 704)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UIController/PicturesMenu/Control" unique_id=133355317]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h4fw4")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/PicturesMenu/Control" unique_id=2060031791]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="HScrollBar" type="ScrollContainer" parent="UIController/PicturesMenu/Control/MarginContainer" unique_id=1804963966]
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="VFlowContainer" type="VFlowContainer" parent="UIController/PicturesMenu/Control/MarginContainer/HScrollBar" unique_id=1886213082]
+custom_minimum_size = Vector2(0, 576)
+layout_mode = 2
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 64
+
+[node name="TextureButton" type="TextureButton" parent="UIController/PicturesMenu" unique_id=737407105]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 168.0
+offset_bottom = 168.0
+texture_normal = ExtResource("4_1l0tm")
+stretch_mode = 0
 
 [node name="DrinkMenu" type="Panel" parent="UIController" unique_id=1915711493]
 visible = false
@@ -343,59 +482,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.21568628)
-
-[node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
-custom_minimum_size = Vector2(128, 64)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = -120.0
-offset_right = 184.0
-offset_bottom = -56.0
-grow_vertical = 0
-
-[node name="MoneyIcon" type="TextureRect" parent="UIController/MoneyDisplay" unique_id=1218405606]
-layout_mode = 2
-texture = ExtResource("5_v158k")
-expand_mode = 3
-
-[node name="MoneyLabel" type="Label" parent="UIController/MoneyDisplay" unique_id=603573638]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "0"
-
-[node name="CameraMenuButton" type="TextureButton" parent="UIController" unique_id=1240222806]
-custom_minimum_size = Vector2(64, 64)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -120.0
-offset_right = 32.0
-offset_bottom = -56.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = ExtResource("6_h4fw4")
-stretch_mode = 0
-
-[node name="TextureButton" type="TextureButton" parent="UIController" unique_id=1638974363]
-custom_minimum_size = Vector2(64, 64)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -120.0
-offset_right = -56.0
-offset_bottom = -56.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("7_ldgsr")
-stretch_mode = 0
 
 [node name="EntitiesContainer" type="Node2D" parent="." unique_id=537070834]
 

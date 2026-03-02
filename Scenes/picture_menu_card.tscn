@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://2ushu7t861mb"]
+
+[ext_resource type="Texture2D" uid="uid://beq51dfd8v6uw" path="res://Assets/Donut Don.png" id="1_safb3"]
+[ext_resource type="Texture2D" uid="uid://niidpg5nnike" path="res://Assets/UI/Picture Frame.png" id="2_aj4r3"]
+
+[node name="PictureMenuCard" type="Panel" unique_id=1287544388]
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1931054063]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11674089, 0.116740905, 0.11674089, 1)
+
+[node name="CharacterImage" type="TextureRect" parent="." unique_id=934826855]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_safb3")
+
+[node name="PictureFrame" type="TextureRect" parent="." unique_id=1150463649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aj4r3")

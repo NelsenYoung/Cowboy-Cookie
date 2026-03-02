@@ -16,7 +16,7 @@ custom_minimum_size = Vector2(44, 44)
 layout_mode = 1
 offset_right = 64.0
 offset_bottom = 64.0
-scale = Vector2(0.688, 0.688)
+scale = Vector2(0.172, 0.172)
 texture = ExtResource("1_4t5ys")
 
 [node name="Frame" type="TextureRect" parent="." unique_id=1956486277]

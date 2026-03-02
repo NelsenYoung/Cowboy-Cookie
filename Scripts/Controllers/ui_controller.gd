@@ -22,6 +22,13 @@ extends CanvasLayer
 @onready var camera_menu = $CameraMenu
 @onready var back_wall_button = $WallPictures/Button
 
+
+# ---------- START TUTORIAL CODE ---------- #
+@onready var picture_menu = $PicturesMenu
+@onready var picture_flow_box = $PicturesMenu/Control/MarginContainer/HScrollBar/VFlowContainer
+var picture_menu_card = preload("res://Scenes/picture_menu_card.tscn")
+# ---------- END TUTORIAL CODE ---------- #
+
 @onready var money_label = $MoneyDisplay/MoneyLabel
 
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
@@ -56,8 +63,27 @@ func _ready():
 func _on_camera_menu_button_pressed():
 	camera_menu.visible = true
 
+# ---------- START TUTORIAL CODE ---------- #
+
+
 func _on_back_wall_button_pressed():
 	print("back wall button pressed")
+	picture_menu.visible = true
+	var chars = game_controller.all_visited_chars
+	for char in chars:
+		var menu_card = picture_menu_card.instantiate()
+		picture_flow_box.add_child(menu_card)
+		menu_card.get_child(1).texture = char.poses[0]
+	var close_button = picture_menu.get_child(2)
+	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
+
+func _on_picture_menu_close_button_pressed():
+	for obj in picture_flow_box.get_children():
+		obj.queue_free()
+	picture_menu.visible = false
+	
+	
+# ---------- END TUTORIAL CODE ---------- #
 
 func _on_gifts_menu_button_pressed() -> void:
 	gifts_menu.visible = true
