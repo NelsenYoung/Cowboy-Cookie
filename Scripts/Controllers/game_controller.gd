@@ -9,7 +9,8 @@ var unclaimed_gifts: Dictionary = {}
 var unique_gift_id: int = 0
 var last_login_time:float = 0
 var purchased_attractions: Dictionary = {}
-var all_visited_chars: Dictionary = {}
+var all_visited_chars = []
+var all_chars_order = []
 
 @onready var attractions_container = $"../EntitiesContainer/Attractions"
 @onready var characters_container = $"../EntitiesContainer/Characters"
@@ -48,6 +49,7 @@ const DRINK_SLOT_POSITION = Vector2(200, 640)
 func _ready():
 	#var drink_slot_button = $"../UIController/DrinkSlotButton/SlotButton1"
 	#_on_drink_selected(TEST_DRINK)
+	all_visited_chars.resize(15)
 	
 	var slot_buttons = attraction_slots_container.get_children()
 	for i in range(num_attraction_slots):
@@ -98,6 +100,7 @@ func _ready():
 		if attraction != null:
 			for slot in attraction.slot_nodes:
 				simulate_slot(slot, current_time, last_login_time)
+	initialize_all_chars()
 	create_picture_wall_frames()
 
 func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
@@ -150,8 +153,9 @@ func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 
 func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
 	characters[char] = true
-	all_visited_chars[char] = true
+	all_visited_chars[char.id] = true
 	slot.spawn_char(char, time, drink.time_placed + drink.data.time)
+	print(all_visited_chars, char.id)
 
 func remove_char(slot: AttractionSlotNode, char: CharacterData, sim: bool):
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
@@ -166,11 +170,44 @@ func remove_all_chars() -> void:
 				if slot.character != null:
 					remove_char(slot, slot.data.character, false)
 
+func initialize_all_chars():
+	var dir_name = "res://Resources/characters/"
+	var dir = DirAccess.open(dir_name)
+	
+	dir.list_dir_begin()
+	var group_name = dir.get_next()
+	
+	all_chars_order.resize(15)
+	
+	var count = 0
+	while group_name != "":
+		var group = DirAccess.open(dir_name + group_name)
+		group.list_dir_begin()
+		var file_name = group.get_next()
+		
+		while file_name != "":
+			if file_name.ends_with(".tres"):
+				var char = load(dir_name + group_name + "/" + file_name)
+				if all_visited_chars[char.id] == true:
+					all_visited_chars[char.id] = true
+				else:
+					all_visited_chars[char.id] = false
+				all_chars_order[char.id] = char
+			file_name = group.get_next()
+		group.list_dir_end()
+		group_name = dir.get_next()
+	dir.list_dir_end()
+	print(all_visited_chars)
+	print(all_chars_order)
+
 func create_picture_wall_frames():
-	for character in all_visited_chars:
+	for character in all_chars_order:
 		var picture = PictureFrameScene.instantiate()
 		wall_pictures_container.add_child(picture)
 		picture.setup(character)
+		if all_visited_chars[character.id] == false:
+			picture.get_child(1).visible = false
+			picture.get_child(2).visible = false
 
 func leave_gift(char: CharacterData) -> int:
 	var amount: int = floor(10 * char.money_rate * randf())
@@ -245,7 +282,7 @@ func save_game():
 		"characters": serialize_characters(),
 		"unclaimed_gifts": serialize_gifts(),
 		"purchased_attractions": serialize_purchased_attractions(),
-		"all_visited_chars": serialize_all_visited_chars()
+		"all_visited_chars": all_visited_chars
 	}
 
 	var file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -265,6 +302,7 @@ func load_game():
 func read_save_data(save_data: Dictionary):
 	last_login_time = save_data["last_login_time"]
 	money = save_data["money"]
+	all_visited_chars = save_data["all_visited_chars"]
 	
 	# place the existing drink if it exists
 	if save_data["drink"] != null:
@@ -290,9 +328,6 @@ func read_save_data(save_data: Dictionary):
 		for purchased_attraction in save_data["purchased_attractions"]:
 			purchased_attractions[load(purchased_attraction["attraction"])] = true
 	
-	if "all_visited_chars" in save_data:
-		for character in save_data["all_visited_chars"]:
-			all_visited_chars[load(character["char"])] = true
 	return
 
 func serialize_attractions():
@@ -333,13 +368,5 @@ func serialize_purchased_attractions():
 	for purchased_attraction in purchased_attractions:
 		data.append({
 			"attraction": purchased_attraction.resource_path
-		})
-	return data
-
-func serialize_all_visited_chars():
-	var data = []
-	for character in all_visited_chars:
-		data.append({
-			"char": character.resource_path
 		})
 	return data

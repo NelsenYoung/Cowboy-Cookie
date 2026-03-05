@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://beq51dfd8v6uw" path="res://Assets/Donut Don.png" id="1_safb3"]
 [ext_resource type="Texture2D" uid="uid://niidpg5nnike" path="res://Assets/UI/Picture Frame.png" id="2_aj4r3"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_safb3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="PictureMenuCard" type="Panel" unique_id=1287544388]
 custom_minimum_size = Vector2(256, 256)
 anchors_preset = 8
@@ -39,3 +42,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_aj4r3")
+
+[node name="Button" type="Button" parent="." unique_id=594690067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_safb3")

@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("3_e15dm")
+id = 9
 char_name = "Otto Reno"
 poses = Array[Texture2D]([ExtResource("1_nqp3q"), ExtResource("2_jllks")])
-hit_rate = 0.3
+hit_rate = 0.1
 leave_rate = 0.1
 money_rate = 2.0
 metadata/_custom_type_script = "uid://c4ydn64imo227"

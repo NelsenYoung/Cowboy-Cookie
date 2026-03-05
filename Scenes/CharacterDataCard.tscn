@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://b2w6p3fjouyqg"]
+
+[ext_resource type="Texture2D" uid="uid://beq51dfd8v6uw" path="res://Assets/Donut Don.png" id="1_r4mlb"]
+[ext_resource type="Script" uid="uid://cd06k8u4ebi70" path="res://Scenes/character_data_card.gd" id="1_y1hld"]
+[ext_resource type="FontFile" uid="uid://l3xf26id3o6y" path="res://Assets/Font/CowboyJunior-GO6Dq.ttf" id="2_y1hld"]
+[ext_resource type="Texture2D" uid="uid://b8g35pltric0" path="res://Assets/UI/Close Button.png" id="4_3jph0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jph0"]
+bg_color = Color(0.68077457, 0.49434108, 0.303348, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffp05"]
+bg_color = Color(0.7296304, 0.56369054, 0.40449196, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4mlb"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Control" type="Panel" unique_id=1527777284]
+custom_minimum_size = Vector2(512, 712)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y1hld")
+
+[node name="Panel" type="Panel" parent="." unique_id=609176760]
+custom_minimum_size = Vector2(512, 712)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jph0")
+
+[node name="CharacterPanel" type="Panel" parent="Panel" unique_id=706228912]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_left = 56.0
+offset_top = 56.0
+offset_right = 256.0
+offset_bottom = 256.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ffp05")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/CharacterPanel" unique_id=329579677]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_r4mlb")
+
+[node name="Control" type="Control" parent="Panel" unique_id=1641276454]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_top = 56.0
+offset_right = -56.0
+offset_bottom = 256.0
+grow_horizontal = 0
+
+[node name="NameContainer" type="Control" parent="Panel/Control" unique_id=1396119692]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/Control/NameContainer" unique_id=1325548192]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_y1hld")
+theme_override_font_sizes/font_size = 32
+text = "Name:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/Control/NameContainer" unique_id=1965846700]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 141.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("2_y1hld")
+theme_override_font_sizes/font_size = 32
+text = "Donut Don"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LastAppeardContainer" type="Control" parent="Panel/Control" unique_id=552272914]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/Control/LastAppeardContainer" unique_id=99514023]
+custom_minimum_size = Vector2(186, 34)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -17.0
+offset_right = 93.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_y1hld")
+theme_override_font_sizes/font_size = 32
+text = "Last Appeard:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/Control/LastAppeardContainer" unique_id=575149027]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 141.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("2_y1hld")
+theme_override_font_sizes/font_size = 32
+text = "12/3/2025"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionContainer" type="Control" parent="Panel" unique_id=779339679]
+custom_minimum_size = Vector2(450, 400)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -437.0
+offset_right = 225.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="Panel/DescriptionContainer" unique_id=290023788]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4mlb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/DescriptionContainer/Panel" unique_id=843177974]
+custom_minimum_size = Vector2(430, 380)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_y1hld")
+theme_override_font_sizes/normal_font_size = 32
+text = "This is the description for Donut Don"
+
+[node name="CloseButton" type="TextureButton" parent="." unique_id=929035057]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture_normal = ExtResource("4_3jph0")

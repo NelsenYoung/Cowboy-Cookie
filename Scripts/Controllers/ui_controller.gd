@@ -28,6 +28,7 @@ extends CanvasLayer
 @onready var picture_flow_box = $PicturesMenu/Control/MarginContainer/HScrollBar/VFlowContainer
 var picture_menu_card = preload("res://Scenes/picture_menu_card.tscn")
 # ---------- END TUTORIAL CODE ---------- #
+var character_data_card = preload("res://Scenes/CharacterDataCard.tscn")
 
 @onready var money_label = $MoneyDisplay/MoneyLabel
 
@@ -70,10 +71,15 @@ func _on_back_wall_button_pressed():
 	print("back wall button pressed")
 	picture_menu.visible = true
 	var chars = game_controller.all_visited_chars
-	for char in chars:
+	var char_order = game_controller.all_chars_order
+	for char in char_order:
 		var menu_card = picture_menu_card.instantiate()
 		picture_flow_box.add_child(menu_card)
-		menu_card.get_child(1).texture = char.poses[0]
+		if chars[char.id]:
+			menu_card.get_child(1).texture = char.poses[0]
+			menu_card.get_child(3).pressed.connect(_on_character_picture_pressed.bind(char))
+		else:
+			menu_card.get_child(1).visible = false
 	var close_button = picture_menu.get_child(2)
 	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
 
@@ -84,6 +90,15 @@ func _on_picture_menu_close_button_pressed():
 	
 	
 # ---------- END TUTORIAL CODE ---------- #
+
+func _on_character_picture_pressed(char: CharacterData):
+	var data_card = character_data_card.instantiate()
+	picture_menu.add_child(data_card)
+	data_card.setup(char)
+	data_card.get_child(1).pressed.connect(_close_char_data_card.bind(data_card))
+
+func _close_char_data_card(data_card):
+	data_card.queue_free()
 
 func _on_gifts_menu_button_pressed() -> void:
 	gifts_menu.visible = true

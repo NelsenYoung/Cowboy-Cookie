@@ -26,5 +26,5 @@ script = ExtResource("2_5s617")
 drink_name = "Milk"
 textures = Array[Texture2D]([ExtResource("6_72elj"), ExtResource("7_8k11k"), ExtResource("8_72elj")])
 possible_chars = Array[ExtResource("1_baixa")]([ExtResource("3_fjnax"), ExtResource("3_70f0s"), ExtResource("4_70f0s"), ExtResource("5_ua2om"), ExtResource("6_rt4ju"), ExtResource("7_iysyj"), ExtResource("8_yeccm"), ExtResource("9_tvqhv"), ExtResource("10_4gejk"), ExtResource("11_d6q04"), ExtResource("12_tqgqc"), ExtResource("13_amk1k"), ExtResource("14_m5hkf"), ExtResource("15_uae47"), ExtResource("16_ysn3a")])
-time = 60
+time = 5400
 metadata/_custom_type_script = "uid://bf7ioe8sus5gb"
