@@ -21,6 +21,7 @@ window/size/viewport_height=1280
 window/size/window_width_override=360
 window/size/window_height_override=640
 window/stretch/mode="viewport"
+window/handheld/orientation=1
 
 [editor]
 
@@ -44,4 +45,5 @@ click={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 gdscript/warnings/exclude_addons=true
