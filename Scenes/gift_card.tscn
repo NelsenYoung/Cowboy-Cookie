@@ -1,25 +1,14 @@
 [gd_scene format=3 uid="uid://ha4nqritnkba"]
 
 [ext_resource type="Script" uid="uid://xstxn7qnex2u" path="res://Scripts/SceneScripts/gift_card.gd" id="1_t63i5"]
+[ext_resource type="Texture2D" uid="uid://x741kntn1gsv" path="res://Assets/UI/output-onlinepngtools.png" id="2_4r4kj"]
 [ext_resource type="Texture2D" uid="uid://cs58gup3o18he" path="res://Assets/UI/Coin Icon(Silver).png" id="2_iyrm6"]
 [ext_resource type="FontFile" uid="uid://l3xf26id3o6y" path="res://Assets/Font/CowboyJunior-GO6Dq.ttf" id="3_iyrm6"]
 [ext_resource type="Texture2D" uid="uid://b8g35pltric0" path="res://Assets/UI/Close Button.png" id="4_4r4kj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t63i5"]
-bg_color = Color(0.7019608, 0.49019608, 0.3647059, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [node name="GiftCard" type="Control" unique_id=681855243]
 clip_contents = true
-custom_minimum_size = Vector2(560, 120)
+custom_minimum_size = Vector2(560, 300)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -30,24 +19,27 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t63i5")
 
-[node name="Panel" type="Panel" parent="." unique_id=1654135764]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=965351858]
+custom_minimum_size = Vector2(560, 300)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t63i5")
+texture = ExtResource("2_4r4kj")
+region_rect = Rect2(2152, 240, 1600, 576)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1158755280]
+custom_minimum_size = Vector2(140, 100)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -30.0
-offset_right = 121.0
-offset_bottom = 30.0
+offset_left = 60.0
+offset_top = -20.0
+offset_right = 238.0
+offset_bottom = 80.0
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=112697674]
@@ -73,11 +65,21 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = 20.0
+offset_left = -140.0
+offset_top = -32.0
+offset_right = -76.0
+offset_bottom = 32.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("4_4r4kj")
 stretch_mode = 0
+
+[node name="NameLabel" type="Label" parent="." unique_id=1742324043]
+layout_mode = 1
+offset_left = 71.0
+offset_top = 76.0
+offset_right = 404.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("3_iyrm6")
+theme_override_font_sizes/font_size = 50
+text = "Character Name"

@@ -76,6 +76,8 @@ func _ready():
 	if save_data != null:
 		read_save_data(save_data)
 
+	print("CHARACTERS AFTER LOADING: ", characters)
+
 	if FIRST_LOGIN:
 		# run the tutorial and init
 		pass
@@ -155,9 +157,10 @@ func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
 	characters[char] = true
 	all_visited_chars[char.id] = true
 	slot.spawn_char(char, time, drink.time_placed + drink.data.time)
-	print(all_visited_chars, char.id)
+	#print(all_visited_chars, char.id)
 
 func remove_char(slot: AttractionSlotNode, char: CharacterData, sim: bool):
+	print(char.char_name, " left and should've left a gift")
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
 	leave_gift(char)
 	characters.erase(char)
@@ -186,7 +189,10 @@ func initialize_all_chars():
 		var file_name = group.get_next()
 		
 		while file_name != "":
-			if file_name.ends_with(".tres"):
+			if file_name.ends_with(".tres") or file_name.ends_with(".tres.remap"):
+				#print(file_name)
+				if file_name.ends_with(".remap"):
+					file_name = file_name.left(-6)
 				var char = load(dir_name + group_name + "/" + file_name)
 				if all_visited_chars[char.id] == true:
 					all_visited_chars[char.id] = true
@@ -197,8 +203,8 @@ func initialize_all_chars():
 		group.list_dir_end()
 		group_name = dir.get_next()
 	dir.list_dir_end()
-	print(all_visited_chars)
-	print(all_chars_order)
+	#print(all_visited_chars)
+	#print(all_chars_order)
 
 func create_picture_wall_frames():
 	for character in all_chars_order:
@@ -314,11 +320,14 @@ func read_save_data(save_data: Dictionary):
 			_on_attraction_selected(i, load(save_data["attractions"][i]))
 	
 	# place the characters if there are any
+	print("LOADED CHARACTERS: ", save_data["characters"])
 	for character_data in save_data["characters"]:
+		print(character_data)
 		if character_data != null:
 			var cur_attraction = attractions_container.get_child(character_data["attraction_index"])
 			var cur_slot = cur_attraction.get_child(character_data["slot_index"])
 			spawn_char(cur_slot, load(character_data["char"]), character_data["arrival"])
+			print("Character is loaded and spawned")
 	
 	# Store Unclaimed gifts if there are any
 	for gift in save_data["unclaimed_gifts"]:
@@ -352,6 +361,7 @@ func serialize_characters():
 						"slot_index": slot.get_index(),
 						"attraction_index": attraction.get_index()
 					})
+	print("SAVED CHARACTERS: ", data)
 	return data
 
 func serialize_gifts():

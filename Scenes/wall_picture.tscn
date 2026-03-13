@@ -20,13 +20,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2509804, 0.2509804, 0.2509804, 0.4745098)
 
-[node name="Picture" type="TextureRect" parent="." unique_id=1933336236]
+[node name="PictureContainer" type="Control" parent="." unique_id=1501587749]
+custom_minimum_size = Vector2(44, 44)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Picture" type="TextureRect" parent="PictureContainer" unique_id=1933336236]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 1
-offset_right = 64.0
-offset_bottom = 64.0
-scale = Vector2(0.172, 0.172)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_4t5ys")
+expand_mode = 3
 
 [node name="Frame" type="TextureRect" parent="." unique_id=1956486277]
 custom_minimum_size = Vector2(44, 44)

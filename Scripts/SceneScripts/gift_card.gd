@@ -6,6 +6,7 @@ var amount: int
 
 @onready var label = $HBoxContainer/Label
 @onready var char_icon = $HBoxContainer/TextureRect
+@onready var name_label = $NameLabel
 
 func setup(character: CharacterData, gift_amount: int) -> void:
 	character_data = character
@@ -15,3 +16,4 @@ func _ready():
 	label.text ="$%d" % amount
 	# This is temporary and must change later. Character data should have something like an icon field
 	char_icon.texture = character_data.poses[0]
+	name_label.text = character_data.char_name

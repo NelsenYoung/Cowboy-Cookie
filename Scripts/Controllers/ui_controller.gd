@@ -30,6 +30,8 @@ var picture_menu_card = preload("res://Scenes/picture_menu_card.tscn")
 # ---------- END TUTORIAL CODE ---------- #
 var character_data_card = preload("res://Scenes/CharacterDataCard.tscn")
 
+#@onready var tutorial_button = $TutorialMenu/TextureButton
+
 @onready var money_label = $MoneyDisplay/MoneyLabel
 
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
@@ -60,9 +62,18 @@ func _ready():
 		
 	camera_menu_button.pressed.connect(_on_camera_menu_button_pressed)
 	back_wall_button.pressed.connect(_on_back_wall_button_pressed)
+	#tutorial_button.pressed.connect(_close_tutorial_menu)
 
 func _on_camera_menu_button_pressed():
 	camera_menu.visible = true
+
+#func _close_tutorial_menu():
+	#var tutorial_panel = $TutorialMenu
+	#tutorial_panel.visible = false
+#
+#func _open_tutorial_menu():
+	#var tutorial_panel = $TutorialMenu
+	#tutorial_panel.visible = true
 
 # ---------- START TUTORIAL CODE ---------- #
 
@@ -80,7 +91,7 @@ func _on_back_wall_button_pressed():
 			menu_card.get_child(3).pressed.connect(_on_character_picture_pressed.bind(char))
 		else:
 			menu_card.get_child(1).visible = false
-	var close_button = picture_menu.get_child(2)
+	var close_button = picture_menu.get_child(1)
 	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
 
 func _on_picture_menu_close_button_pressed():
@@ -141,7 +152,9 @@ func load_drinks_from_dir() -> Array[DrinkData]:
 	var file_name = dir.get_next()
 	
 	while file_name != "":
-		if file_name.ends_with(".tres"):
+		if file_name.ends_with(".tres") or file_name.ends_with(".tres.remap"):
+			if file_name.ends_with(".remap"):
+				file_name = file_name.left(-6)
 			var drink = load(dir_name + file_name)
 			drinks.append(drink)
 		file_name = dir.get_next()
@@ -194,7 +207,9 @@ func load_attractions_from_dir() -> Array[AttractionData]:
 	var file_name = dir.get_next()
 	
 	while file_name != "":
-		if file_name.ends_with(".tres"):
+		if file_name.ends_with(".tres") or file_name.ends_with(".tres.remap"):
+			if file_name.ends_with(".remap"):
+				file_name = file_name.left(-6)
 			var attraction = load(dir_name + file_name)
 			attractions.append(attraction)
 		file_name = dir.get_next()
