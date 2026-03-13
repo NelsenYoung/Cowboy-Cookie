@@ -32,6 +32,7 @@ const DEBUG_MODE = false
 const DEBUG_ONE_HOUR_PASSED = 3600
 const DEBUG_SIX_HOURS_PASSED = 10800
 const DEBUG_TEN_HOURS_PASSED = 36000
+const PST_OFFSET = -8 * 3600
 
 const RESTART = false
 const FIRST_LOGIN = false
@@ -76,8 +77,6 @@ func _ready():
 	if save_data != null:
 		read_save_data(save_data)
 
-	print("CHARACTERS AFTER LOADING: ", characters)
-
 	if FIRST_LOGIN:
 		# run the tutorial and init
 		pass
@@ -112,7 +111,7 @@ func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time
 		#print("Sim Time:", Time.get_datetime_string_from_unix_time(sim_time))
 		if slot.character != null:
 			if slot.character.departure_time <= sim_time:
-				slot.remove_char()
+				remove_char(slot, slot.character.data, true)
 			sim_time += tick
 		else:
 			if (drink.time_placed + drink.data.time) - sim_time > 0:
@@ -120,9 +119,9 @@ func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time
 				var char = try_to_spwan(slot, sim_time)
 				if char != null:
 					if slot.character.departure_time > current_time:
-						print(slot.character.data.char_name + " Spawned and won't leave until " + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+						print(slot.character.data.char_name + " Spawned and won't leave until " + Time.get_datetime_string_from_unix_time(slot.character.departure_time + PST_OFFSET))
 					else:
-						print(slot.character.data.char_name + " Came and left at" + Time.get_datetime_string_from_unix_time(slot.character.departure_time))
+						print(slot.character.data.char_name + " Came and left at" + Time.get_datetime_string_from_unix_time(slot.character.departure_time + PST_OFFSET))
 						sim_time = slot.character.departure_time
 						remove_char(slot, char, true)
 				else:
@@ -320,14 +319,12 @@ func read_save_data(save_data: Dictionary):
 			_on_attraction_selected(i, load(save_data["attractions"][i]))
 	
 	# place the characters if there are any
-	print("LOADED CHARACTERS: ", save_data["characters"])
 	for character_data in save_data["characters"]:
 		print(character_data)
 		if character_data != null:
 			var cur_attraction = attractions_container.get_child(character_data["attraction_index"])
 			var cur_slot = cur_attraction.get_child(character_data["slot_index"])
 			spawn_char(cur_slot, load(character_data["char"]), character_data["arrival"])
-			print("Character is loaded and spawned")
 	
 	# Store Unclaimed gifts if there are any
 	for gift in save_data["unclaimed_gifts"]:
@@ -361,7 +358,6 @@ func serialize_characters():
 						"slot_index": slot.get_index(),
 						"attraction_index": attraction.get_index()
 					})
-	print("SAVED CHARACTERS: ", data)
 	return data
 
 func serialize_gifts():
