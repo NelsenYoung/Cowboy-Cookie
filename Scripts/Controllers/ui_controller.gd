@@ -11,8 +11,8 @@ extends CanvasLayer
 @onready var purchased_attractions = game_controller.purchased_attractions
 
 @onready var drinks_menu = $DrinkMenu
-@onready var drink_grid = $DrinkMenu/MarginContainer/ScrollContainer/AttractionGrid
-@onready var drink_menu_close_button = $DrinkMenu/CloseButton
+@onready var drink_grid = $DrinkMenu/MarginContainer2/Panel/MarginContainer/ScrollContainer/AttractionGrid
+@onready var drink_menu_close_button = $DrinkMenu/MarginContainer2/Panel/CloseButton
 
 @onready var gifts_menu_button = $TextureButton
 @onready var gifts_menu = $GiftsMenu
