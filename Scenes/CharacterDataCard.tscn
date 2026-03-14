@@ -69,10 +69,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3jph0")
 [node name="CharacterPanel" type="Panel" parent="Panel" unique_id=706228912]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 0
-offset_left = 56.0
-offset_top = 56.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 240.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ffp05")
 
 [node name="TextureRect" type="TextureRect" parent="Panel/CharacterPanel" unique_id=329579677]
@@ -90,21 +90,17 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -256.0
-offset_top = 56.0
-offset_right = -56.0
-offset_bottom = 256.0
+offset_left = -240.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 240.0
 grow_horizontal = 0
 
 [node name="NameContainer" type="Control" parent="Panel/Control" unique_id=1396119692]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
+anchors_preset = 0
+offset_right = 40.0
 offset_bottom = 40.0
-grow_horizontal = 2
 
 [node name="Label" type="Label" parent="Panel/Control/NameContainer" unique_id=1325548192]
 layout_mode = 0
@@ -129,16 +125,12 @@ vertical_alignment = 1
 
 [node name="LastAppeardContainer" type="Control" parent="Panel/Control" unique_id=552272914]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
 offset_top = -20.0
-offset_right = 20.0
+offset_right = 40.0
 offset_bottom = 20.0
-grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel/Control/LastAppeardContainer" unique_id=99514023]
@@ -149,9 +141,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.0
+offset_left = -20.0
 offset_top = -17.0
-offset_right = 93.0
+offset_right = 169.0
 offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -192,30 +184,40 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r4mlb")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/DescriptionContainer/Panel" unique_id=843177974]
-custom_minimum_size = Vector2(430, 380)
+custom_minimum_size = Vector2(430, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -0.5
-offset_right = 0.5
+offset_left = -215.0
+offset_top = -140.0
+offset_right = 215.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("2_y1hld")
 theme_override_font_sizes/normal_font_size = 32
 text = "This is the description for Donut Don"
 
-[node name="CloseButton" type="TextureButton" parent="." unique_id=929035057]
+[node name="CloseButton" type="TextureButton" parent="Panel" unique_id=929035057]
 layout_mode = 1
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 128.0
-offset_bottom = 128.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -84.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
 texture_normal = ExtResource("4_3jph0")

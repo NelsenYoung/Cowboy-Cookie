@@ -6,3 +6,6 @@ func setup(character: CharacterData):
 	
 	var name = $Panel/Control/NameContainer/Label2
 	name.text = character.char_name
+	
+	var description = $Panel/DescriptionContainer/Panel/RichTextLabel
+	description.text = character.description

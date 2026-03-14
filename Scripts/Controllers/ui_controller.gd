@@ -106,7 +106,7 @@ func _on_character_picture_pressed(char: CharacterData):
 	var data_card = character_data_card.instantiate()
 	picture_menu.add_child(data_card)
 	data_card.setup(char)
-	data_card.get_child(1).pressed.connect(_close_char_data_card.bind(data_card))
+	data_card.get_child(0).get_child(3).pressed.connect(_close_char_data_card.bind(data_card))
 
 func _close_char_data_card(data_card):
 	data_card.queue_free()

@@ -7,6 +7,7 @@ class_name CharacterData
 @export var hit_rate: float
 @export var leave_rate: float
 @export var money_rate: float
+@export var description: String
 
 func choose_pose(idx: int):
 	pass

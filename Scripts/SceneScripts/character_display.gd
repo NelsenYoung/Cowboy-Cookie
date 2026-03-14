@@ -7,7 +7,7 @@ var texture: Texture2D
 var data: CharacterData
 
 var arrival_time
-var stay_duration = randi_range(30, 60)  # 30-45 mins in seconds+
+var stay_duration = randi_range(10 * 60, 20 * 60)  # 30-45 mins in seconds+
 var departure_time
 
 func setup(character_data: CharacterData, spawn_time: float, drink_expiration_time: float):

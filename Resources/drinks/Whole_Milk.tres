@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DrinkData" format=3 uid="uid://dtksj4mylcv5f"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_qo3f2"]
+[ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_pco6k"]
+
+[resource]
+script = ExtResource("2_pco6k")
+metadata/_custom_type_script = "uid://bf7ioe8sus5gb"
