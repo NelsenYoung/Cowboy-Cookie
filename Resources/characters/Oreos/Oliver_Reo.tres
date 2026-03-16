@@ -8,7 +8,10 @@
 script = ExtResource("3_l316p")
 id = 5
 char_name = "Oliver Reo"
-poses = Array[Texture2D]([ExtResource("1_ncmta"), ExtResource("2_mkfkr")])
+poses = {
+"res://Resources/attraction_slots/poker_table_slot2.tres": ExtResource("1_ncmta")
+}
+icon = ExtResource("2_mkfkr")
 hit_rate = 0.1
 leave_rate = 0.1
 money_rate = 2.0

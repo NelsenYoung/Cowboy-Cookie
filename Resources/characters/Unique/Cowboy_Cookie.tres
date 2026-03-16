@@ -7,7 +7,7 @@
 script = ExtResource("1_kdbt1")
 id = 10
 char_name = "Cowboy Cookie"
-poses = Array[Texture2D]([ExtResource("1_uwjju")])
+icon = ExtResource("1_uwjju")
 hit_rate = 0.01
 leave_rate = 0.1
 money_rate = 10.0

@@ -3,7 +3,8 @@ class_name CharacterData
 
 @export var id: int
 @export var char_name: String
-@export var poses: Array[Texture2D]
+@export var poses: Dictionary
+@export var icon: Texture2D
 @export var hit_rate: float
 @export var leave_rate: float
 @export var money_rate: float

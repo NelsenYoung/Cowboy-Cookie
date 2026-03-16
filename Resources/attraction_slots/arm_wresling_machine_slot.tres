@@ -6,5 +6,6 @@
 
 [resource]
 script = ExtResource("2_l6pun")
+id = 7
 possible_chars = Array[ExtResource("1_e2i06")]([ExtResource("2_oukhm")])
 metadata/_custom_type_script = "uid://bke5xyxtew67v"

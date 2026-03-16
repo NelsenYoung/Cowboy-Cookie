@@ -7,7 +7,7 @@
 script = ExtResource("1_w5rei")
 id = 14
 char_name = "Professor Pickle"
-poses = Array[Texture2D]([ExtResource("1_ixgu6")])
+icon = ExtResource("1_ixgu6")
 hit_rate = 0.01
 leave_rate = 0.1
 money_rate = 30.0

@@ -13,7 +13,7 @@ func setup(slot_data: AttractionSlotData):
 
 func spawn_char(char: CharacterData, time: float, drink_expiration_time: float):
 	var char_instance = CharacterScene.instantiate()
-	char_instance.setup(char, time, drink_expiration_time)
+	char_instance.setup(data, char, time, drink_expiration_time)
 	root.add_child(char_instance)
 	character = char_instance
 	data.character = char

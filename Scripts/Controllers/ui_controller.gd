@@ -87,7 +87,7 @@ func _on_back_wall_button_pressed():
 		var menu_card = picture_menu_card.instantiate()
 		picture_flow_box.add_child(menu_card)
 		if chars[char.id]:
-			menu_card.get_child(1).texture = char.poses[0]
+			menu_card.get_child(1).texture = char.icon
 			menu_card.get_child(3).pressed.connect(_on_character_picture_pressed.bind(char))
 		else:
 			menu_card.get_child(1).visible = false

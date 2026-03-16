@@ -10,9 +10,9 @@ var arrival_time
 var stay_duration = randi_range(10 * 60, 20 * 60)  # 30-45 mins in seconds+
 var departure_time
 
-func setup(character_data: CharacterData, spawn_time: float, drink_expiration_time: float):
+func setup(slot: AttractionSlotData, character_data: CharacterData, spawn_time: float, drink_expiration_time: float):
 	data = character_data
-	texture = character_data.poses[0]
+	texture = character_data.poses[slot._get_path()]
 	arrival_time = spawn_time
 	departure_time = min(arrival_time + stay_duration, drink_expiration_time)
 

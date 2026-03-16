@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://dqq3d32rf5d36"]
 
+[ext_resource type="Texture2D" uid="uid://mc3kmhkr14b" path="res://Assets/Characters/Table(Ottis Reo).png" id="1_jofx3"]
 [ext_resource type="Texture2D" uid="uid://c61370apf0p6r" path="res://Assets/Characters/Poker Table(Ottis Reo).png" id="1_nu5rs"]
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="3_vaw6o"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btooj"]
-load_path = "res://.godot/imported/Table(Ottis Reo).png-b9783272488927a73002526f39d8dd3f.ctex"
 
 [resource]
 script = ExtResource("3_vaw6o")
 id = 8
 char_name = "Ottis Reo"
-poses = Array[Texture2D]([ExtResource("1_nu5rs"), SubResource("CompressedTexture2D_btooj")])
+poses = {
+"res://Resources/attraction_slots/poker_table_slot2.tres": ExtResource("1_nu5rs")
+}
+icon = ExtResource("1_jofx3")
 hit_rate = 0.1
 leave_rate = 0.1
 money_rate = 3.0
