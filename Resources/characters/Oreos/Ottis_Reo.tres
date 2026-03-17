@@ -9,7 +9,8 @@ script = ExtResource("3_vaw6o")
 id = 8
 char_name = "Ottis Reo"
 poses = {
-"res://Resources/attraction_slots/poker_table_slot2.tres": ExtResource("1_nu5rs")
+0: ExtResource("1_jofx3"),
+2: ExtResource("1_nu5rs")
 }
 icon = ExtResource("1_jofx3")
 hit_rate = 0.1

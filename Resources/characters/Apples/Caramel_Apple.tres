@@ -9,7 +9,8 @@ script = ExtResource("1_8hi3n")
 id = 1
 char_name = "Caramel Apple"
 poses = {
-"res://Resources/attraction_slots/poker_table_slot3.tres": ExtResource("1_kaifw")
+0: ExtResource("2_4liyp"),
+3: ExtResource("1_kaifw")
 }
 icon = ExtResource("2_4liyp")
 hit_rate = 0.1

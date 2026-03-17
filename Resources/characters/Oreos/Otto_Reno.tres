@@ -9,6 +9,7 @@ script = ExtResource("3_e15dm")
 id = 9
 char_name = "Otto Reno"
 poses = {
+2: ExtResource("1_nqp3q"),
 "res://Resources/attraction_slots/poker_table_slot2.tres": ExtResource("1_nqp3q")
 }
 icon = ExtResource("1_jllks")

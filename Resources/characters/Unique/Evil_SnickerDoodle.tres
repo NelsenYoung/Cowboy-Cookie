@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://br1jax2avcbuo"]
 
+[ext_resource type="Texture2D" uid="uid://crjo8rmm8lipw" path="res://Assets/Characters/Poker Table(Evil Snickerdoodle).png" id="1_6i8nu"]
 [ext_resource type="Texture2D" uid="uid://8imv2xlcx110" path="res://Assets/Evil SnickerDoodle.png" id="1_35lv2"]
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="2_dl8un"]
 
@@ -7,6 +8,9 @@
 script = ExtResource("2_dl8un")
 id = 12
 char_name = "Evil SnickerDoodle"
+poses = {
+1: ExtResource("1_6i8nu")
+}
 icon = ExtResource("1_35lv2")
 hit_rate = 0.01
 leave_rate = 0.1

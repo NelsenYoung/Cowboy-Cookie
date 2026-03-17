@@ -7,6 +7,9 @@
 script = ExtResource("1_kdbt1")
 id = 10
 char_name = "Cowboy Cookie"
+poses = {
+5: ExtResource("1_uwjju")
+}
 icon = ExtResource("1_uwjju")
 hit_rate = 0.01
 leave_rate = 0.1

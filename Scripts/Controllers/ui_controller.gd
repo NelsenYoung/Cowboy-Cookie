@@ -11,14 +11,13 @@ extends CanvasLayer
 @onready var purchased_attractions = game_controller.purchased_attractions
 
 @onready var drinks_menu = $DrinkMenu
-@onready var drink_grid = $DrinkMenu/MarginContainer2/Panel/MarginContainer/ScrollContainer/AttractionGrid
-@onready var drink_menu_close_button = $DrinkMenu/MarginContainer2/Panel/CloseButton
+@onready var drink_grid = $DrinkMenu/Panel/MarginContainer/ScrollContainer/AttractionGrid
+@onready var drink_menu_close_button = $DrinkMenu/Panel/CloseButton
 
 @onready var gifts_menu_button = $TextureButton
 @onready var gifts_menu = $GiftsMenu
 @onready var gifts_vbox = $GiftsMenu/MarginContainer/ScrollContainer/VBoxContainer
 
-@onready var camera_menu_button = $CameraMenuButton
 @onready var camera_menu = $CameraMenu
 @onready var back_wall_button = $WallPictures/Button
 
@@ -60,8 +59,9 @@ func _ready():
 		# The button.pressed signal does not emit an index normally but in this case we need it, so we use bind
 		slot_buttons[i].pressed.connect(_on_slot_button_pressed.bind(i))
 		
-	camera_menu_button.pressed.connect(_on_camera_menu_button_pressed)
 	back_wall_button.pressed.connect(_on_back_wall_button_pressed)
+	var close_button = picture_menu.get_child(2)
+	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
 	#tutorial_button.pressed.connect(_close_tutorial_menu)
 
 func _on_camera_menu_button_pressed():
@@ -77,8 +77,25 @@ func _on_camera_menu_button_pressed():
 
 # ---------- START TUTORIAL CODE ---------- #
 
+func fade_out():
+	var blackout_rect = $BlackOut
+	blackout_rect.visible = true
+	var animation_player: AnimationPlayer = $AnimationPlayer
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+
+func fade_in():
+	var blackout_rect = $BlackOut
+	var animation_player: AnimationPlayer = $AnimationPlayer
+	animation_player.play("fade_in")
+	await animation_player.animation_finished
+	blackout_rect.visible = false
 
 func _on_back_wall_button_pressed():
+	
+	# Fade out Animation
+	await fade_out()
+	
 	print("back wall button pressed")
 	picture_menu.visible = true
 	var chars = game_controller.all_visited_chars
@@ -91,14 +108,14 @@ func _on_back_wall_button_pressed():
 			menu_card.get_child(3).pressed.connect(_on_character_picture_pressed.bind(char))
 		else:
 			menu_card.get_child(1).visible = false
-	var close_button = picture_menu.get_child(1)
-	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
-
+	await fade_in()
+	
 func _on_picture_menu_close_button_pressed():
+	await fade_out()
 	for obj in picture_flow_box.get_children():
 		obj.queue_free()
 	picture_menu.visible = false
-	
+	await fade_in()
 	
 # ---------- END TUTORIAL CODE ---------- #
 
@@ -112,6 +129,7 @@ func _close_char_data_card(data_card):
 	data_card.queue_free()
 
 func _on_gifts_menu_button_pressed() -> void:
+	await fade_out()
 	gifts_menu.visible = true
 	
 	var gifts = game_controller.unclaimed_gifts
@@ -124,15 +142,18 @@ func _on_gifts_menu_button_pressed() -> void:
 		gifts_vbox.add_child(card)
 		var child_button = card.get_child(2)
 		child_button.pressed.connect(_on_gift_claimed.bind(card, key, amount))
+	await fade_in()
 
 func _on_gift_claimed(card: GiftCard, key: int, amount: int):
 	gift_claimed.emit(key, amount)
 	card.queue_free()
 
 func _on_close_gifts_menu_button_pressed():
+	await fade_out()
 	gifts_menu.visible = false
 	for child in gifts_vbox.get_children():
 		child.queue_free()
+	await fade_in()
 
 func update_money_label(updated_value: int):
 	money_label.text = "$%d" % updated_value

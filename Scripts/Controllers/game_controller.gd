@@ -105,7 +105,7 @@ func _ready():
 	create_picture_wall_frames()
 
 func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
-	var tick = 5
+	var tick = 30
 	var sim_time = last_login_time
 	while sim_time < min(current_time, drink.time_placed + drink.data.time):
 		#print("Sim Time:", Time.get_datetime_string_from_unix_time(sim_time))

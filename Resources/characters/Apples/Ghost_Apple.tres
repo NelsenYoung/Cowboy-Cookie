@@ -9,7 +9,8 @@ script = ExtResource("3_yk34f")
 id = 2
 char_name = "Ghost Apple"
 poses = {
-"res://Resources/attraction_slots/poker_table_slot3.tres": ExtResource("1_c5tun")
+0: ExtResource("2_x8ytm"),
+3: ExtResource("1_c5tun")
 }
 icon = ExtResource("2_x8ytm")
 hit_rate = 0.1

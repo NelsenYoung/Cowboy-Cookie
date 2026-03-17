@@ -7,6 +7,9 @@
 script = ExtResource("1_w5rei")
 id = 14
 char_name = "Professor Pickle"
+poses = {
+6: ExtResource("1_ixgu6")
+}
 icon = ExtResource("1_ixgu6")
 hit_rate = 0.01
 leave_rate = 0.1

@@ -7,4 +7,4 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func setup(char_data: CharacterData):
-	picture.texture = char_data.poses[0]
+	picture.texture = char_data.icon

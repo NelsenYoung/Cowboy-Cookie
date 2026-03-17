@@ -12,7 +12,7 @@ var departure_time
 
 func setup(slot: AttractionSlotData, character_data: CharacterData, spawn_time: float, drink_expiration_time: float):
 	data = character_data
-	texture = character_data.poses[slot._get_path()]
+	texture = character_data.poses[slot.id]
 	arrival_time = spawn_time
 	departure_time = min(arrival_time + stay_duration, drink_expiration_time)
 

@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b8g35pltric0" path="res://Assets/UI/Close Button.png" id="4_1l0tm"]
 [ext_resource type="FontFile" uid="uid://l3xf26id3o6y" path="res://Assets/Font/CowboyJunior-GO6Dq.ttf" id="5_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://bfsgeyhmnrhhi" path="res://Assets/UI/Money Icon.png" id="5_v158k"]
-[ext_resource type="Texture2D" uid="uid://ca8lit8mlilde" path="res://Assets/UI/Camera Icon.png" id="6_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://cs58gup3o18he" path="res://Assets/UI/Coin Icon(Silver).png" id="7_ldgsr"]
 
 [sub_resource type="GDScript" id="GDScript_qxrlw"]
@@ -36,7 +35,7 @@ script/source = "extends Node2D
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldgsr"]
-bg_color = Color(0.77624726, 0.5402054, 0.37010053, 1)
+bg_color = Color(0.6745098, 0.5019608, 0.3882353, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4fw4"]
 bg_color = Color(0.3558096, 0.24379754, 0.16757601, 1)
@@ -51,12 +50,66 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5yvi"]
-bg_color = Color(0.26392722, 0.17715201, 0.096562214, 1)
+bg_color = Color(0.6745098, 0.5019608, 0.3882353, 1)
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_1l0tm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BlackOut:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_v158k"]
+resource_name = "fade_in"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BlackOut:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_h4fw4"]
+resource_name = "fade_out"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BlackOut:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 0.11662919, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldgsr"]
+_data = {
+&"RESET": SubResource("Animation_1l0tm"),
+&"fade_in": SubResource("Animation_v158k"),
+&"fade_out": SubResource("Animation_h4fw4")
+}
 
 [node name="Game" type="Node2D" unique_id=207332668]
 script = SubResource("GDScript_qxrlw")
@@ -167,59 +220,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_v158k")
 
-[node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
-custom_minimum_size = Vector2(128, 64)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = -120.0
-offset_right = 184.0
-offset_bottom = -56.0
-grow_vertical = 0
-
-[node name="MoneyIcon" type="TextureRect" parent="UIController/MoneyDisplay" unique_id=1218405606]
-layout_mode = 2
-texture = ExtResource("5_v158k")
-expand_mode = 3
-
-[node name="MoneyLabel" type="Label" parent="UIController/MoneyDisplay" unique_id=603573638]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "0"
-
-[node name="CameraMenuButton" type="TextureButton" parent="UIController" unique_id=1240222806]
-custom_minimum_size = Vector2(64, 64)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -120.0
-offset_right = 32.0
-offset_bottom = -56.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = ExtResource("6_h4fw4")
-stretch_mode = 0
-
-[node name="TextureButton" type="TextureButton" parent="UIController" unique_id=1638974363]
-custom_minimum_size = Vector2(64, 64)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -120.0
-offset_right = -56.0
-offset_bottom = -56.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("7_ldgsr")
-stretch_mode = 0
-
 [node name="PicturesMenu" type="Panel" parent="UIController" unique_id=1144630620]
 visible = false
 anchors_preset = 15
@@ -228,6 +228,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ldgsr")
+
+[node name="Title" type="Label" parent="UIController/PicturesMenu" unique_id=1803444738]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 80.0
+offset_right = 20.0
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_h4fw4")
+theme_override_font_sizes/font_size = 64
+text = "Characters"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Control" type="Control" parent="UIController/PicturesMenu" unique_id=2029600602]
 custom_minimum_size = Vector2(704, 704)
@@ -280,9 +297,9 @@ theme_override_constants/v_separation = 64
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 80.0
 offset_right = 104.0
-offset_bottom = 104.0
+offset_bottom = 144.0
 texture_normal = ExtResource("4_1l0tm")
 stretch_mode = 0
 
@@ -294,31 +311,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="UIController/DrinkMenu" unique_id=1500395396]
+[node name="Panel" type="Panel" parent="UIController/DrinkMenu" unique_id=175410436]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 200
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 200
-
-[node name="Panel" type="Panel" parent="UIController/DrinkMenu/MarginContainer2" unique_id=175410436]
-layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_o5yvi")
 
-[node name="Title" type="Label" parent="UIController/DrinkMenu/MarginContainer2/Panel" unique_id=1906121200]
+[node name="Title" type="Label" parent="UIController/DrinkMenu/Panel" unique_id=1906121200]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -260.0
-offset_top = 20.0
+offset_top = 80.0
 offset_right = 260.0
-offset_bottom = 87.0
+offset_bottom = 147.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("5_h4fw4")
@@ -326,34 +336,37 @@ theme_override_font_sizes/font_size = 64
 text = "Drinks"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UIController/DrinkMenu/MarginContainer2/Panel" unique_id=775027348]
-layout_mode = 0
-offset_right = 520.0
-offset_bottom = 880.0
+[node name="MarginContainer" type="MarginContainer" parent="UIController/DrinkMenu/Panel" unique_id=775027348]
+custom_minimum_size = Vector2(640, 900)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 120
-theme_override_constants/margin_right = 40
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 200
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UIController/DrinkMenu/MarginContainer2/Panel/MarginContainer" unique_id=1054194279]
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/DrinkMenu/Panel/MarginContainer" unique_id=1054194279]
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="AttractionGrid" type="GridContainer" parent="UIController/DrinkMenu/MarginContainer2/Panel/MarginContainer/ScrollContainer" unique_id=1694715332]
+[node name="AttractionGrid" type="GridContainer" parent="UIController/DrinkMenu/Panel/MarginContainer/ScrollContainer" unique_id=1694715332]
 layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 2
 
-[node name="CloseButton" type="TextureButton" parent="UIController/DrinkMenu/MarginContainer2/Panel" unique_id=468504045]
+[node name="CloseButton" type="TextureButton" parent="UIController/DrinkMenu/Panel" unique_id=468504045]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 40.0
-offset_top = 20.0
+offset_top = 80.0
 offset_right = 104.0
-offset_bottom = 84.0
+offset_bottom = 144.0
 texture_normal = ExtResource("4_1l0tm")
 
 [node name="AttractionMenu" type="Panel" parent="UIController" unique_id=2039143183]
@@ -378,13 +391,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -86.0
-offset_top = 50.0
-offset_right = 86.0
-offset_bottom = 95.0
+offset_left = -163.5
+offset_top = 80.0
+offset_right = 163.5
+offset_bottom = 147.0
 grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("5_h4fw4")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Attractions"
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController/AttractionMenu" unique_id=1455397647]
@@ -395,8 +410,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 120
+theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 200
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UIController/AttractionMenu/MarginContainer" unique_id=2121921434]
 layout_mode = 2
@@ -413,9 +429,9 @@ columns = 2
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 80.0
 offset_right = 104.0
-offset_bottom = 104.0
+offset_bottom = 144.0
 texture_normal = ExtResource("4_1l0tm")
 stretch_mode = 0
 
@@ -434,7 +450,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.656323, 0.42837825, 0.28491765, 1)
+color = Color(0.6745098, 0.5019608, 0.3882353, 1)
 
 [node name="Title" type="Label" parent="UIController/GiftsMenu" unique_id=636457207]
 layout_mode = 1
@@ -446,9 +462,13 @@ offset_top = 80.0
 offset_right = 36.0
 offset_bottom = 125.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_h4fw4")
+theme_override_font_sizes/font_size = 64
 text = "Gifts"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController/GiftsMenu" unique_id=1133872896]
 layout_mode = 1
@@ -458,8 +478,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 120
+theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 200
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UIController/GiftsMenu/MarginContainer" unique_id=1336521328]
 layout_mode = 2
@@ -471,9 +492,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 80.0
 offset_right = 104.0
-offset_bottom = 104.0
+offset_bottom = 144.0
 texture_normal = ExtResource("4_1l0tm")
 stretch_mode = 0
 
@@ -494,6 +515,60 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.21568628)
 
+[node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
+custom_minimum_size = Vector2(160, 100)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -156.0
+offset_right = 192.0
+offset_bottom = -56.0
+grow_vertical = 0
+
+[node name="MoneyIcon" type="TextureRect" parent="UIController/MoneyDisplay" unique_id=1218405606]
+layout_mode = 2
+texture = ExtResource("5_v158k")
+expand_mode = 3
+
+[node name="MoneyLabel" type="Label" parent="UIController/MoneyDisplay" unique_id=603573638]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_h4fw4")
+theme_override_font_sizes/font_size = 72
+text = "0"
+
+[node name="TextureButton" type="TextureButton" parent="UIController" unique_id=1638974363]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = -56.0
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("7_ldgsr")
+stretch_mode = 0
+
+[node name="BlackOut" type="ColorRect" parent="UIController" unique_id=393770845]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIController" unique_id=161081121]
+root_node = NodePath("../PicturesMenu")
+libraries/ = SubResource("AnimationLibrary_ldgsr")
+
 [node name="EntitiesContainer" type="Node2D" parent="." unique_id=537070834]
 
 [node name="Attractions" type="Node2D" parent="EntitiesContainer" unique_id=1079911432]
@@ -501,3 +576,5 @@ color = Color(0, 0, 0, 0.21568628)
 [node name="Characters" type="Node2D" parent="EntitiesContainer" unique_id=1237138373]
 
 [node name="Drinks" type="Node2D" parent="EntitiesContainer" unique_id=1892903962]
+
+[node name="DebugController" type="Node2D" parent="." unique_id=587423714]
