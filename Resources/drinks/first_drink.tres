@@ -2,18 +2,50 @@
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_baixa"]
 [ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_5s617"]
-[ext_resource type="Resource" uid="uid://bhqugyfa5a8u4" path="res://Resources/characters/Oreos/Omar_Reo.tres" id="5_ua2om"]
+[ext_resource type="Texture2D" uid="uid://bxpncggrrk0nu" path="res://Assets/Characters/Table(Omar Reo).png" id="2_nxp1f"]
+[ext_resource type="Texture2D" uid="uid://bn6cg2wrss6gi" path="res://Assets/Characters/Poker Table(Omar Reo).png" id="3_uk6fa"]
+[ext_resource type="Texture2D" uid="uid://dr7j5gie6h7t7" path="res://Assets/Characters/Table(Oscar Reo).png" id="4_adma7"]
+[ext_resource type="Texture2D" uid="uid://rvy234c2c581" path="res://Assets/Characters/Poker Table(Oscar Reo).png" id="5_d10bv"]
 [ext_resource type="Texture2D" uid="uid://dt7rx7k3pcv23" path="res://Assets/Drinks/Bar(Full).png" id="6_72elj"]
-[ext_resource type="Resource" uid="uid://c0n67ckprqnx1" path="res://Resources/characters/Oreos/Oscar_Reo.tres" id="6_rt4ju"]
 [ext_resource type="Texture2D" uid="uid://b3do78p48d146" path="res://Assets/Drinks/Bar(Mid).png" id="7_8k11k"]
 [ext_resource type="Texture2D" uid="uid://cw13b14u45lnf" path="res://Assets/Drinks/Bar(Empty w_ bottles).png" id="8_72elj"]
 [ext_resource type="Resource" uid="uid://dfphcisgilbjh" path="res://Resources/characters/Apples/Ghost_Apple.tres" id="10_4gejk"]
 [ext_resource type="Resource" uid="uid://c73xmegchgg8r" path="res://Resources/characters/Apples/Adam_S_Apple.tres" id="11_d6q04"]
 
+[sub_resource type="Resource" id="Resource_ljvdi"]
+script = ExtResource("1_baixa")
+id = 6
+char_name = "Omar Reo"
+poses = {
+0: ExtResource("2_nxp1f"),
+3: ExtResource("3_uk6fa")
+}
+icon = ExtResource("2_nxp1f")
+hit_rate = 0.1
+leave_rate = 0.1
+money_rate = 3.0
+description = "Mexican Oreo"
+metadata/_custom_type_script = "uid://c4ydn64imo227"
+
+[sub_resource type="Resource" id="Resource_wjysk"]
+script = ExtResource("1_baixa")
+id = 7
+char_name = "Oscar Reo"
+poses = {
+0: ExtResource("4_adma7"),
+3: ExtResource("5_d10bv")
+}
+icon = ExtResource("4_adma7")
+hit_rate = 0.1
+leave_rate = 0.1
+money_rate = 3.0
+description = "Mobster Oreo"
+metadata/_custom_type_script = "uid://c4ydn64imo227"
+
 [resource]
 script = ExtResource("2_5s617")
 drink_name = "Milk"
 textures = Array[Texture2D]([ExtResource("6_72elj"), ExtResource("7_8k11k"), ExtResource("8_72elj")])
-possible_chars = Array[ExtResource("1_baixa")]([ExtResource("5_ua2om"), ExtResource("6_rt4ju"), ExtResource("10_4gejk"), ExtResource("11_d6q04")])
+possible_chars = Array[ExtResource("1_baixa")]([SubResource("Resource_ljvdi"), SubResource("Resource_wjysk"), ExtResource("10_4gejk"), ExtResource("11_d6q04")])
 time = 600
 metadata/_custom_type_script = "uid://bf7ioe8sus5gb"

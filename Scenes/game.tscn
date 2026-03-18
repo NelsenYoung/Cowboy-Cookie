@@ -204,12 +204,10 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 17
 
-[node name="GridContainer" type="GridContainer" parent="UIController/WallPictures/MarginContainer" unique_id=807388925]
-custom_minimum_size = Vector2(43, 44)
+[node name="VFlowContainer" type="VFlowContainer" parent="UIController/WallPictures/MarginContainer" unique_id=477781034]
 layout_mode = 2
 theme_override_constants/h_separation = 65
 theme_override_constants/v_separation = 52
-columns = 11
 
 [node name="Button" type="Button" parent="UIController/WallPictures" unique_id=1913386292]
 layout_mode = 1

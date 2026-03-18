@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="DrinkData" format=3 uid="uid://b15mpn2nq5by4"]
+
+[ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_6a71f"]
+[ext_resource type="Resource" uid="uid://c73xmegchgg8r" path="res://Resources/characters/Apples/Adam_S_Apple.tres" id="2_2xo28"]
+[ext_resource type="Script" uid="uid://bf7ioe8sus5gb" path="res://Scripts/Classes/DrinkData.gd" id="2_h14v1"]
+[ext_resource type="Resource" uid="uid://dfphcisgilbjh" path="res://Resources/characters/Apples/Ghost_Apple.tres" id="3_668vm"]
+[ext_resource type="Resource" uid="uid://bi61u2u66kg8y" path="res://Resources/characters/Apples/Golden_Apple.tres" id="4_hw0wd"]
+[ext_resource type="Resource" uid="uid://o81eotgsr014" path="res://Resources/characters/Apples/Caramel_Apple.tres" id="5_mu6wm"]
+[ext_resource type="Resource" uid="uid://b3lya2kl3o0sy" path="res://Resources/characters/Apples/Granny_Smith.tres" id="6_2cjyy"]
+[ext_resource type="Resource" uid="uid://bhqugyfa5a8u4" path="res://Resources/characters/Oreos/Omar_Reo.tres" id="7_ar07l"]
+[ext_resource type="Resource" uid="uid://c0n67ckprqnx1" path="res://Resources/characters/Oreos/Oscar_Reo.tres" id="8_m3t10"]
+[ext_resource type="Resource" uid="uid://dqq3d32rf5d36" path="res://Resources/characters/Oreos/Ottis_Reo.tres" id="9_ktn8f"]
+[ext_resource type="Resource" uid="uid://doofsik3ge7h0" path="res://Resources/characters/Oreos/Oliver_Reo.tres" id="10_q566e"]
+[ext_resource type="Resource" uid="uid://y7t2juim4yk3" path="res://Resources/characters/Oreos/Otto_Reno.tres" id="11_7072k"]
+[ext_resource type="Resource" uid="uid://cw7yt8bgca7pf" path="res://Resources/characters/Unique/Cowboy_Cookie.tres" id="12_qkpar"]
+[ext_resource type="Resource" uid="uid://br1jax2avcbuo" path="res://Resources/characters/Unique/Evil_SnickerDoodle.tres" id="13_xk3i5"]
+[ext_resource type="Resource" uid="uid://bifk8ier487q5" path="res://Resources/characters/Unique/Professor_Pickle.tres" id="14_17sye"]
+[ext_resource type="Resource" uid="uid://c8f45l00vox2c" path="res://Resources/characters/Unique/Jawbreaker_Joe.tres" id="15_ku6fn"]
+[ext_resource type="Resource" uid="uid://dbvqsnpcmht2u" path="res://Resources/characters/Unique/Donut_Don.tres" id="16_ilfb2"]
+[ext_resource type="Texture2D" uid="uid://dt7rx7k3pcv23" path="res://Assets/Drinks/Bar(Full).png" id="18_l07oe"]
+[ext_resource type="Texture2D" uid="uid://b3do78p48d146" path="res://Assets/Drinks/Bar(Mid).png" id="19_v3lvq"]
+[ext_resource type="Texture2D" uid="uid://cw13b14u45lnf" path="res://Assets/Drinks/Bar(Empty w_ bottles).png" id="20_70wlt"]
+
+[resource]
+script = ExtResource("2_h14v1")
+id = 2
+drink_name = "Half and Half"
+textures = Array[Texture2D]([ExtResource("18_l07oe"), ExtResource("19_v3lvq"), ExtResource("20_70wlt")])
+price = 500
+possible_chars = Array[ExtResource("1_6a71f")]([ExtResource("2_2xo28"), ExtResource("3_668vm"), ExtResource("4_hw0wd"), ExtResource("5_mu6wm"), ExtResource("6_2cjyy"), ExtResource("7_ar07l"), ExtResource("8_m3t10"), ExtResource("9_ktn8f"), ExtResource("10_q566e"), ExtResource("11_7072k"), ExtResource("12_qkpar"), ExtResource("13_xk3i5"), ExtResource("14_17sye"), ExtResource("15_ku6fn"), ExtResource("16_ilfb2")])
+metadata/_custom_type_script = "uid://bf7ioe8sus5gb"

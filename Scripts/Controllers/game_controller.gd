@@ -18,7 +18,7 @@ var all_chars_order = []
 @onready var attraction_slots_container = $"../UIController/AttractionSlotButtons"
 @onready var ui_controller = $"../UIController"
 @onready var money_label = $"../UIController/MoneyDisplay/MoneyLabel"
-@onready var wall_pictures_container = $"../UIController/WallPictures/MarginContainer/GridContainer"
+@onready var wall_pictures_container = $"../UIController/WallPictures/MarginContainer/VFlowContainer"
 
 const AttractionDisplayScene = preload("res://Scenes/AttractionDisplay.tscn")
 const CharacterDisplayScene = preload("res://Scenes/CharacterDisplay.tscn")
@@ -159,7 +159,6 @@ func spawn_char(slot: AttractionSlotNode, char: CharacterData, time: float):
 	#print(all_visited_chars, char.id)
 
 func remove_char(slot: AttractionSlotNode, char: CharacterData, sim: bool):
-	print(char.char_name, " left and should've left a gift")
 	# print(slot.data.character.char_name + " left from " + slot.get_parent().get_name())
 	leave_gift(char)
 	characters.erase(char)
@@ -255,10 +254,14 @@ func _on_attraction_purchased(slot_idx: int, attraction: AttractionData) -> void
 	return
 
 func _on_drink_selected(drink_data: DrinkData, time_placed: float = Time.get_unix_time_from_system()):
-	var drink_instance = DrinkDisplayScene.instantiate()
-	drink_instance.setup(drink_data, time_placed)
-	drinks_container.add_child(drink_instance)
-	drink = drink_instance
+	if drink == null:
+		var drink_instance = DrinkDisplayScene.instantiate()
+		drink_instance.setup(drink_data, time_placed)
+		drinks_container.add_child(drink_instance)
+		drink = drink_instance
+	else:
+		drink.data = drink_data
+		drink.change_state(0)
 	money -= drink_data.price
 	ui_controller.update_money_label(money)
 
@@ -307,11 +310,15 @@ func load_game():
 func read_save_data(save_data: Dictionary):
 	last_login_time = save_data["last_login_time"]
 	money = save_data["money"]
+	ui_controller.update_money_label(money)
 	all_visited_chars = save_data["all_visited_chars"]
 	
 	# place the existing drink if it exists
 	if save_data["drink"] != null:
-		_on_drink_selected(load(save_data["drink"]), save_data["drink_time_placed"])
+		var drink_instance = DrinkDisplayScene.instantiate()
+		drink_instance.setup(load(save_data["drink"]), save_data["drink_time_placed"])
+		drinks_container.add_child(drink_instance)
+		drink = drink_instance
 
 	# place the existing attractions if they exist
 	for i in range(num_attraction_slots):
@@ -320,7 +327,6 @@ func read_save_data(save_data: Dictionary):
 	
 	# place the characters if there are any
 	for character_data in save_data["characters"]:
-		print(character_data)
 		if character_data != null:
 			var cur_attraction = attractions_container.get_child(character_data["attraction_index"])
 			var cur_slot = cur_attraction.get_child(character_data["slot_index"])
