@@ -9,7 +9,7 @@
 script = ExtResource("1_iv867")
 id = "4"
 attraction_name = "Pool Table"
-price = 300
+price = 500
 slots = Array[ExtResource("2_tirqi")]([ExtResource("3_rdj7f")])
 texture = ExtResource("3_tirqi")
 metadata/_custom_type_script = "uid://hgobj064obp5"

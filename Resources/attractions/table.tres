@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://hgobj064obp5" path="res://Scripts/Classes/AttractionData.gd" id="1_r6orx"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_ps4fs"]
 [ext_resource type="Resource" uid="uid://y6k2txh6uddu" path="res://Resources/attraction_slots/table_slot.tres" id="3_n0c5i"]
-[ext_resource type="Texture2D" uid="uid://b0yvlkbhofotp" path="res://Assets/Table.png" id="3_ry5no"]
+[ext_resource type="Texture2D" uid="uid://raxcxdy3ewh3" path="res://Assets/Attractions/Table.png" id="4_n0c5i"]
 
 [resource]
 script = ExtResource("1_r6orx")
@@ -11,5 +11,5 @@ id = "3"
 attraction_name = "Table"
 price = 50
 slots = Array[ExtResource("2_ps4fs")]([ExtResource("3_n0c5i")])
-texture = ExtResource("3_ry5no")
+texture = ExtResource("4_n0c5i")
 metadata/_custom_type_script = "uid://hgobj064obp5"

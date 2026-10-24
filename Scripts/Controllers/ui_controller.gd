@@ -14,13 +14,15 @@ extends CanvasLayer
 @onready var drink_grid = $DrinkMenu/Panel/MarginContainer/ScrollContainer/AttractionGrid
 @onready var drink_menu_close_button = $DrinkMenu/Panel/CloseButton
 
-@onready var gifts_menu_button = $TextureButton
+@onready var gifts_menu_button = $GiftsButton
 @onready var gifts_menu = $GiftsMenu
 @onready var gifts_vbox = $GiftsMenu/MarginContainer/ScrollContainer/VBoxContainer
 
-@onready var camera_menu = $CameraMenu
 @onready var back_wall_button = $WallPictures/Button
 
+@onready var settings_button = $SettingsButton
+@onready var settings_menu = $SettingsMenu
+@onready var reset_button = $SettingsMenu/ResetButton
 
 # ---------- START TUTORIAL CODE ---------- #
 @onready var picture_menu = $PicturesMenu
@@ -35,8 +37,10 @@ var character_data_card = preload("res://Scenes/CharacterDataCard.tscn")
 
 signal attraction_card_selected(slot_idx: int, attraction: AttractionData)
 signal attraction_purchase_requested(slot_indx: int, attraction: AttractionData)
+signal attraction_removal_requested(slot_indx: int)
 signal drink_card_selected(drink: DrinkData)
 signal gift_claimed(idx: int, amount: int)
+signal reset_confirmed()
 
 var attraction_card = preload("res://Scenes/attraction_card.tscn")
 var drink_card = preload("res://Scenes/drink_card.tscn")
@@ -58,14 +62,15 @@ func _ready():
 		# We use the bind function here to pass extra data on a signal that does not normally have it
 		# The button.pressed signal does not emit an index normally but in this case we need it, so we use bind
 		slot_buttons[i].pressed.connect(_on_slot_button_pressed.bind(i))
-		
 	back_wall_button.pressed.connect(_on_back_wall_button_pressed)
 	var close_button = picture_menu.get_child(2)
 	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
-	#tutorial_button.pressed.connect(_close_tutorial_menu)
+	
+	settings_button.pressed.connect(_on_settings_button_pressed)
+	reset_button.pressed.connect(_on_reset_button_pressed)
 
-func _on_camera_menu_button_pressed():
-	camera_menu.visible = true
+func _on_settings_button_pressed():
+	settings_menu.visible = true
 
 #func _close_tutorial_menu():
 	#var tutorial_panel = $TutorialMenu
@@ -90,6 +95,26 @@ func fade_in():
 	animation_player.play("fade_in")
 	await animation_player.animation_finished
 	blackout_rect.visible = false
+
+func pull_up():
+	var animation_player: AnimationPlayer = $AnimationPlayer
+	animation_player.play("pull_up")
+	await animation_player.animation_finished
+
+func pull_down():
+	var animation_player: AnimationPlayer = $AnimationPlayer
+	animation_player.play("pull_down")
+	await animation_player.animation_finished
+
+func pull_up_attr():
+	var animation_player: AnimationPlayer = $AnimationPlayer
+	animation_player.play("pull_up_attr")
+	await animation_player.animation_finished
+
+func pull_down_attr():
+	var animation_player: AnimationPlayer = $AnimationPlayer
+	animation_player.play("pull_down_attr")
+	await animation_player.animation_finished
 
 func _on_back_wall_button_pressed():
 	
@@ -162,6 +187,7 @@ func _on_drink_slot_pressed() -> void:
 	var drinks = load_drinks_from_dir()
 	populate_drink_menu(drinks)
 	drinks_menu.visible = true
+	await pull_up()
 	return
 
 func load_drinks_from_dir() -> Array[DrinkData]:
@@ -207,6 +233,7 @@ func _on_drink_card_selected(drink: DrinkData, check_menu):
 	close_drink_menu()
 
 func close_drink_menu():
+	await pull_down()
 	drinks_menu.visible = false
 	slot_idx = null
 	for child in drink_grid.get_children():
@@ -216,7 +243,12 @@ func _on_slot_button_pressed(slot_index: int):
 	slot_idx = slot_index
 	var attractions = load_attractions_from_dir()
 	populate_attraction_menu(attractions)
+	
+	var remove_attraction_button = $AttractionMenu/RemoveButton
+	remove_attraction_button.pressed.connect(_on_remove_attraction_button_pressed.bind(slot_index))
+	
 	attractions_menu.visible = true
+	await pull_up_attr()
 	# print("Slot ", slot_idx, " Pressed!")
 	
 func load_attractions_from_dir() -> Array[AttractionData]:
@@ -254,12 +286,25 @@ func populate_attraction_menu(attraction_data: Array[AttractionData]) -> void:
 			panel.add_theme_stylebox_override("panel", style)
 			card.get_child(5).pressed.connect(_on_locked_attraction_selected.bind(slot_idx, attraction))
 		else:
+			var placed_attractions = game_controller.attractions
+			for attr_display in placed_attractions:
+				if attr_display != null and attraction == attr_display.data:
+					card.get_child(6).visible = true
+					var panel = card.get_child(4)
+					var style = panel.get_theme_stylebox("panel").duplicate()
+					style.bg_color.a = 0.5  # 50% transparent
+					panel.add_theme_stylebox_override("panel", style)
 			card.get_child(5).pressed.connect(_on_attraction_card_selected.bind(slot_idx, attraction))
 	return
 
 func _on_attraction_card_selected(slot_index: int, attraction: AttractionData):
 	attraction_card_selected.emit(slot_index, attraction)
 	close_attraction_menu()
+
+func _on_remove_attraction_button_pressed(slot_index: int):
+	attraction_removal_requested.emit(slot_index)
+	close_attraction_menu()
+	pass
 
 func _on_locked_attraction_selected(slot_idx: int, attraction: AttractionData):
 	var check_menu = purchase_check_menu.instantiate()
@@ -280,7 +325,16 @@ func _on_purchase_declined(check_menu):
 	check_menu.queue_free()
 
 func close_attraction_menu():
+	await pull_down_attr()
 	attractions_menu.visible = false
 	slot_idx = null
 	for child in attraction_grid.get_children():
 		child.queue_free()
+	
+	var remove_attraction_button = $AttractionMenu/RemoveButton
+	remove_attraction_button.pressed.disconnect(_on_remove_attraction_button_pressed)
+
+# <----------    RESET BUTTON    ---------->
+func _on_reset_button_pressed():
+	reset_confirmed.emit()
+	settings_menu.visible = false

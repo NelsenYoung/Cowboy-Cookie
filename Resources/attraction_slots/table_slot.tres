@@ -1,10 +1,36 @@
 [gd_resource type="Resource" script_class="AttractionSlotData" format=3 uid="uid://y6k2txh6uddu"]
 
 [ext_resource type="Script" uid="uid://c4ydn64imo227" path="res://Scripts/Classes/CharacterData.gd" id="1_1lmxp"]
-[ext_resource type="Resource" uid="uid://dfphcisgilbjh" path="res://Resources/characters/Apples/Ghost_Apple.tres" id="2_66y6l"]
 [ext_resource type="Script" uid="uid://bke5xyxtew67v" path="res://Scripts/Classes/AttractionSlotData.gd" id="2_osg8v"]
+[ext_resource type="Texture2D" uid="uid://rfd3fid8vfcs" path="res://Assets/Characters/Table(Ghost Apple).png" id="2_u513x"]
+[ext_resource type="Texture2D" uid="uid://bnl5ffiyi5kf3" path="res://Assets/Characters/Poker Table(Ghost Apple).png" id="3_vf4a5"]
+[ext_resource type="Resource" uid="uid://c73xmegchgg8r" path="res://Resources/characters/Apples/Adam_S_Apple.tres" id="4_qrg0p"]
+[ext_resource type="Resource" uid="uid://bi61u2u66kg8y" path="res://Resources/characters/Apples/Golden_Apple.tres" id="5_tngm0"]
+[ext_resource type="Resource" uid="uid://o81eotgsr014" path="res://Resources/characters/Apples/Caramel_Apple.tres" id="6_jjs26"]
+[ext_resource type="Resource" uid="uid://b3lya2kl3o0sy" path="res://Resources/characters/Apples/Granny_Smith.tres" id="7_6oyei"]
+[ext_resource type="Resource" uid="uid://bhqugyfa5a8u4" path="res://Resources/characters/Oreos/Omar_Reo.tres" id="8_syjhy"]
+[ext_resource type="Resource" uid="uid://c0n67ckprqnx1" path="res://Resources/characters/Oreos/Oscar_Reo.tres" id="9_531v5"]
+[ext_resource type="Resource" uid="uid://dqq3d32rf5d36" path="res://Resources/characters/Oreos/Ottis_Reo.tres" id="10_yf36g"]
+[ext_resource type="Resource" uid="uid://doofsik3ge7h0" path="res://Resources/characters/Oreos/Oliver_Reo.tres" id="11_k4vv3"]
+[ext_resource type="Resource" uid="uid://y7t2juim4yk3" path="res://Resources/characters/Oreos/Otto_Reno.tres" id="12_u35cb"]
+
+[sub_resource type="Resource" id="Resource_17imy"]
+script = ExtResource("1_1lmxp")
+id = 2
+char_name = "Ghost Apple"
+poses = {
+0: ExtResource("2_u513x"),
+3: ExtResource("3_vf4a5")
+}
+icon = ExtResource("2_u513x")
+hit_rate = 0.1
+leave_rate = 0.1
+money_rate = 2.0
+description = "This guys a ghost"
+metadata/_custom_type_script = "uid://c4ydn64imo227"
 
 [resource]
 script = ExtResource("2_osg8v")
-possible_chars = Array[ExtResource("1_1lmxp")]([ExtResource("2_66y6l")])
+path = null
+possible_chars = Array[ExtResource("1_1lmxp")]([SubResource("Resource_17imy"), ExtResource("4_qrg0p"), ExtResource("5_tngm0"), ExtResource("6_jjs26"), ExtResource("7_6oyei"), ExtResource("8_syjhy"), ExtResource("9_531v5"), ExtResource("10_yf36g"), ExtResource("11_k4vv3"), ExtResource("12_u35cb")])
 metadata/_custom_type_script = "uid://bke5xyxtew67v"

@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://l3xf26id3o6y" path="res://Assets/Font/CowboyJunior-GO6Dq.ttf" id="5_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://bfsgeyhmnrhhi" path="res://Assets/UI/Money Icon.png" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://cs58gup3o18he" path="res://Assets/UI/Coin Icon(Silver).png" id="7_ldgsr"]
+[ext_resource type="Texture2D" uid="uid://ca8lit8mlilde" path="res://Assets/UI/Camera Icon.png" id="7_v158k"]
 
 [sub_resource type="GDScript" id="GDScript_qxrlw"]
 script/source = "extends Node2D
@@ -57,6 +58,18 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1l0tm"]
+bg_color = Color(0.35686275, 0.23921569, 0.15294118, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="Animation" id="Animation_1l0tm"]
 length = 0.001
 tracks/0/type = "value"
@@ -70,6 +83,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DrinkMenu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AttractionMenu:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_v158k"]
@@ -104,11 +141,79 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_o5yvi"]
+resource_name = "pull_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DrinkMenu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1280)]
+}
+
+[sub_resource type="Animation" id="Animation_rfjv2"]
+resource_name = "pull_down_attr"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AttractionMenu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1280)]
+}
+
+[sub_resource type="Animation" id="Animation_ldgsr"]
+resource_name = "pull_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DrinkMenu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 0.05),
+"update": 0,
+"values": [Vector2(0, 1280), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rku1e"]
+resource_name = "pull_up_attr"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AttractionMenu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, 1280), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ldgsr"]
 _data = {
 &"RESET": SubResource("Animation_1l0tm"),
 &"fade_in": SubResource("Animation_v158k"),
-&"fade_out": SubResource("Animation_h4fw4")
+&"fade_out": SubResource("Animation_h4fw4"),
+&"pull_down": SubResource("Animation_o5yvi"),
+&"pull_down_attr": SubResource("Animation_rfjv2"),
+&"pull_up": SubResource("Animation_ldgsr"),
+&"pull_up_attr": SubResource("Animation_rku1e")
 }
 
 [node name="Game" type="Node2D" unique_id=207332668]
@@ -175,6 +280,7 @@ offset_right = 722.0
 offset_bottom = 177.0
 
 [node name="SlotButton1" type="Button" parent="UIController/DrinkSlotButton" unique_id=88820465]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,6 +316,7 @@ theme_override_constants/h_separation = 65
 theme_override_constants/v_separation = 52
 
 [node name="Button" type="Button" parent="UIController/WallPictures" unique_id=1913386292]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -306,6 +413,7 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -0.00048828125
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -410,7 +518,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 200
+theme_override_constants/margin_bottom = 350
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UIController/AttractionMenu/MarginContainer" unique_id=2121921434]
 layout_mode = 2
@@ -422,6 +530,26 @@ layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 2
+
+[node name="RemoveButton" type="Button" parent="UIController/AttractionMenu" unique_id=1829285194]
+custom_minimum_size = Vector2(600, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_h4fw4")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_1l0tm")
+text = "Remove Attraction"
 
 [node name="CloseButton" type="TextureButton" parent="UIController/AttractionMenu" unique_id=1489917161]
 custom_minimum_size = Vector2(64, 64)
@@ -496,7 +624,7 @@ offset_bottom = 144.0
 texture_normal = ExtResource("4_1l0tm")
 stretch_mode = 0
 
-[node name="CameraMenu" type="Panel" parent="UIController" unique_id=1887539568]
+[node name="SettingsMenu" type="Panel" parent="UIController" unique_id=152338376]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -504,14 +632,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="UIController/CameraMenu" unique_id=360443926]
+[node name="TextureRect" type="ColorRect" parent="UIController/SettingsMenu" unique_id=2062652102]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.21568628)
+color = Color(0.6745098, 0.5019608, 0.3882353, 1)
+
+[node name="ResetButton" type="TextureButton" parent="UIController/SettingsMenu" unique_id=1714260097]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_1l0tm")
 
 [node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
 custom_minimum_size = Vector2(160, 100)
@@ -537,7 +680,23 @@ theme_override_fonts/font = ExtResource("5_h4fw4")
 theme_override_font_sizes/font_size = 72
 text = "0"
 
-[node name="TextureButton" type="TextureButton" parent="UIController" unique_id=1638974363]
+[node name="SettingsButton" type="TextureButton" parent="UIController" unique_id=24296388]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -156.0
+offset_right = 50.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("7_v158k")
+stretch_mode = 0
+
+[node name="GiftsButton" type="TextureButton" parent="UIController" unique_id=1638974363]
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 3
 anchor_left = 1.0

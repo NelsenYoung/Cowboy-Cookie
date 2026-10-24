@@ -1,6 +1,6 @@
 extends Node
 
-var money: int = 500
+var money: int = 100
 var drink: DrinkDisplay = null
 var num_attraction_slots = 3
 var attractions: Array[AttractionDisplay] = []
@@ -35,7 +35,7 @@ const DEBUG_TEN_HOURS_PASSED = 36000
 const PST_OFFSET = -8 * 3600
 
 const RESTART = false
-const FIRST_LOGIN = false
+var FIRST_LOGIN = false
 
 # Define where attractions appear
 const SLOT_POSITIONS = [
@@ -61,8 +61,10 @@ func _ready():
 		
 	ui_controller.attraction_card_selected.connect(_on_attraction_selected)
 	ui_controller.attraction_purchase_requested.connect(_on_attraction_purchased)
+	ui_controller.attraction_removal_requested.connect(_on_attraction_removed)
 	ui_controller.drink_card_selected.connect(_on_drink_selected)
 	ui_controller.gift_claimed.connect(_on_gift_claimed)
+	ui_controller.reset_confirmed.connect(_on_reset_requested)
 	
 	await get_tree().create_timer(0.5).timeout  # Wait 0.5 seconds
 	var current_time = Time.get_unix_time_from_system()
@@ -73,12 +75,14 @@ func _ready():
 			read_save_data(save_data)
 		last_login_time = current_time - DEBUG_ONE_HOUR_PASSED
 	
-	var save_data = load_game()
-	if save_data != null:
-		read_save_data(save_data)
-
-	if FIRST_LOGIN:
-		# run the tutorial and init
+	if not FIRST_LOGIN:
+		var save_data = load_game()
+		print(save_data)
+		if save_data != null:
+			read_save_data(save_data)
+		#pass
+	else:
+		FIRST_LOGIN = false
 		pass
 	
 	if drink == null:
@@ -105,7 +109,7 @@ func _ready():
 	create_picture_wall_frames()
 
 func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time: float):
-	var tick = 30
+	var tick = 5
 	var sim_time = last_login_time
 	while sim_time < min(current_time, drink.time_placed + drink.data.time):
 		#print("Sim Time:", Time.get_datetime_string_from_unix_time(sim_time))
@@ -128,6 +132,9 @@ func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time
 					sim_time += tick
 			else:
 				sim_time += tick
+
+func reset_game():
+	pass
 
 func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 	var possible_chars = {}
@@ -253,6 +260,10 @@ func _on_attraction_purchased(slot_idx: int, attraction: AttractionData) -> void
 	ui_controller.update_money_label(money)
 	return
 
+func _on_attraction_removed(slot_idx: int):
+	if attractions[slot_idx] != null:
+		attractions[slot_idx].queue_free()
+
 func _on_drink_selected(drink_data: DrinkData, time_placed: float = Time.get_unix_time_from_system()):
 	if drink == null:
 		var drink_instance = DrinkDisplayScene.instantiate()
@@ -260,6 +271,7 @@ func _on_drink_selected(drink_data: DrinkData, time_placed: float = Time.get_uni
 		drinks_container.add_child(drink_instance)
 		drink = drink_instance
 	else:
+		drink.time_placed = Time.get_unix_time_from_system()
 		drink.data = drink_data
 		drink.change_state(0)
 	money -= drink_data.price
@@ -269,6 +281,21 @@ func _on_gift_claimed(id: int, amount: int):
 	money += amount
 	unclaimed_gifts.erase(id)
 	ui_controller.update_money_label(money)
+
+func clear_purchased_attractions():
+	for attraction in purchased_attractions:
+		purchased_attractions[attraction] = false
+
+func clear_all_visited_chars():
+	all_visited_chars = []
+
+func _on_reset_requested():
+	money = 100
+	ui_controller.update_money_label(money)
+	clear_purchased_attractions()
+	clear_all_visited_chars()
+	FIRST_LOGIN = true
+	# Should also clear the picture wall
 
 # ------------------- SAVE GAME LOGIC ------------------- #
 
@@ -304,7 +331,6 @@ func load_game():
 	var file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	var save_data = file.get_var()
 	file.close()
-	
 	return save_data
 
 func read_save_data(save_data: Dictionary):

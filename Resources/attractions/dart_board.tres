@@ -9,7 +9,7 @@
 script = ExtResource("1_0joaw")
 id = "1"
 attraction_name = "Dart Board"
-price = 5
+price = 300
 slots = Array[ExtResource("2_dbemk")]([ExtResource("3_0pvg5")])
 texture = ExtResource("3_dbemk")
 metadata/_custom_type_script = "uid://hgobj064obp5"
