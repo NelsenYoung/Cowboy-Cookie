@@ -284,6 +284,11 @@ func clear_purchased_attractions():
 	for attraction in purchased_attractions:
 		purchased_attractions[attraction] = false
 
+func clear_all_placed_attractions():
+	for i in range(num_attraction_slots):
+		if(attractions[i] != null):
+			attractions[i].queue_free()
+
 func clear_all_visited_chars():
 	all_visited_chars.clear()
 	all_visited_chars.resize(CHAR_COUNT)
@@ -293,6 +298,8 @@ func _on_reset_requested():
 	ui_controller.update_money_label(money)
 	clear_purchased_attractions()
 	clear_all_visited_chars()
+	clear_all_placed_attractions();
+	# Clear currently present characters
 	FIRST_LOGIN = true
 	# Should also clear the picture wall
 
