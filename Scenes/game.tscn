@@ -656,6 +656,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("4_1l0tm")
 
+[node name="CloseWindowButton" type="TextureButton" parent="UIController/SettingsMenu" unique_id=2050319429]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 104.0
+texture_normal = ExtResource("4_1l0tm")
+
 [node name="MoneyDisplay" type="HBoxContainer" parent="UIController" unique_id=2097343096]
 custom_minimum_size = Vector2(160, 100)
 anchors_preset = 2

@@ -22,6 +22,7 @@ extends CanvasLayer
 
 @onready var settings_button = $SettingsButton
 @onready var settings_menu = $SettingsMenu
+@onready var settings_menu_close_button = $SettingsMenu/CloseWindowButton
 @onready var reset_button = $SettingsMenu/ResetButton
 
 # ---------- START TUTORIAL CODE ---------- #
@@ -67,10 +68,14 @@ func _ready():
 	close_button.pressed.connect(_on_picture_menu_close_button_pressed)
 	
 	settings_button.pressed.connect(_on_settings_button_pressed)
+	settings_menu_close_button.pressed.connect(_on_close_settings_button_pressed)
 	reset_button.pressed.connect(_on_reset_button_pressed)
 
 func _on_settings_button_pressed():
 	settings_menu.visible = true
+
+func _on_close_settings_button_pressed():
+	settings_menu.visible = false
 
 #func _close_tutorial_menu():
 	#var tutorial_panel = $TutorialMenu

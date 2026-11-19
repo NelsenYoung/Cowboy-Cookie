@@ -33,6 +33,7 @@ const DEBUG_ONE_HOUR_PASSED = 3600
 const DEBUG_SIX_HOURS_PASSED = 10800
 const DEBUG_TEN_HOURS_PASSED = 36000
 const PST_OFFSET = -8 * 3600
+const CHAR_COUNT = 15
 
 const RESTART = false
 var FIRST_LOGIN = false
@@ -50,7 +51,7 @@ const DRINK_SLOT_POSITION = Vector2(200, 640)
 func _ready():
 	#var drink_slot_button = $"../UIController/DrinkSlotButton/SlotButton1"
 	#_on_drink_selected(TEST_DRINK)
-	all_visited_chars.resize(15)
+	all_visited_chars.resize(CHAR_COUNT)
 	
 	var slot_buttons = attraction_slots_container.get_children()
 	for i in range(num_attraction_slots):
@@ -133,9 +134,6 @@ func simulate_slot(slot: AttractionSlotNode, current_time:float, last_login_time
 			else:
 				sim_time += tick
 
-func reset_game():
-	pass
-
 func try_to_spwan(slot: AttractionSlotNode, time: float) -> CharacterData:
 	var possible_chars = {}
 	
@@ -185,7 +183,7 @@ func initialize_all_chars():
 	dir.list_dir_begin()
 	var group_name = dir.get_next()
 	
-	all_chars_order.resize(15)
+	all_chars_order.resize(CHAR_COUNT)
 	
 	var count = 0
 	while group_name != "":
@@ -287,7 +285,8 @@ func clear_purchased_attractions():
 		purchased_attractions[attraction] = false
 
 func clear_all_visited_chars():
-	all_visited_chars = []
+	all_visited_chars.clear()
+	all_visited_chars.resize(CHAR_COUNT)
 
 func _on_reset_requested():
 	money = 100
